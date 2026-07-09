@@ -27,3 +27,11 @@
 ## v0.7
 
 - Gründe/Ziele bearbeiten.
+
+## v0.7
+
+- Liste „Grund / Ziel des Ausgangs“ bearbeiten.
+
+## v0.8
+
+- Passwortänderung finalisieren und UI-Polish.

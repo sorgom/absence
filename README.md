@@ -117,3 +117,14 @@ Bugfix-Release:
 
 - Patientenverwaltung ist im Personal-Hamburger-Menü verlinkt.
 - Gemeinsame Menü-Komponente wird zuverlässig im Header eingebunden.
+
+
+## v0.6.0
+
+Neu in dieser Version:
+
+- Personal-Member im Personalbereich anlegen.
+- Initiales Passwort automatisch generieren und einmal anzeigen.
+- Personal-Member löschen.
+- Eigener Account kann nicht gelöscht werden.
+- Personalverwaltung über das Personal-Hamburger-Menü erreichbar.

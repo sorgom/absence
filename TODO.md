@@ -29,3 +29,10 @@
 - [x] Patient anlegen.
 - [x] Initiale PIN erzeugen und anzeigen.
 - [x] Patient löschen.
+
+## Done in v0.6.0
+
+- [x] Personal-Member anlegen.
+- [x] Initiales Passwort erzeugen und anzeigen.
+- [x] Personal-Member löschen.
+- [x] Eigenen Account vor Löschung schützen.
