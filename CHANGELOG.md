@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v0.8.7
+
+### Changed
+- Date/time values are still stored as UTC in SQLite.
+- Date/time values are now rendered as `<time datetime="...Z" data-local-time>`.
+- Browser JavaScript formats times using the client's own locale and timezone.
+- Server-side visible fallback remains UTC until JavaScript formats the value.
+
+### Added
+- `Utils::utcIsoDateTime()`.
+- `Utils::fallbackDateTime()`.
+- `Utils::localTimeElement()`.
+- `tools/check_client_time_markup.php`.
+
 ## v0.8.5
 
 ### Fixed
@@ -10,10 +24,3 @@
 
 ### Added
 - `tools/check_patient_login.php` diagnostic helper.
-
-## v0.8.4
-
-### Fixed
-- Removed overly strict `tools/check_forms.php` warning about harmless multi-line form tags.
-- Rewrote delete/reason forms with single-line opening `<form>` tags to avoid false positives.
-- Version bumped to `0.8.4`.

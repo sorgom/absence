@@ -226,3 +226,26 @@ Diagnose:
 php tools/check_patient_login.php
 php tools/check_forms.php
 ```
+
+
+## v0.8.7
+
+Datum/Uhrzeit:
+
+- Zeiten bleiben in SQLite als UTC gespeichert.
+- PHP gibt Zeiten als maschinenlesbares `<time datetime="...Z" data-local-time>` aus.
+- JavaScript formatiert die Anzeige im Browser nach Locale und Zeitzone des Clients.
+- Dadurch sehen PC und Smartphone Zeiten jeweils in ihrer eigenen lokalen Einstellung.
+
+Prüfen:
+
+```bash
+php tools/check_client_time_markup.php
+php tools/check_forms.php
+```
+
+Beispiel-Ausgabe im HTML:
+
+```html
+<time datetime="2026-07-09T18:30:00Z" data-local-time>2026-07-09 18:30 UTC</time>
+```

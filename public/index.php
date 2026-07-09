@@ -102,7 +102,7 @@ if ($auth->isLoggedIn() && $auth->currentRole() === Auth::ROLE_PATIENT):
         <?php if ($active): ?>
             <h2>Rückkehr</h2>
             <p><strong>Grund / Ziel:</strong> <?= Utils::h((string) $active['reason_name']) ?></p>
-            <p><strong>Aufbruch:</strong> <?= Utils::h((string) $active['departure_time']) ?></p>
+            <p><strong>Aufbruch:</strong> <?= Utils::localTimeElement((string) $active['departure_time']) ?></p>
 
             <form method="post" action="/index.php">
                 <?= Csrf::field() ?>

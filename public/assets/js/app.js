@@ -95,3 +95,28 @@ document.addEventListener('change', (event) => {
     }
   });
 });
+
+
+/*
+ * Convert UTC timestamps rendered by PHP to the browser's local date/time.
+ * The browser decides both timezone and locale, which is ideal for PC and
+ * smartphone clients in different local settings.
+ */
+document.querySelectorAll('[data-local-time]').forEach((element) => {
+  if (!(element instanceof HTMLTimeElement) || !element.dateTime) {
+    return;
+  }
+
+  const date = new Date(element.dateTime);
+
+  if (Number.isNaN(date.getTime())) {
+    return;
+  }
+
+  element.textContent = new Intl.DateTimeFormat(undefined, {
+    dateStyle: 'short',
+    timeStyle: 'short'
+  }).format(date);
+
+  element.title = element.dateTime;
+});

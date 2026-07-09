@@ -102,9 +102,9 @@ function staffSortIndicator(string $column, string $currentSort, string $current
                             </td>
                             <td data-label="Patienten-ID"><?= Utils::h((string) $absence['patient_id']) ?></td>
                             <td data-label="Grund / Ziel"><?= Utils::h((string) $absence['reason_name']) ?></td>
-                            <td data-label="Aufbruch"><?= Utils::h((string) $absence['departure_time']) ?></td>
+                            <td data-label="Aufbruch"><?= Utils::localTimeElement((string) $absence['departure_time']) ?></td>
                             <td data-label="Rückkehr">
-                                <?= $absence['return_time'] === null ? '' : Utils::h((string) $absence['return_time']) ?>
+                                <?= $absence['return_time'] === null ? '' : Utils::localTimeElement((string) $absence['return_time']) ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
