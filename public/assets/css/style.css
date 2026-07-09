@@ -377,3 +377,26 @@ tr.is-active td:first-child {
     width: 38%;
   }
 }
+
+
+.sort-form {
+  margin: 0;
+}
+
+.table-sort-button {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.table-sort-button:hover,
+.table-sort-button:focus {
+  text-decoration: underline;
+}

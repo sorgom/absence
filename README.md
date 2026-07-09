@@ -62,3 +62,13 @@ git add .
 git commit -m "feat: add staff absence overview"
 git tag v0.4
 ```
+
+
+## v0.4.2
+
+Bugfix-Release nach v0.4.1:
+
+- Personal-Login funktioniert wieder.
+- Personal-Logout führt weiter korrekt zum Personal-Login.
+- Die Personalübersicht speichert Filter und Sortierung in der Session.
+- `Aktualisieren` bleibt erhalten.

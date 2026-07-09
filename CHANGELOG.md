@@ -1,23 +1,17 @@
-# Changelog
+# CHANGELOG
 
-## v0.4
-
-### Added
-- Personal overview with tabular absence list.
-- Default filter for active absences only.
-- Switch to display all absences.
-- Sorting by departure time or patient ID.
-- Responsive table layout for smartphone use.
-
-### Changed
-- `AbsenceRepository` now supports staff overview queries.
-- Personal start page now shows real absence data after login.
-
-## v0.3.1
+## v0.4.2
 
 ### Fixed
-- Personal logout redirects to the personal login page.
-- Patient and staff users now receive role-specific hamburger menus.
+- Restored staff login after the v0.4.1 regression.
+- Kept staff logout redirecting to the personal login.
+- Restored the central bootstrap loading path from v0.4.
+
+### Changed
+- Staff overview keeps filter and sorting in the session.
+- Removed redundant `Anzeigen` button.
+- Kept explicit `Aktualisieren` button.
+- Removed duplicate `Aktueller Login` line from the overview.
 
 ### Added
-- `CHANGELOG.md`, `TODO.md`, and `ROADMAP.md`.
+- Ascending and descending sorting in the staff overview.

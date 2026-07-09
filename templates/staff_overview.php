@@ -2,8 +2,8 @@
 /**
  * Staff overview table.
  *
- * Shows active absences by default. Staff members may switch to all records
- * and choose between the sort orders required by the specification.
+ * The overview state is stored in the session by public/personal.php.
+ * Sorting is changed through POST requests so the URL remains clean.
  */
 declare(strict_types=1);
 
@@ -12,31 +12,51 @@ use AbsenceApp\Utils;
 /** @var array<int,array<string,mixed>> $absences */
 /** @var bool $activeOnly */
 /** @var string $sort */
+/** @var string $order */
+
+/**
+ * Returns the visible arrow for the active sort column.
+ */
+function staffSortIndicator(string $column, string $currentSort, string $currentOrder): string
+{
+    if ($column !== $currentSort) {
+        return '';
+    }
+
+    return $currentOrder === 'asc' ? ' ▲' : ' ▼';
+}
 ?>
 <section class="card wide-card">
     <div class="page-title-row">
         <div>
             <h1>Übersicht Abwesenheiten</h1>
-            <p class="muted">Aktueller Login: <?= Utils::h((string) $auth->currentUserId()) ?></p>
+            <p class="muted">
+                <?= $activeOnly ? 'Nur aktive Abwesenheiten' : 'Alle Abwesenheiten' ?> ·
+                Sortierung:
+                <?= Utils::h($sort === 'patient' ? 'Patienten-ID' : 'Aufbruch') ?>
+                <?= Utils::h($order === 'asc' ? 'aufsteigend' : 'absteigend') ?>
+            </p>
         </div>
-        <a class="button-secondary compact" href="/personal.php">Aktualisieren</a>
+
+        <form method="post" action="/personal.php">
+            <input type="hidden" name="action" value="overview_refresh">
+            <button class="button-secondary compact" type="submit">Aktualisieren</button>
+        </form>
     </div>
 
-    <form class="toolbar" method="get" action="/personal.php">
+    <form class="toolbar" method="post" action="/personal.php">
+        <input type="hidden" name="action" value="overview_view">
+        <input type="hidden" name="view" value="<?= $activeOnly ? 'all' : 'active' ?>">
+
         <label class="switch-row">
-            <input class="checkbox" type="checkbox" name="view" value="all" <?= !$activeOnly ? 'checked' : '' ?>>
-            <span>Alle Abwesenheiten anzeigen</span>
+            <input
+                class="checkbox"
+                type="checkbox"
+                onchange="this.form.submit()"
+                <?= $activeOnly ? 'checked' : '' ?>
+            >
+            <span>Nur aktive Abwesenheiten</span>
         </label>
-
-        <label class="inline-select">
-            Sortierung
-            <select name="sort">
-                <option value="departure" <?= $sort === 'departure' ? 'selected' : '' ?>>Aufbruch</option>
-                <option value="patient" <?= $sort === 'patient' ? 'selected' : '' ?>>Patienten-ID</option>
-            </select>
-        </label>
-
-        <button class="compact" type="submit">Anzeigen</button>
     </form>
 
     <?php if ($absences === []): ?>
@@ -46,20 +66,40 @@ use AbsenceApp\Utils;
             <table>
                 <thead>
                     <tr>
-                        <th>Patienten-ID</th>
+                        <th>Status</th>
+                        <th>
+                            <form class="sort-form" method="post" action="/personal.php">
+                                <input type="hidden" name="action" value="overview_sort">
+                                <input type="hidden" name="sort" value="patient">
+                                <button class="table-sort-button" type="submit">
+                                    Patienten-ID<?= Utils::h(staffSortIndicator('patient', $sort, $order)) ?>
+                                </button>
+                            </form>
+                        </th>
                         <th>Grund / Ziel</th>
-                        <th>Aufbruch</th>
+                        <th>
+                            <form class="sort-form" method="post" action="/personal.php">
+                                <input type="hidden" name="action" value="overview_sort">
+                                <input type="hidden" name="sort" value="departure">
+                                <button class="table-sort-button" type="submit">
+                                    Aufbruch<?= Utils::h(staffSortIndicator('departure', $sort, $order)) ?>
+                                </button>
+                            </form>
+                        </th>
                         <th>Rückkehr</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($absences as $absence): ?>
                         <tr class="<?= $absence['return_time'] === null ? 'is-active' : '' ?>">
+                            <td data-label="Status">
+                                <?= $absence['return_time'] === null ? '<span class="status-active">Unterwegs</span>' : 'Zurück' ?>
+                            </td>
                             <td data-label="Patienten-ID"><?= Utils::h((string) $absence['patient_id']) ?></td>
                             <td data-label="Grund / Ziel"><?= Utils::h((string) $absence['reason_name']) ?></td>
                             <td data-label="Aufbruch"><?= Utils::h((string) $absence['departure_time']) ?></td>
                             <td data-label="Rückkehr">
-                                <?= $absence['return_time'] === null ? '<span class="status-active">aktiv</span>' : Utils::h((string) $absence['return_time']) ?>
+                                <?= $absence['return_time'] === null ? '' : Utils::h((string) $absence['return_time']) ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

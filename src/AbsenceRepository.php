@@ -74,12 +74,15 @@ final class AbsenceRepository
      *
      * @return array<int,array<string,mixed>>
      */
-    public function listForStaff(bool $activeOnly = true, string $sort = 'departure'): array
+    public function listForStaff(bool $activeOnly = true, string $sort = 'departure', string $order = 'asc'): array
     {
         $where = $activeOnly ? 'WHERE a.return_time IS NULL' : '';
+
+        $direction = $order === 'desc' ? 'DESC' : 'ASC';
+
         $orderBy = match ($sort) {
-            'patient' => 'a.patient_id COLLATE NOCASE ASC, a.departure_time DESC',
-            default => 'a.departure_time DESC, a.patient_id COLLATE NOCASE ASC',
+            'patient' => "a.patient_id COLLATE NOCASE {$direction}, a.departure_time DESC",
+            default => "a.departure_time {$direction}, a.patient_id COLLATE NOCASE ASC",
         };
 
         $sql = "SELECT
