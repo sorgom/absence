@@ -1,2 +1,3 @@
-# absence
-notification about absences
+# Abwesenheits-App
+
+Version v0.1 Grundgerüst.

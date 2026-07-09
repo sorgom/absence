@@ -1,0 +1,4 @@
+#   all text files unix line endings
+* text=auto eol=lf
+
+*.svg   text eol=lf
