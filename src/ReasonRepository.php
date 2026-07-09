@@ -27,6 +27,16 @@ final class ReasonRepository
     }
 
     /**
+     * Compatibility alias for older patient workflow code.
+     *
+     * @return array<int,array{id:int,name:string}>
+     */
+    public function all(): array
+    {
+        return $this->listAll();
+    }
+
+    /**
      * Adds a new reason / destination.
      */
     public function add(string $name): void

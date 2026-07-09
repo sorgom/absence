@@ -210,3 +210,19 @@ Bugfix-Release:
 - `tools/check_forms.php` meldet keine harmlosen mehrzeiligen Formular-Tags mehr.
 - Die betroffenen Templates wurden zusätzlich auf einzeilige öffnende `<form>`-Tags umgestellt.
 - Nach dem Entpacken sollte `php tools/check_forms.php` sauber `Form markup check: OK` melden.
+
+
+## v0.8.5
+
+Bugfix-Release für den Patienten-Login:
+
+- Nach korrekter initialer PIN wird direkt auf `/change_password.php` weitergeleitet.
+- Nach späterem Login mit eigenem Passwort wird der Patientenbereich angezeigt.
+- Patienten-Formulare verwenden explizit `action="/index.php"`.
+
+Diagnose:
+
+```bash
+php tools/check_patient_login.php
+php tools/check_forms.php
+```
