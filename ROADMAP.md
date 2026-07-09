@@ -19,3 +19,11 @@
 ## v1.0
 
 - Release Candidate mit README, nginx-Konfiguration und Installationshinweisen
+
+## v0.6
+
+- Personal-Member anlegen/löschen.
+
+## v0.7
+
+- Gründe/Ziele bearbeiten.

@@ -98,3 +98,14 @@ Der Hook prüft, ob die `VERSION`-Datei vorhanden ist und der Footer die Version
 - Zentrale `VERSION`-Datei ergänzt.
 - Footer zeigt die Version dynamisch an.
 - Optionales Git-Pre-Commit-Skript ergänzt.
+
+
+## v0.5.0
+
+Neu in dieser Version:
+
+- Patienten im Personalbereich anlegen.
+- Vierstellige initiale PIN wird automatisch generiert und einmal angezeigt.
+- Patienten im Personalbereich löschen.
+- Löschvorgang mit Bestätigungsdialog.
+- Patientenverwaltung über das Personal-Hamburger-Menü erreichbar.

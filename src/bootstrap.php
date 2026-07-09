@@ -9,3 +9,5 @@ require_once __DIR__ . '/ReasonRepository.php';
 require_once __DIR__ . '/AbsenceRepository.php';
 
 require_once __DIR__ . '/AppInfo.php';
+
+require_once __DIR__ . '/PatientRepository.php';

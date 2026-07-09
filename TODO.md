@@ -23,3 +23,9 @@
 
 - [x] Footer-Version dynamisch über `VERSION` anzeigen.
 - [x] Optionalen Git-Pre-Commit-Hook bereitstellen.
+
+## Done in v0.5.0
+
+- [x] Patient anlegen.
+- [x] Initiale PIN erzeugen und anzeigen.
+- [x] Patient löschen.

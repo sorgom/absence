@@ -400,3 +400,50 @@ tr.is-active td:first-child {
 .table-sort-button:focus {
   text-decoration: underline;
 }
+
+
+.stack-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+select {
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.75rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--border);
+  font: inherit;
+  background: var(--card);
+  color: var(--fg);
+}
+
+.success {
+  background: color-mix(in srgb, #1f8f4a 18%, transparent);
+  color: var(--fg);
+}
+
+.result-box {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  margin: 1rem 0;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.result-box code {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.danger-button {
+  background: #b3261e;
+  border-color: #b3261e;
+  color: #fff;
+}
+
+.danger-button:hover,
+.danger-button:focus {
+  filter: brightness(1.05);
+}

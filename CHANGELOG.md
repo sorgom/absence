@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v0.5.0
+
+### Added
+- Staff-side patient creation.
+- Automatic four-digit initial PIN generation for new patients.
+- Staff-side patient deletion.
+- Confirmation dialog before deleting patients.
+- `PatientRepository` for patient management.
+
+### Changed
+- Version bumped to `0.5.0`.
+
 ## v0.4.3
 
 ### Added
