@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## v0.4.3
+
+### Added
+- Central `VERSION` file.
+- `AbsenceApp\AppInfo` helper for application metadata.
+- Optional Git pre-commit hook in `tools/pre-commit`.
+
+### Changed
+- `templates/footer.php` now reads the version dynamically from `VERSION`.
+
 ## v0.4.2
 
 ### Fixed

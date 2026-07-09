@@ -18,3 +18,8 @@
 
 - [ ] Icons für Menüeinträge
 - [ ] CSV-Export der Übersicht prüfen
+
+## Done in v0.4.3
+
+- [x] Footer-Version dynamisch über `VERSION` anzeigen.
+- [x] Optionalen Git-Pre-Commit-Hook bereitstellen.

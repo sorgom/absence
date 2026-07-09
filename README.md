@@ -72,3 +72,29 @@ Bugfix-Release nach v0.4.1:
 - Personal-Logout führt weiter korrekt zum Personal-Login.
 - Die Personalübersicht speichert Filter und Sortierung in der Session.
 - `Aktualisieren` bleibt erhalten.
+
+
+## Versionierung
+
+Die Anwendung liest ihre Versionsnummer aus der Datei:
+
+```text
+VERSION
+```
+
+Der Footer zeigt diese Version automatisch an. `templates/footer.php` muss daher nicht mehr pro Release manuell angepasst werden.
+
+Optional kann ein Git-Pre-Commit-Hook installiert werden:
+
+```bash
+cp tools/pre-commit .git/hooks/pre-commit
+chmod +x .git/hooks/pre-commit
+```
+
+Der Hook prüft, ob die `VERSION`-Datei vorhanden ist und der Footer die Version dynamisch liest.
+
+## v0.4.3
+
+- Zentrale `VERSION`-Datei ergänzt.
+- Footer zeigt die Version dynamisch an.
+- Optionales Git-Pre-Commit-Skript ergänzt.

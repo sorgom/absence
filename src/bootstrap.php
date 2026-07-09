@@ -7,3 +7,5 @@ require_once __DIR__ . '/Utils.php';
 require_once __DIR__ . '/Auth.php';
 require_once __DIR__ . '/ReasonRepository.php';
 require_once __DIR__ . '/AbsenceRepository.php';
+
+require_once __DIR__ . '/AppInfo.php';
