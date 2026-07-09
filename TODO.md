@@ -21,7 +21,7 @@
 
 ## Done in v0.4.3
 
-- [x] Footer-Version dynamisch über `VERSION` anzeigen.
+- [x] Footer-Version dynamisch über `version` anzeigen.
 - [x] Optionalen Git-Pre-Commit-Hook bereitstellen.
 
 ## Done in v0.5.0

@@ -2,58 +2,46 @@
 declare(strict_types=1);
 
 /**
- * Checks PHP templates and public files for accidentally broken opening form tags.
- *
- * Run:
- *   php tools/check_forms.php
+ * Checks PHP templates and site entry points for accidentally broken opening form tags.
  */
 
 $root = dirname(__DIR__);
-$directories = [
-    $root . '/templates',
-    $root . '/public',
-];
-
+$site = $root . '/site';
 $errors = [];
 
-foreach ($directories as $directory) {
-    if (!is_dir($directory)) {
+$iterator = new RecursiveIteratorIterator(
+    new RecursiveDirectoryIterator($site, FilesystemIterator::SKIP_DOTS)
+);
+
+foreach ($iterator as $file) {
+    if (!$file instanceof SplFileInfo || $file->getExtension() !== 'php') {
         continue;
     }
 
-    $iterator = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator($directory, FilesystemIterator::SKIP_DOTS)
-    );
+    $path = $file->getPathname();
+    $content = file_get_contents($path);
 
-    foreach ($iterator as $file) {
-        if (!$file instanceof SplFileInfo || $file->getExtension() !== 'php') {
-            continue;
-        }
+    if ($content === false) {
+        continue;
+    }
 
-        $content = file_get_contents($file->getPathname());
-
-        if ($content === false) {
-            continue;
-        }
-
-        if (preg_match_all('/<form\b[^>]*>/is', $content, $matches, PREG_OFFSET_CAPTURE)) {
-            foreach ($matches[0] as [$formTag, $offset]) {
-                if (str_contains($formTag, '<input')) {
-                    $line = substr_count(substr($content, 0, $offset), "\n") + 1;
-                    $errors[] = $file->getPathname() . ':' . $line . ' contains <input> markup inside the opening <form> tag.';
-                }
+    if (preg_match_all('/<form\b[^>]*>/is', $content, $matches, PREG_OFFSET_CAPTURE)) {
+        foreach ($matches[0] as [$formTag, $offset]) {
+            if (str_contains($formTag, '<input')) {
+                $line = substr_count(substr($content, 0, $offset), "\n") + 1;
+                $errors[] = $path . ':' . $line . ' contains <input> markup inside the opening <form> tag.';
             }
         }
+    }
 
-        foreach ([
-            'personal.php        <input',
-            'action="<?= Utils::h((string) $action) ?>        <input',
-            'action="/personal.php        <input',
-            'action="/index.php        <input',
-        ] as $brokenMarker) {
-            if (str_contains($content, $brokenMarker)) {
-                $errors[] = $file->getPathname() . ' contains known broken marker: ' . $brokenMarker;
-            }
+    foreach ([
+        'personal.php        <input',
+        'action="<?= Utils::h((string) $action) ?>        <input',
+        'action="/personal.php        <input',
+        'action="/index.php        <input',
+    ] as $brokenMarker) {
+        if (str_contains($content, $brokenMarker)) {
+            $errors[] = $path . ' contains known broken marker: ' . $brokenMarker;
         }
     }
 }

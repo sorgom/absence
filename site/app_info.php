@@ -9,11 +9,11 @@ namespace AbsenceApp;
 final class AppInfo
 {
     /**
-     * Returns the application version from the repository-level VERSION file.
+     * Returns the application version from the repository-level version file.
      */
     public static function version(): string
     {
-        $versionFile = dirname(__DIR__) . '/VERSION';
+        $versionFile = __DIR__ . '/version';
 
         if (!is_file($versionFile)) {
             return 'dev';

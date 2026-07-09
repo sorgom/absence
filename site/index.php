@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
-require dirname(__DIR__) . '/src/bootstrap.php';
+require_once __DIR__ . '/bootstrap.php';
+
+
 
 use AbsenceApp\AbsenceRepository;
 use AbsenceApp\Auth;
@@ -82,7 +84,7 @@ if ($auth->isLoggedIn() && $auth->currentRole() === Auth::ROLE_PATIENT && $_SERV
 }
 
 $title = 'Patientenbereich';
-require dirname(__DIR__) . '/templates/header.php';
+require __DIR__ . '/header.php';
 
 if ($auth->isLoggedIn() && $auth->currentRole() === Auth::ROLE_PATIENT):
     $absences = new AbsenceRepository($db);
@@ -140,7 +142,7 @@ else:
     $headline = 'Patienten-Login';
     $idLabel = 'Patienten-ID';
     $action = '/index.php';
-    require dirname(__DIR__) . '/templates/login.php';
+    require __DIR__ . '/login.php';
 endif;
 
-require dirname(__DIR__) . '/templates/footer.php';
+require __DIR__ . '/footer.php';

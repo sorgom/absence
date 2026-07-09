@@ -16,8 +16,8 @@ $userId = (string) Session::get('user_id', '');
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= Utils::h((string) $title) ?></title>
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <script src="/assets/js/app.js" defer></script>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/app.js" defer></script>
 </head>
 <body>
 <header class="app-header">

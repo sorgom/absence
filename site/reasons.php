@@ -1,7 +1,10 @@
 <?php
 declare(strict_types=1);
 
-require dirname(__DIR__) . '/src/bootstrap.php';
+require_once __DIR__ . '/bootstrap.php';
+
+
+
 
 use AbsenceApp\Auth;
 use AbsenceApp\Csrf;
@@ -47,6 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $reasons = $repository->listAll();
 
 $title = 'Gründe / Ziele bearbeiten';
-require dirname(__DIR__) . '/templates/header.php';
-require dirname(__DIR__) . '/templates/reasons.php';
-require dirname(__DIR__) . '/templates/footer.php';
+require __DIR__ . '/header.php';
+require __DIR__ . '/templates_reasons.php';
+require __DIR__ . '/footer.php';

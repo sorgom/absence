@@ -1,9 +1,14 @@
-/database/*.sqlite
-/database/*.sqlite-shm
-/database/*.sqlite-wal
-/logs/*.log
-/vendor/
+# Runtime files
+/site/database.sqlite
+/site/*.sqlite-shm
+/site/*.sqlite-wal
+/site/*.log
+
+# IDE / OS
 .vscode/
 .idea/
 .DS_Store
 Thumbs.db
+# nginx:
+logs
+temp

@@ -48,7 +48,7 @@ final class Utils
 
     /**
      * Returns a safe <time> element that is converted to client-local time
-     * by public/assets/js/app.js.
+     * by public/app.js.
      */
     public static function localTimeElement(?string $value): string
     {

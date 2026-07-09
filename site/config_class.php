@@ -7,7 +7,7 @@ final class Config
     public static function get(string $key): mixed
     {
         if (self::$values === null) {
-            self::$values = require dirname(__DIR__) . '/config/config.php';
+            self::$values = require __DIR__ . '/app_config.php';
         }
         if (!array_key_exists($key, self::$values)) {
             throw new \RuntimeException('Unknown configuration key: ' . $key);

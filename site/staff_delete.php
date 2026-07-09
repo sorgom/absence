@@ -1,7 +1,10 @@
 <?php
 declare(strict_types=1);
 
-require dirname(__DIR__) . '/src/bootstrap.php';
+require_once __DIR__ . '/bootstrap.php';
+
+
+
 
 use AbsenceApp\Auth;
 use AbsenceApp\Csrf;
@@ -23,23 +26,25 @@ if ($auth->isFirstLogin()) {
 $repository = new StaffRepository($db);
 $error = null;
 $success = null;
-$generatedPassword = null;
-$createdStaffId = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $staffId = trim((string) ($_POST['staff_id'] ?? ''));
 
     try {
         Csrf::requireValid($_POST['csrf_token'] ?? null);
-        $generatedPassword = $repository->create($staffId);
-        $createdStaffId = $staffId;
-        $success = 'Personal-Member wurde angelegt.';
+        $repository->delete($staffId, (string) $auth->currentUserId());
+        $success = 'Personal-Member wurde gelöscht.';
     } catch (Throwable $exception) {
         $error = $exception->getMessage();
     }
 }
 
-$title = 'Personal-Member anlegen';
-require dirname(__DIR__) . '/templates/header.php';
-require dirname(__DIR__) . '/templates/staff_create.php';
-require dirname(__DIR__) . '/templates/footer.php';
+$staffIds = array_values(array_filter(
+    $repository->listIds(),
+    static fn (string $staffId): bool => $staffId !== (string) $auth->currentUserId()
+));
+
+$title = 'Personal-Member löschen';
+require __DIR__ . '/header.php';
+require __DIR__ . '/templates_staff_delete.php';
+require __DIR__ . '/footer.php';

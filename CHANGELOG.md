@@ -1,26 +1,100 @@
 # CHANGELOG
 
-## v0.8.7
+## v0.8.19
 
 ### Changed
-- Date/time values are still stored as UTC in SQLite.
-- Date/time values are now rendered as `<time datetime="...Z" data-local-time>`.
-- Browser JavaScript formats times using the client's own locale and timezone.
-- Server-side visible fallback remains UTC until JavaScript formats the value.
+- Renamed all project filenames to lowercase.
+- Replaced interCaps filenames with underscore names.
+- Updated all internal include paths and checks.
+- `Config.php` is now `config_class.php`.
+- `AppInfo.php` is now `app_info.php`.
+- `PasswordService.php` is now `password_service.php`.
+- `VERSION` is now `version`.
 
 ### Added
-- `Utils::utcIsoDateTime()`.
-- `Utils::fallbackDateTime()`.
-- `Utils::localTimeElement()`.
-- `tools/check_client_time_markup.php`.
+- `tools/check_filenames.php`.
 
-## v0.8.5
+## v0.8.18
 
 ### Fixed
-- Patient login now redirects explicitly to password change on first login.
-- Patient login no longer returns silently to the login form after accepting a correct PIN.
-- Patient absence forms now use explicit `action="/index.php"` and CSRF fields.
-- Fixed patient workflow call to `ReasonRepository::listAll()`.
+- Fixed `tools/check_site_structure.php` on Windows.
+- The check now compares actual filenames exactly instead of using `is_file('site/config.php')`, which incorrectly matches `config_class.php` on Windows.
+- Tightened `tools/check_initial_seed.php` to verify all required default reasons explicitly.
+
+## v0.8.17
+
+### Changed
+- Moved database initialization from `site/init_database.php` to `tools/init_database.php`.
+- `site/` no longer contains the database initialization script.
+- Initialization still creates/updates `site/database.sqlite`.
+- Updated related checks and documentation.
+
+## v0.8.16
+
+### Fixed
+- `site/init_database.php` now seeds the initial staff member `anfang` with password `anfang`.
+- Default reasons are seeded during database initialization.
+- Seeding is idempotent via `INSERT OR IGNORE`.
 
 ### Added
-- `tools/check_patient_login.php` diagnostic helper.
+- `tools/check_initial_seed.php`.
+
+## v0.8.15
+
+### Fixed
+- Reworked remaining internal path references for the fully flat `site/` layout.
+- Fixed `site/init_database.php` to require `site/bootstrap.php`.
+- Added checks for old structure references and database initialization.
+
+### Added
+- `tools/check_flat_paths.php`.
+- `tools/check_init_database.php`.
+
+### Checks
+- Entrypoint and flat-path checks were tightened for the flat `site/` layout.
+
+## v0.8.14
+
+### Fixed
+- Fixed Windows case-insensitive filename collision between `config_class.php` and `config.php`.
+- Renamed flat configuration file to `app_config.php`.
+- Updated `config_class.php` to load `app_config.php`.
+- Added Windows filename collision checks.
+
+## v0.8.13
+
+### Fixed
+- Fixed flat-site entrypoints to require `site/bootstrap.php` before using application classes.
+- Added `tools/check_entrypoints.php` to prevent regressions where `Session::start()` runs before bootstrap.
+
+## v0.8.12
+
+### Fixed
+- Fixed flat-site bootstrap loading order.
+- `config_class.php` is now loaded before `session.php`, preventing `Class "AbsenceApp\Config" not found`.
+- Added `tools/check_bootstrap.php`.
+
+## v0.8.11
+
+### Changed
+- Added nginx runtime directories `logs` and `temp` to `.gitignore`.
+
+
+## v0.8.10
+
+### Changed
+- Flattened `site/` completely.
+- Removed all subdirectories from `site/`.
+- Moved CSS/JS to `site/style.css` and `site/app.js`.
+- Moved PHP classes, templates, config and SQL directly into `site/`.
+- SQLite database path is now `site/database.sqlite`.
+- Updated all include paths and tool checks.
+
+### Note
+- Template files that would collide with page entry points are prefixed with `templates_`, for example `templates_change_password.php`.
+
+## v0.8.9
+
+### Changed
+- Moved all helper/check tools from `site/app/tools/` to top-level `tools/`.
+- Removed `site/app/tools/` from the deployable `site/` tree.

@@ -1,7 +1,10 @@
 <?php
 declare(strict_types=1);
 
-require dirname(__DIR__) . '/src/bootstrap.php';
+require_once __DIR__ . '/bootstrap.php';
+
+
+
 
 use AbsenceApp\Auth;
 use AbsenceApp\Csrf;
@@ -23,23 +26,22 @@ if ($auth->isFirstLogin()) {
 $repository = new PatientRepository($db);
 $error = null;
 $success = null;
-$generatedPin = null;
-$createdPatientId = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $patientId = trim((string) ($_POST['patient_id'] ?? ''));
 
     try {
         Csrf::requireValid($_POST['csrf_token'] ?? null);
-        $generatedPin = $repository->create($patientId);
-        $createdPatientId = $patientId;
-        $success = 'Patient wurde angelegt.';
+        $repository->delete($patientId);
+        $success = 'Patient wurde gelöscht.';
     } catch (Throwable $exception) {
         $error = $exception->getMessage();
     }
 }
 
-$title = 'Patient anlegen';
-require dirname(__DIR__) . '/templates/header.php';
-require dirname(__DIR__) . '/templates/patient_create.php';
-require dirname(__DIR__) . '/templates/footer.php';
+$patientIds = $repository->listIds();
+
+$title = 'Patient löschen';
+require __DIR__ . '/header.php';
+require __DIR__ . '/templates_patient_delete.php';
+require __DIR__ . '/footer.php';

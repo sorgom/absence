@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
-require dirname(__DIR__) . '/src/bootstrap.php';
+require_once __DIR__ . '/bootstrap.php';
+
+
 
 use AbsenceApp\Auth;
 use AbsenceApp\Database;

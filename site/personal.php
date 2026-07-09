@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
-require dirname(__DIR__) . '/src/bootstrap.php';
+require_once __DIR__ . '/bootstrap.php';
+
+
 
 use AbsenceApp\AbsenceRepository;
 use AbsenceApp\Auth;
@@ -88,7 +90,7 @@ if ($auth->isLoggedIn() && $auth->currentRole() === Auth::ROLE_STAFF && $auth->i
 }
 
 $title = 'Personalbereich';
-require dirname(__DIR__) . '/templates/header.php';
+require __DIR__ . '/header.php';
 
 if ($auth->isLoggedIn() && $auth->currentRole() === Auth::ROLE_STAFF) {
     $view = (string) Session::get('staff_overview_view', 'active');
@@ -104,12 +106,12 @@ if ($auth->isLoggedIn() && $auth->currentRole() === Auth::ROLE_STAFF) {
     $absenceRepository = new AbsenceRepository($db);
     $absences = $absenceRepository->listForStaff($activeOnly, $sort, $order);
 
-    require dirname(__DIR__) . '/templates/staff_overview.php';
+    require __DIR__ . '/staff_overview.php';
 } else {
     $headline = 'Personal-Login';
     $idLabel = 'Personal-ID';
     $action = '/personal.php';
-    require dirname(__DIR__) . '/templates/login.php';
+    require __DIR__ . '/login.php';
 }
 
-require dirname(__DIR__) . '/templates/footer.php';
+require __DIR__ . '/footer.php';

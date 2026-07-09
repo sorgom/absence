@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-require_once dirname(__DIR__) . '/src/bootstrap.php';
+require_once __DIR__ . '/bootstrap.php';
 use AbsenceApp\Database;
 if ($argc !== 3) { fwrite(STDERR, "Usage: php sql/create_patient.php <patient-id> <password>
 "); exit(1); }
