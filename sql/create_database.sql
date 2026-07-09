@@ -1,2 +1,41 @@
-PRAGMA foreign_keys=ON;
-CREATE TABLE settings(name TEXT PRIMARY KEY,value TEXT NOT NULL);
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE IF NOT EXISTS patients (
+    id TEXT PRIMARY KEY,
+    password_hash TEXT NOT NULL,
+    first_login INTEGER NOT NULL DEFAULT 1,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS staff (
+    id TEXT PRIMARY KEY,
+    password_hash TEXT NOT NULL,
+    first_login INTEGER NOT NULL DEFAULT 1,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS reasons (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL UNIQUE,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS absences (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    patient_id TEXT NOT NULL,
+    reason_id INTEGER NOT NULL,
+    departure_time TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    return_time TEXT,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (patient_id) REFERENCES patients(id) ON DELETE CASCADE,
+    FOREIGN KEY (reason_id) REFERENCES reasons(id) ON DELETE RESTRICT
+);
+
+CREATE TABLE IF NOT EXISTS settings (
+    name TEXT PRIMARY KEY,
+    value TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_absences_patient_id ON absences(patient_id);
+CREATE INDEX IF NOT EXISTS idx_absences_departure_time ON absences(departure_time);
+CREATE INDEX IF NOT EXISTS idx_absences_return_time ON absences(return_time);
