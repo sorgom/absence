@@ -5,6 +5,7 @@ require dirname(__DIR__) . '/src/bootstrap.php';
 
 use AbsenceApp\AbsenceRepository;
 use AbsenceApp\Auth;
+use AbsenceApp\Csrf;
 use AbsenceApp\Database;
 use AbsenceApp\Session;
 
@@ -35,6 +36,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$auth->isLoggedIn()) {
 }
 
 if ($auth->isLoggedIn() && $auth->currentRole() === Auth::ROLE_STAFF && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    try {
+        Csrf::requireValid($_POST['csrf_token'] ?? null);
+    } catch (Throwable $exception) {
+        $error = $exception->getMessage();
+    }
+
+    if ($error === null) {
     $action = (string) ($_POST['action'] ?? '');
 
     if ($action === 'overview_view') {
@@ -70,6 +78,7 @@ if ($auth->isLoggedIn() && $auth->currentRole() === Auth::ROLE_STAFF && $_SERVER
     if ($action === 'overview_refresh') {
         header('Location: /personal.php');
         exit;
+    }
     }
 }
 

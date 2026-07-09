@@ -7,6 +7,7 @@
  */
 declare(strict_types=1);
 
+use AbsenceApp\Csrf;
 use AbsenceApp\Utils;
 
 /** @var array<int,array<string,mixed>> $absences */
@@ -39,12 +40,14 @@ function staffSortIndicator(string $column, string $currentSort, string $current
         </div>
 
         <form method="post" action="/personal.php">
+            <?= Csrf::field() ?>
             <input type="hidden" name="action" value="overview_refresh">
             <button class="button-secondary compact" type="submit">Aktualisieren</button>
         </form>
     </div>
 
     <form class="toolbar" method="post" action="/personal.php">
+        <?= Csrf::field() ?>
         <input type="hidden" name="action" value="overview_view">
         <input type="hidden" name="view" value="<?= $activeOnly ? 'all' : 'active' ?>">
 
@@ -69,6 +72,7 @@ function staffSortIndicator(string $column, string $currentSort, string $current
                         <th>Status</th>
                         <th>
                             <form class="sort-form" method="post" action="/personal.php">
+                                <?= Csrf::field() ?>
                                 <input type="hidden" name="action" value="overview_sort">
                                 <input type="hidden" name="sort" value="patient">
                                 <button class="table-sort-button" type="submit">
@@ -79,6 +83,7 @@ function staffSortIndicator(string $column, string $currentSort, string $current
                         <th>Grund / Ziel</th>
                         <th>
                             <form class="sort-form" method="post" action="/personal.php">
+                                <?= Csrf::field() ?>
                                 <input type="hidden" name="action" value="overview_sort">
                                 <input type="hidden" name="sort" value="departure">
                                 <button class="table-sort-button" type="submit">

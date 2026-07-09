@@ -64,3 +64,34 @@ document.addEventListener('click', (event) => {
     menu.classList.toggle('is-open');
   }
 });
+
+
+document.addEventListener('change', (event) => {
+  const target = event.target;
+  if (!(target instanceof HTMLInputElement)) {
+    return;
+  }
+
+  if (!target.matches('[data-toggle-passwords]')) {
+    return;
+  }
+
+  const form = target.closest('form');
+  if (!form) {
+    return;
+  }
+
+  form.querySelectorAll('input[type="password"], input[data-password-visible="true"]').forEach((input) => {
+    if (!(input instanceof HTMLInputElement)) {
+      return;
+    }
+
+    if (target.checked) {
+      input.dataset.passwordVisible = 'true';
+      input.type = 'text';
+    } else {
+      input.type = 'password';
+      delete input.dataset.passwordVisible;
+    }
+  });
+});

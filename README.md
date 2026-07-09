@@ -138,3 +138,75 @@ Neu in dieser Version:
 - Neue Gründe / Ziele hinzufügen.
 - Vorhandene Gründe / Ziele löschen.
 - Einträge, die bereits von Abwesenheiten verwendet werden, werden vor Löschung geschützt.
+
+
+## v0.8.0
+
+Neu in dieser Version:
+
+- Passwortänderung für Patienten und Personal.
+- Passwortänderung beim ersten Login wird erzwungen.
+- Checkbox „Passwörter anzeigen“.
+- CSRF-Schutz für zustandsändernde Formulare im Personalbereich.
+- Verbesserte Fokusdarstellung für Tastaturbedienung.
+
+
+## v0.8.1
+
+Bugfix-Release:
+
+- Fehlerhafte Formular-Attribute aus v0.8.0 korrigiert.
+- CSRF-Felder manuell und valide in die Formulare eingefügt.
+
+
+## v0.8.2
+
+Dieses Release ergänzt ein Prüfskript für Formular-Markup:
+
+```bash
+php tools/check_forms.php
+```
+
+Wenn nach dem Entpacken weiterhin Requests wie
+
+```text
+/personal.php        <input type=
+```
+
+auftreten, läuft sehr wahrscheinlich noch eine alte Datei aus v0.8.0 oder ein PHP/OPcache-Prozess liefert alten Code aus.
+
+Empfohlen:
+
+1. Zielverzeichnis leeren, aber `.git/` behalten.
+2. ZIP vollständig neu entpacken.
+3. PHP/nginx bzw. PHP-CGI/FPM neu starten.
+4. Prüfen:
+
+```bash
+php tools/check_forms.php
+```
+
+
+## v0.8.3
+
+Bugfix-Release:
+
+- `templates/login.php` wurde gezielt neu geschrieben.
+- Das sichtbare `">` auf der Personal-Login-Seite wurde korrigiert.
+- Das öffnende Login-`form`-Tag nutzt jetzt eine vorberechnete Variable `$safeAction`.
+- `tools/check_forms.php` prüft zusätzliche bekannte Fehlerbilder.
+
+Nach dem Entpacken prüfen:
+
+```bash
+php tools/check_forms.php
+```
+
+
+## v0.8.4
+
+Bugfix-Release:
+
+- `tools/check_forms.php` meldet keine harmlosen mehrzeiligen Formular-Tags mehr.
+- Die betroffenen Templates wurden zusätzlich auf einzeilige öffnende `<form>`-Tags umgestellt.
+- Nach dem Entpacken sollte `php tools/check_forms.php` sauber `Form markup check: OK` melden.

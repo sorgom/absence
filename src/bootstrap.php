@@ -13,3 +13,7 @@ require_once __DIR__ . '/AppInfo.php';
 require_once __DIR__ . '/PatientRepository.php';
 
 require_once __DIR__ . '/StaffRepository.php';
+
+require_once __DIR__ . '/Csrf.php';
+
+require_once __DIR__ . '/PasswordService.php';

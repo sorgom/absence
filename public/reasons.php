@@ -4,6 +4,7 @@ declare(strict_types=1);
 require dirname(__DIR__) . '/src/bootstrap.php';
 
 use AbsenceApp\Auth;
+use AbsenceApp\Csrf;
 use AbsenceApp\Database;
 use AbsenceApp\ReasonRepository;
 use AbsenceApp\Session;
@@ -14,6 +15,11 @@ $db = Database::getConnection();
 $auth = new Auth($db);
 $auth->requireRole(Auth::ROLE_STAFF);
 
+if ($auth->isFirstLogin()) {
+    header('Location: /change_password.php');
+    exit;
+}
+
 $repository = new ReasonRepository($db);
 $error = null;
 $success = null;
@@ -22,6 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = (string) ($_POST['action'] ?? '');
 
     try {
+        Csrf::requireValid($_POST['csrf_token'] ?? null);
+
         if ($action === 'add') {
             $repository->add((string) ($_POST['name'] ?? ''));
             $success = 'Grund / Ziel wurde hinzugefügt.';

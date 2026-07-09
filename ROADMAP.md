@@ -41,3 +41,9 @@
 - Passwortänderung finalisieren.
 - CSRF-Schutz ergänzen.
 - UI-Polish.
+
+## v0.9
+
+- Datenschutz-Cleanup alter Abwesenheiten.
+- nginx-Konfiguration finalisieren.
+- README-Installation finalisieren.

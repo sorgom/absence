@@ -42,3 +42,9 @@
 - [x] Gründe/Ziele hinzufügen.
 - [x] Gründe/Ziele löschen.
 - [x] Menülink für Gründe/Ziele aktivieren.
+
+## Done in v0.8.0
+
+- [x] Passwortänderung finalisieren.
+- [x] Erstlogin-Passwortänderung erzwingen.
+- [x] CSRF-Schutz ergänzen.

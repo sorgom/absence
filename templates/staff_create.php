@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use AbsenceApp\Csrf;
 use AbsenceApp\Utils;
 
 /** @var string|null $error */
@@ -28,6 +29,7 @@ use AbsenceApp\Utils;
     <?php endif; ?>
 
     <form method="post" action="/staff_create.php" class="stack-form">
+        <?= Csrf::field() ?>
         <label for="staff_id">Personal-ID</label>
         <input id="staff_id" name="staff_id" type="text" autocomplete="off" required autofocus>
 

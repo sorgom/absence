@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use AbsenceApp\Csrf;
 use AbsenceApp\Utils;
 
 /** @var array<int,string> $staffIds */
@@ -22,12 +23,9 @@ use AbsenceApp\Utils;
         <p class="alert notice">Es sind keine löschbaren Personal-Member vorhanden.</p>
         <p class="muted">Der eigene Account wird aus Sicherheitsgründen nicht zum Löschen angeboten.</p>
     <?php else: ?>
-        <form
-            method="post"
-            action="/staff_delete.php"
-            class="stack-form"
-            data-confirm="Personal-Member wirklich löschen?"
-        >
+        <form method="post" action="/staff_delete.php" class="stack-form" data-confirm="Personal-Member wirklich löschen?">
+            <?= Csrf::field() ?>
+
             <label for="staff_id">Personal-ID</label>
             <select id="staff_id" name="staff_id" required>
                 <?php foreach ($staffIds as $staffId): ?>

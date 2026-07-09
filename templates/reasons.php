@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use AbsenceApp\Csrf;
 use AbsenceApp\Utils;
 
 /** @var array<int,array{id:int,name:string}> $reasons */
@@ -19,6 +20,7 @@ use AbsenceApp\Utils;
     <?php endif; ?>
 
     <form method="post" action="/reasons.php" class="stack-form">
+        <?= Csrf::field() ?>
         <input type="hidden" name="action" value="add">
 
         <label for="name">Neuer Grund / neues Ziel</label>
@@ -32,12 +34,8 @@ use AbsenceApp\Utils;
     <?php if ($reasons === []): ?>
         <p class="alert notice">Es sind keine Gründe / Ziele vorhanden.</p>
     <?php else: ?>
-        <form
-            method="post"
-            action="/reasons.php"
-            class="stack-form"
-            data-confirm="Eintrag wirklich löschen?"
-        >
+        <form method="post" action="/reasons.php" class="stack-form" data-confirm="Eintrag wirklich löschen?">
+            <?= Csrf::field() ?>
             <input type="hidden" name="action" value="delete">
 
             <label for="reason_id">Vorhandene Einträge</label>

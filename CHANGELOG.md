@@ -1,22 +1,15 @@
 # CHANGELOG
 
-## v0.7.0
+## v0.8.4
 
-### Added
-- Staff-side management of absence reasons / destinations.
-- Add reason / destination form.
-- Delete reason / destination form with confirmation dialog.
-- `ReasonRepository` for reason management.
+### Fixed
+- Removed overly strict `tools/check_forms.php` warning about harmless multi-line form tags.
+- Rewrote delete/reason forms with single-line opening `<form>` tags to avoid false positives.
+- Version bumped to `0.8.4`.
 
-### Changed
-- Version bumped to `0.7.0`.
-- Reason management menu entry is now functional.
+## v0.8.3
 
-## v0.6.0
-
-### Added
-- Staff-side creation of Personal-Members.
-- Automatic initial password generation for new Personal-Members.
-- Staff-side deletion of Personal-Members.
-- Safety guard preventing deletion of the currently logged-in account.
-- `StaffRepository` for staff management.
+### Fixed
+- Rewrote `templates/login.php` to avoid fragile PHP output inside the form action attribute.
+- Fixed visible `">` artifact on the personal login page.
+- Strengthened `tools/check_forms.php` to catch suspicious opening form tags.
