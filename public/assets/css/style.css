@@ -1,1 +1,249 @@
-:root{color-scheme:light dark;--bg:#f5f6f8;--fg:#1b1f24;--card:#fff;--border:#d9dee7;--accent:#2457c5;--accent-fg:#fff;--error-bg:#ffe8e8;--error-fg:#8a1f1f;--notice-bg:#fff7d6;--notice-fg:#6a5100}@media(prefers-color-scheme:dark){:root{--bg:#111418;--fg:#f2f4f8;--card:#1b2027;--border:#343b45;--accent:#7aa2ff;--accent-fg:#111418;--error-bg:#3a1c1c;--error-fg:#ffb8b8;--notice-bg:#302806;--notice-fg:#ffe58a}}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}.app-header,.app-footer{padding:1rem;border-bottom:1px solid var(--border);background:var(--card)}.app-footer{border-top:1px solid var(--border);border-bottom:0;text-align:center}.brand{color:var(--fg);font-weight:700;text-decoration:none}.top-nav{display:flex;gap:1rem;align-items:center;justify-content:flex-end;flex-wrap:wrap;margin-top:.5rem}.top-nav a{color:var(--accent)}.container{width:min(100%,46rem);margin:0 auto;padding:1.5rem 1rem}.card{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1.25rem;box-shadow:0 .5rem 1.5rem rgb(0 0 0 / .06)}.login-card{max-width:28rem;margin:2rem auto}label{display:block;margin-top:1rem;font-weight:600}input,select,button,.button-secondary{width:100%;margin-top:.35rem;padding:.75rem;border-radius:.6rem;border:1px solid var(--border);font:inherit}button{margin-top:1.25rem;border-color:var(--accent);background:var(--accent);color:var(--accent-fg);font-weight:700;cursor:pointer}.button-secondary{display:block;text-align:center;text-decoration:none;color:var(--fg);background:transparent}.checkbox{width:auto;margin-right:.4rem}.alert{padding:.75rem;border-radius:.6rem}.error{background:var(--error-bg);color:var(--error-fg)}.notice{background:var(--notice-bg);color:var(--notice-fg)}@media(min-width:42rem){.app-header{display:flex;align-items:center;justify-content:space-between}.top-nav{margin-top:0}}
+:root {
+  color-scheme: light dark;
+  --bg: #f5f6f8;
+  --fg: #1b1f24;
+  --card: #ffffff;
+  --border: #d9dee7;
+  --accent: #2457c5;
+  --accent-fg: #ffffff;
+  --muted: #687282;
+  --error-bg: #ffe8e8;
+  --error-fg: #8a1f1f;
+  --notice-bg: #fff7d6;
+  --notice-fg: #6a5100;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111418;
+    --fg: #f2f4f8;
+    --card: #1b2027;
+    --border: #343b45;
+    --accent: #7aa2ff;
+    --accent-fg: #111418;
+    --muted: #a9b2bf;
+    --error-bg: #3a1c1c;
+    --error-fg: #ffb8b8;
+    --notice-bg: #302806;
+    --notice-fg: #ffe58a;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+}
+
+.app-header,
+.app-footer {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 0.85rem 1rem;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.app-footer {
+  border-top: 1px solid var(--border);
+  border-bottom: 0;
+  text-align: center;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.brand {
+  color: var(--fg);
+  font-weight: 700;
+  overflow: hidden;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.login-info {
+  color: var(--muted);
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.menu-toggle {
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  color: var(--fg);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 1.25rem;
+  height: 2.5rem;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  width: 2.5rem;
+}
+
+.menu-toggle:hover,
+.menu-toggle[aria-expanded="true"] {
+  border-color: var(--accent);
+}
+
+.app-menu {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  box-shadow: 0 1rem 2rem rgb(0 0 0 / 0.16);
+  display: grid;
+  gap: 0.15rem;
+  left: 1rem;
+  min-width: min(22rem, calc(100vw - 2rem));
+  padding: 0.5rem;
+  position: absolute;
+  top: 4.25rem;
+  z-index: 20;
+}
+
+.app-menu[hidden] { display: none; }
+
+.menu-header {
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  margin-bottom: 0.25rem;
+  padding: 0.65rem 0.75rem;
+}
+
+.app-menu a {
+  border-radius: 0.6rem;
+  color: var(--fg);
+  padding: 0.7rem 0.75rem;
+  text-decoration: none;
+}
+
+.app-menu a:hover,
+.app-menu a[aria-current="page"] {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.app-menu a[aria-disabled="true"] {
+  color: var(--muted);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+  width: min(100%, 46rem);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1.5rem rgb(0 0 0 / 0.06);
+  padding: 1.25rem;
+}
+
+.login-card {
+  margin: 2rem auto;
+  max-width: 28rem;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+input,
+select,
+button,
+.button-secondary {
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  font: inherit;
+  min-height: 2.75rem;
+  padding: 0.7rem 0.8rem;
+  width: 100%;
+}
+
+input,
+select {
+  background: var(--card);
+  color: var(--fg);
+  margin-top: 0.35rem;
+}
+
+button,
+.button-secondary {
+  align-items: center;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-fg);
+  cursor: pointer;
+  display: inline-flex;
+  font-weight: 700;
+  justify-content: center;
+  margin-top: 1.25rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+.button-secondary {
+  background: transparent;
+  color: var(--fg);
+}
+
+.checkbox {
+  min-height: auto;
+  width: auto;
+}
+
+.alert {
+  border-radius: 0.6rem;
+  padding: 0.75rem;
+}
+
+.error {
+  background: var(--error-bg);
+  color: var(--error-fg);
+}
+
+.notice {
+  background: var(--notice-bg);
+  color: var(--notice-fg);
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+@media (max-width: 34rem) {
+  .login-info {
+    display: none;
+  }
+}

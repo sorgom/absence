@@ -1,6 +1,6 @@
 # Abwesenheits-App
 
-Version **v0.3** – Patientenbereich mit Ausgang starten/beenden und Passwortänderung.
+Version **v0.3.1** – Patientenbereich mit Ausgang starten/beenden und Passwortänderung.
 
 ## Enthalten
 
@@ -12,6 +12,8 @@ Version **v0.3** – Patientenbereich mit Ausgang starten/beenden und Passwortä
 - Passwortänderung für Patient und Personal
 - Erstlogin-Erkennung mit erzwungener Passwortänderung
 - Responsive Layout mit Light-/Dark-Mode
+- Rollenabhängiger Logout
+- Unterschiedliche Hamburger-Menüs für Patienten und Personal
 
 ## Installation
 
@@ -47,6 +49,6 @@ Passwort: anfang
 
 ```bash
 git add .
-git commit -m "feat: implement patient absence workflow"
-git tag v0.3
+git commit -m "fix: improve logout and role menus"
+git tag v0.3.1
 ```
