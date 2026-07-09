@@ -1,1 +1,0 @@
-<?php echo 'Patient Login folgt';
