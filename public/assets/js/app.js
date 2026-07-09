@@ -46,3 +46,21 @@ document.addEventListener('submit', (event) => {
     event.preventDefault();
   }
 });
+
+
+document.addEventListener('click', (event) => {
+  const target = event.target;
+  if (!(target instanceof HTMLElement)) {
+    return;
+  }
+
+  const toggle = target.closest('[data-menu-toggle]');
+  if (!toggle) {
+    return;
+  }
+
+  const menu = document.getElementById('drawer-menu');
+  if (menu) {
+    menu.classList.toggle('is-open');
+  }
+});

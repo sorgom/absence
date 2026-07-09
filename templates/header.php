@@ -23,7 +23,8 @@ $userId = (string) Session::get('user_id', '');
 <header class="app-header">
     <div class="header-left">
         <?php require __DIR__ . '/menu.php'; ?>
-        <a class="brand" href="<?= $role === Auth::ROLE_STAFF ? '/personal.php' : '/index.php' ?>">
+        <button class="menu-toggle" type="button" data-menu-toggle aria-label="Menü öffnen">☰</button>
+    <a class="brand" href="<?= $role === Auth::ROLE_STAFF ? '/personal.php' : '/index.php' ?>">
             <?= Utils::h((string) Config::get('app_name')) ?>
         </a>
     </div>

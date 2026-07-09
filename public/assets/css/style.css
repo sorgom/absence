@@ -447,3 +447,56 @@ select {
 .danger-button:focus {
   filter: brightness(1.05);
 }
+
+
+.drawer-menu {
+  display: none;
+  gap: 0.25rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+}
+
+.drawer-menu.is-open {
+  display: grid;
+}
+
+.drawer-menu a,
+.drawer-menu .menu-login {
+  display: block;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.55rem;
+}
+
+.drawer-menu a {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.drawer-menu a:hover,
+.drawer-menu a:focus {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.menu-login {
+  margin: 0;
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+.menu-toggle {
+  width: auto;
+  margin: 0;
+  padding: 0.45rem 0.7rem;
+  line-height: 1;
+}
+
+@media (min-width: 48rem) {
+  .drawer-menu {
+    max-width: 46rem;
+    margin: 0 auto;
+    border: 1px solid var(--border);
+    border-top: 0;
+    border-radius: 0 0 0.75rem 0.75rem;
+  }
+}

@@ -109,3 +109,11 @@ Neu in dieser Version:
 - Patienten im Personalbereich löschen.
 - Löschvorgang mit Bestätigungsdialog.
 - Patientenverwaltung über das Personal-Hamburger-Menü erreichbar.
+
+
+## v0.5.1
+
+Bugfix-Release:
+
+- Patientenverwaltung ist im Personal-Hamburger-Menü verlinkt.
+- Gemeinsame Menü-Komponente wird zuverlässig im Header eingebunden.
