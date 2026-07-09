@@ -2,17 +2,19 @@
 
 ## High
 
-- [ ] Implement staff overview table for active/all absences.
-- [ ] Implement staff management pages from the specification.
-- [ ] Implement reason management pages from the specification.
+- [ ] Verwaltung der Liste „Grund / Ziel des Ausgangs“
+- [ ] Patient anlegen
+- [ ] Patient löschen
+- [ ] Personal-Member anlegen
+- [ ] Personal-Member löschen
 
 ## Medium
 
-- [ ] Add CSRF protection to all forms.
-- [ ] Add configurable cleanup of old absences.
-- [ ] Improve validation messages.
+- [ ] CSRF-Schutz für alle Formulare ergänzen
+- [ ] Datensätze nach konfigurierbarer Frist automatisch löschen
+- [ ] Benutzerfreundlichere Zeitformatierung
 
 ## Low
 
-- [ ] Add icons to menu entries.
-- [ ] Add keyboard shortcut for opening the menu.
+- [ ] Icons für Menüeinträge
+- [ ] CSV-Export der Übersicht prüfen

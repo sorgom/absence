@@ -1,23 +1,23 @@
 # Changelog
 
+## v0.4
+
+### Added
+- Personal overview with tabular absence list.
+- Default filter for active absences only.
+- Switch to display all absences.
+- Sorting by departure time or patient ID.
+- Responsive table layout for smartphone use.
+
+### Changed
+- `AbsenceRepository` now supports staff overview queries.
+- Personal start page now shows real absence data after login.
+
 ## v0.3.1
 
 ### Fixed
-
-- Personal logout now redirects to the personal login page (`/personal.php`).
-- Patient and staff users now receive different hamburger menus according to the specification.
-
-### Changed
-
-- Added a shared role-aware menu component in `templates/menu.php`.
-- Improved header layout and menu behaviour on small screens.
-- Updated footer version label to v0.3.1.
-
-## v0.3
+- Personal logout redirects to the personal login page.
+- Patient and staff users now receive role-specific hamburger menus.
 
 ### Added
-
-- Patient absence workflow: start absence and record return.
-- Password change page.
-- First-login password change enforcement.
-- CLI helper to create test patients.
+- `CHANGELOG.md`, `TODO.md`, and `ROADMAP.md`.

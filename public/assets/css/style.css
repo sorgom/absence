@@ -247,3 +247,133 @@ button,
     display: none;
   }
 }
+
+/* Staff overview --------------------------------------------------------- */
+.wide-card {
+  width: min(100%, 68rem);
+}
+
+.page-title-row {
+  align-items: flex-start;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.muted {
+  color: var(--muted);
+  margin-top: -0.5rem;
+}
+
+.toolbar {
+  align-items: end;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 1fr;
+  margin: 1rem 0 1.25rem;
+}
+
+.switch-row {
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0;
+}
+
+.inline-select {
+  margin-top: 0;
+}
+
+.compact {
+  margin-top: 0;
+  min-height: 2.4rem;
+  padding: 0.45rem 0.75rem;
+  width: auto;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  min-width: 42rem;
+  width: 100%;
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  font-weight: 700;
+}
+
+tr.is-active td:first-child {
+  border-left: 0.25rem solid var(--accent);
+}
+
+.status-active {
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  display: inline-block;
+  font-weight: 700;
+  padding: 0.15rem 0.55rem;
+}
+
+@media (min-width: 48rem) {
+  .container {
+    width: min(100%, 72rem);
+  }
+
+  .toolbar {
+    grid-template-columns: 1.4fr 12rem auto;
+  }
+}
+
+@media (max-width: 42rem) {
+  .page-title-row {
+    display: block;
+  }
+
+  table {
+    min-width: 0;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr,
+  td {
+    display: block;
+  }
+
+  tr {
+    border: 1px solid var(--border);
+    border-radius: 0.8rem;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+  }
+
+  td {
+    border-bottom: 1px solid var(--border);
+    padding-left: 45%;
+    position: relative;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    left: 0.75rem;
+    position: absolute;
+    width: 38%;
+  }
+}
