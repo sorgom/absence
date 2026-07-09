@@ -2,6 +2,7 @@
 /database/*.sqlite-shm
 /database/*.sqlite-wal
 /logs/*.log
+/logs/*.pid
 /vendor/
 .vscode/
 .idea/
