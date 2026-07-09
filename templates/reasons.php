@@ -1,0 +1,53 @@
+<?php
+declare(strict_types=1);
+
+use AbsenceApp\Utils;
+
+/** @var array<int,array{id:int,name:string}> $reasons */
+/** @var string|null $error */
+/** @var string|null $success */
+?>
+<section class="card">
+    <h1>Liste „Grund / Ziel des Ausgangs“ bearbeiten</h1>
+
+    <?php if ($error): ?>
+        <p class="alert error"><?= Utils::h($error) ?></p>
+    <?php endif; ?>
+
+    <?php if ($success): ?>
+        <p class="alert success"><?= Utils::h($success) ?></p>
+    <?php endif; ?>
+
+    <form method="post" action="/reasons.php" class="stack-form">
+        <input type="hidden" name="action" value="add">
+
+        <label for="name">Neuer Grund / neues Ziel</label>
+        <input id="name" name="name" type="text" autocomplete="off" required autofocus>
+
+        <button type="submit">Hinzufügen</button>
+    </form>
+
+    <hr class="section-divider">
+
+    <?php if ($reasons === []): ?>
+        <p class="alert notice">Es sind keine Gründe / Ziele vorhanden.</p>
+    <?php else: ?>
+        <form
+            method="post"
+            action="/reasons.php"
+            class="stack-form"
+            data-confirm="Eintrag wirklich löschen?"
+        >
+            <input type="hidden" name="action" value="delete">
+
+            <label for="reason_id">Vorhandene Einträge</label>
+            <select id="reason_id" name="reason_id" required>
+                <?php foreach ($reasons as $reason): ?>
+                    <option value="<?= (int) $reason['id'] ?>"><?= Utils::h((string) $reason['name']) ?></option>
+                <?php endforeach; ?>
+            </select>
+
+            <button type="submit" class="danger-button">Löschen</button>
+        </form>
+    <?php endif; ?>
+</section>

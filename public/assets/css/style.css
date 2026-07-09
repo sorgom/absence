@@ -500,3 +500,10 @@ select {
     border-radius: 0 0 0.75rem 0.75rem;
   }
 }
+
+
+.section-divider {
+  margin: 1.5rem 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+}

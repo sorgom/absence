@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v0.7.0
+
+### Added
+- Staff-side management of absence reasons / destinations.
+- Add reason / destination form.
+- Delete reason / destination form with confirmation dialog.
+- `ReasonRepository` for reason management.
+
+### Changed
+- Version bumped to `0.7.0`.
+- Reason management menu entry is now functional.
+
 ## v0.6.0
 
 ### Added
@@ -8,23 +20,3 @@
 - Staff-side deletion of Personal-Members.
 - Safety guard preventing deletion of the currently logged-in account.
 - `StaffRepository` for staff management.
-
-### Changed
-- Version bumped to `0.6.0`.
-- Personal-Member menu entries are now functional.
-
-## v0.5.1
-
-### Fixed
-- Patient management pages are now explicitly linked in the staff hamburger menu.
-- Ensured the shared menu component is included from the header.
-- Added robust hamburger toggle handling.
-
-## v0.5.0
-
-### Added
-- Staff-side patient creation.
-- Automatic four-digit initial PIN generation for new patients.
-- Staff-side patient deletion.
-- Confirmation dialog before deleting patients.
-- `PatientRepository` for patient management.

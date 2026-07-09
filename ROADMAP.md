@@ -35,3 +35,9 @@
 ## v0.8
 
 - Passwortänderung finalisieren und UI-Polish.
+
+## v0.8
+
+- Passwortänderung finalisieren.
+- CSRF-Schutz ergänzen.
+- UI-Polish.

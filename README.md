@@ -128,3 +128,13 @@ Neu in dieser Version:
 - Personal-Member löschen.
 - Eigener Account kann nicht gelöscht werden.
 - Personalverwaltung über das Personal-Hamburger-Menü erreichbar.
+
+
+## v0.7.0
+
+Neu in dieser Version:
+
+- Liste „Grund / Ziel des Ausgangs“ im Personalbereich bearbeiten.
+- Neue Gründe / Ziele hinzufügen.
+- Vorhandene Gründe / Ziele löschen.
+- Einträge, die bereits von Abwesenheiten verwendet werden, werden vor Löschung geschützt.

@@ -36,3 +36,9 @@
 - [x] Initiales Passwort erzeugen und anzeigen.
 - [x] Personal-Member löschen.
 - [x] Eigenen Account vor Löschung schützen.
+
+## Done in v0.7.0
+
+- [x] Gründe/Ziele hinzufügen.
+- [x] Gründe/Ziele löschen.
+- [x] Menülink für Gründe/Ziele aktivieren.
