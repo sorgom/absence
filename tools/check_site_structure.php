@@ -8,6 +8,8 @@ $tools = $root . '/tools';
 $requiredSite = [
     'index.php',
     'personal.php',
+    'person_create.php',
+    'person_delete.php',
     'logout.php',
     'style.css',
     'app.js',
@@ -32,6 +34,7 @@ $requiredRootTools = [
     'check_initial_seed.php',
     'check_filenames.php',
     'check_v090_schema.php',
+    'check_person_management.php',
     'init_database.php',
 ];
 

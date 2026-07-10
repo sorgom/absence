@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v0.9.1
+
+### Changed
+- Replaced separate patient/staff create pages with unified `person_create.php`.
+- Replaced separate patient/staff delete pages with unified `person_delete.php`.
+- Person create/delete forms now use radio buttons for `Patient` and `Personal`.
+- Staff menu now shows `Person anlegen` and `Person löschen`.
+- Old patient/staff create/delete pages remain as redirects for compatibility.
+
+### Added
+- `templates_person_create.php`.
+- `templates_person_delete.php`.
+- `tools/check_person_management.php`.
+
 ## v0.9.0
 
 ### Changed

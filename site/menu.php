@@ -17,11 +17,9 @@ $userId = (string) Session::get('user_id', '');
         <p class="menu-login">Aktueller Login: <?= Utils::h($userId) ?></p>
         <a href="/personal.php">Start / Übersicht</a>
         <a href="/index.php">Abwesenheit</a>
-        <a href="/reasons.php">Liste „Grund / Ziel des Ausgangs“ bearbeiten</a>
-        <a href="/patient_create.php">Patient anlegen</a>
-        <a href="/patient_delete.php">Patient löschen</a>
-        <a href="/staff_create.php">Personal-Member anlegen</a>
-        <a href="/staff_delete.php">Personal-Member löschen</a>
+        <a href="/reasons.php">Gründe und Ziele</a>
+        <a href="/person_create.php">Person anlegen</a>
+        <a href="/person_delete.php">Person löschen</a>
         <a href="/change_password.php">Passwort ändern</a>
         <a href="/logout.php">Logout</a>
     <?php endif; ?>

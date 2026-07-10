@@ -1,6 +1,6 @@
 # Abwesenheits-App
 
-Version **v0.9.0**
+Version **v0.9.1**
 
 ## Wichtigste Änderung in v0.9.0
 
@@ -58,4 +58,31 @@ php tools/check_bootstrap.php
 php tools/check_entrypoints.php
 php tools/check_init_database.php
 php tools/check_initial_seed.php
+```
+
+
+## Personenverwaltung
+
+Im Personalbereich gibt es jetzt gemeinsame Seiten:
+
+```text
+site/person_create.php
+site/person_delete.php
+```
+
+Dort wird per Radio-Button zwischen `Patient` und `Personal` gewählt.
+
+Die alten Seiten bleiben als Weiterleitungen erhalten:
+
+```text
+patient_create.php -> person_create.php
+staff_create.php   -> person_create.php
+patient_delete.php -> person_delete.php?person_type=patient
+staff_delete.php   -> person_delete.php?person_type=staff
+```
+
+Zusätzlicher Check:
+
+```bash
+php tools/check_person_management.php
 ```

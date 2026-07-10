@@ -525,3 +525,31 @@ button:focus {
   outline: 3px solid color-mix(in srgb, var(--accent) 35%, transparent);
   outline-offset: 2px;
 }
+
+
+.radio-group {
+    border: 0;
+    padding: 0;
+    margin: 0 0 1rem;
+    display: grid;
+    gap: 0.5rem;
+}
+
+.radio-group legend {
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+}
+
+.radio-group label {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.result-box {
+    background: var(--muted-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
