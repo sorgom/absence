@@ -15,6 +15,7 @@ $requiredSite = [
     'config_class.php',
     'app_config.php',
     'session.php',
+    'person_repository.php',
     'header.php',
     'version',
 ];
@@ -30,6 +31,7 @@ $requiredRootTools = [
     'check_init_database.php',
     'check_initial_seed.php',
     'check_filenames.php',
+    'check_v090_schema.php',
     'init_database.php',
 ];
 

@@ -11,8 +11,7 @@ use AbsenceApp\Session;
 
 Session::start();
 
-$role = Session::get('role');
-$redirectTarget = $role === Auth::ROLE_STAFF ? '/personal.php' : '/index.php';
+$redirectTarget = '/index.php';
 
 $auth = new Auth(Database::getConnection());
 $auth->logout();

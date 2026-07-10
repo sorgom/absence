@@ -31,7 +31,7 @@ $userId = (string) Session::get('user_id', '');
 
     <?php if (Session::has('user_id')): ?>
         <div class="login-info" aria-label="Aktueller Login">
-            <?= $role === Auth::ROLE_STAFF ? 'Personal' : 'Patient' ?>:
+            Aktueller Login:
             <?= Utils::h($userId) ?>
         </div>
     <?php endif; ?>

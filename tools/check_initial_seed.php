@@ -27,15 +27,20 @@ if ($returnCode !== 0) {
 $pdo = new PDO('sqlite:' . $db);
 $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-$staff = $pdo->query("SELECT id, password_hash, first_login FROM staff WHERE id = 'anfang'")->fetch();
+$staff = $pdo->query("SELECT id, password_hash, is_staff, first_login FROM persons WHERE id = 'anfang'")->fetch();
 
 if (!$staff) {
-    fwrite(STDERR, "Initial staff member 'anfang' is missing.\n");
+    fwrite(STDERR, "Initial person/staff member 'anfang' is missing.\n");
     exit(1);
 }
 
 if (!password_verify('anfang', (string) $staff['password_hash'])) {
     fwrite(STDERR, "Initial staff password for 'anfang' is not 'anfang'.\n");
+    exit(1);
+}
+
+if ((int) $staff['is_staff'] !== 1) {
+    fwrite(STDERR, "Initial staff member must have is_staff = 1.\n");
     exit(1);
 }
 

@@ -10,6 +10,7 @@ require_once __DIR__ . '/csrf.php';
 require_once __DIR__ . '/password_service.php';
 require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/app_info.php';
+require_once __DIR__ . '/person_repository.php';
 require_once __DIR__ . '/reason_repository.php';
 require_once __DIR__ . '/absence_repository.php';
 require_once __DIR__ . '/patient_repository.php';

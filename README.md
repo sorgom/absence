@@ -1,63 +1,42 @@
 # Abwesenheits-App
 
-Version **v0.8.19**
+Version **v0.9.0**
 
-## Dateinamen-Konvention
+## Wichtigste Änderung in v0.9.0
 
-Alle Dateinamen sind klein geschrieben. CamelCase-Dateinamen wurden auf underscore umgestellt.
-
-Beispiele:
+Das Datenmodell wurde auf eine gemeinsame Tabelle `persons` umgestellt.
 
 ```text
-Config.php             -> config_class.php
-AppInfo.php            -> app_info.php
-PasswordService.php    -> password_service.php
-AbsenceRepository.php  -> absence_repository.php
-README_SITE.md         -> readme_site.md
-VERSION                -> version
+persons
+├── id
+├── password_hash
+├── is_staff
+├── first_login
+└── created_at
 ```
 
-Die PHP-Klassennamen bleiben unverändert; geändert wurden nur die Dateinamen und internen Pfade.
+Patienten und Personal-Members liegen nicht mehr in getrennten Tabellen. Das Flag `is_staff` bestimmt Rolle, Navigation und Weiterleitung.
 
-## Deployment-Struktur
+## Login
 
-`site/` ist komplett flach und enthält keine Unterverzeichnisse.
+Der Einstieg erfolgt einheitlich über:
 
 ```text
-site/
-├── index.php
-├── personal.php
-├── logout.php
-├── style.css
-├── app.js
-├── bootstrap.php
-├── config_class.php
-├── app_config.php
-├── database.php
-├── session.php
-├── auth.php
-└── ...
+site/index.php
 ```
 
-Alles, was auf den Webserver kopiert werden muss, liegt direkt in `site/`.
+Nach dem Login entscheidet `persons.is_staff`:
 
-Die Tools liegen außerhalb:
+- `0` -> Abwesenheit / Patientenansicht
+- `1` -> Personalbereich
 
-```text
-tools/
-```
-
-## Datenbank initialisieren
+## Datenbank initialisieren oder migrieren
 
 ```bash
 php tools/init_database.php
 ```
 
-Die SQLite-Datenbank wird erzeugt als:
-
-```text
-site/database.sqlite
-```
+Bei einer bestehenden v0.8.x-Datenbank werden `patients` und `staff` nach `persons` migriert und `absences.patient_id` wird zu `absences.person_id`.
 
 ## Lokaler Testserver
 
@@ -72,6 +51,7 @@ php tools/check_site_structure.php
 php tools/check_windows_filenames.php
 php tools/check_filenames.php
 php tools/check_flat_paths.php
+php tools/check_v090_schema.php
 php tools/check_forms.php
 php tools/check_client_time_markup.php
 php tools/check_bootstrap.php

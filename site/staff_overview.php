@@ -34,7 +34,7 @@ function staffSortIndicator(string $column, string $currentSort, string $current
             <p class="muted">
                 <?= $activeOnly ? 'Nur aktive Abwesenheiten' : 'Alle Abwesenheiten' ?> ·
                 Sortierung:
-                <?= Utils::h($sort === 'patient' ? 'Patienten-ID' : 'Aufbruch') ?>
+                <?= Utils::h($sort === 'patient' ? 'ID' : 'Aufbruch') ?>
                 <?= Utils::h($order === 'asc' ? 'aufsteigend' : 'absteigend') ?>
             </p>
         </div>
@@ -76,7 +76,7 @@ function staffSortIndicator(string $column, string $currentSort, string $current
                                 <input type="hidden" name="action" value="overview_sort">
                                 <input type="hidden" name="sort" value="patient">
                                 <button class="table-sort-button" type="submit">
-                                    Patienten-ID<?= Utils::h(staffSortIndicator('patient', $sort, $order)) ?>
+                                    ID<?= Utils::h(staffSortIndicator('patient', $sort, $order)) ?>
                                 </button>
                             </form>
                         </th>
@@ -100,7 +100,7 @@ function staffSortIndicator(string $column, string $currentSort, string $current
                             <td data-label="Status">
                                 <?= $absence['return_time'] === null ? '<span class="status-active">Unterwegs</span>' : 'Zurück' ?>
                             </td>
-                            <td data-label="Patienten-ID"><?= Utils::h((string) $absence['patient_id']) ?></td>
+                            <td data-label="ID"><?= Utils::h((string) $absence['person_id']) ?></td>
                             <td data-label="Grund / Ziel"><?= Utils::h((string) $absence['reason_name']) ?></td>
                             <td data-label="Aufbruch"><?= Utils::localTimeElement((string) $absence['departure_time']) ?></td>
                             <td data-label="Rückkehr">

@@ -3,9 +3,6 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/bootstrap.php';
 
-
-
-
 use AbsenceApp\Auth;
 use AbsenceApp\Csrf;
 use AbsenceApp\Database;
@@ -18,7 +15,7 @@ $db = Database::getConnection();
 $auth = new Auth($db);
 
 if (!$auth->isLoggedIn()) {
-    header('Location: /');
+    header('Location: /index.php');
     exit;
 }
 
@@ -43,10 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($action === 'change') {
             $service = new PasswordService($db);
-            $service->changePassword(
-                (string) $auth->currentRole(),
+            $service->changePasswordForPerson(
                 (string) $auth->currentUserId(),
-                (string) ($_POST['old_password'] ?? ''),
                 (string) ($_POST['new_password'] ?? ''),
                 (string) ($_POST['repeat_password'] ?? '')
             );

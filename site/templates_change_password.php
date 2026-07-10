@@ -32,9 +32,6 @@ use AbsenceApp\Utils;
             <span>Passwörter anzeigen</span>
         </label>
 
-        <label for="old_password">Altes Passwort</label>
-        <input id="old_password" name="old_password" type="password" autocomplete="current-password" required>
-
         <label for="new_password">Neues Passwort</label>
         <input id="new_password" name="new_password" type="password" autocomplete="new-password" required>
 

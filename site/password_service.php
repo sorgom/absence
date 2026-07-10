@@ -6,7 +6,7 @@ namespace AbsenceApp;
 use PDO;
 
 /**
- * Handles password changes for patients and staff members.
+ * Handles password changes for persons.
  */
 final class PasswordService
 {
@@ -15,7 +15,7 @@ final class PasswordService
     }
 
     /**
-     * Changes the password for the selected role and user ID.
+     * Changes a password without asking for the old password.
      */
     public function changePassword(
         string $role,
@@ -24,6 +24,15 @@ final class PasswordService
         string $newPassword,
         string $repeatPassword
     ): void {
+        $this->changePasswordForPerson($userId, $newPassword, $repeatPassword);
+    }
+
+    public function changePasswordForPerson(string $userId, string $newPassword, string $repeatPassword): void
+    {
+        if ($userId === '') {
+            throw new \InvalidArgumentException('Nicht angemeldet.');
+        }
+
         if ($newPassword === '') {
             throw new \InvalidArgumentException('Das neue Passwort darf nicht leer sein.');
         }
@@ -32,35 +41,20 @@ final class PasswordService
             throw new \InvalidArgumentException('Die neuen Passwörter stimmen nicht überein.');
         }
 
-        $table = $this->tableForRole($role);
-
-        $stmt = $this->db->prepare("SELECT password_hash FROM {$table} WHERE id = :id");
-        $stmt->execute(['id' => $userId]);
-        $row = $stmt->fetch();
-
-        if (!$row || !password_verify($oldPassword, (string) $row['password_hash'])) {
-            throw new \RuntimeException('Das alte Passwort ist nicht korrekt.');
-        }
-
         $stmt = $this->db->prepare(
-            "UPDATE {$table}
+            'UPDATE persons
              SET password_hash = :password_hash, first_login = 0
-             WHERE id = :id"
+             WHERE id = :id'
         );
         $stmt->execute([
             'id' => $userId,
             'password_hash' => password_hash($newPassword, PASSWORD_DEFAULT),
         ]);
 
-        Session::set('first_login', false);
-    }
+        if ($stmt->rowCount() < 1) {
+            throw new \RuntimeException('Person wurde nicht gefunden.');
+        }
 
-    private function tableForRole(string $role): string
-    {
-        return match ($role) {
-            Auth::ROLE_PATIENT => 'patients',
-            Auth::ROLE_STAFF => 'staff',
-            default => throw new \InvalidArgumentException('Ungültige Rolle.'),
-        };
+        Session::set('first_login', false);
     }
 }

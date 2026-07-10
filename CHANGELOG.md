@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## v0.9.0
+
+### Changed
+- Replaced separate `patients` and `staff` tables with shared `persons` table.
+- Added `persons.is_staff` flag to distinguish patient/person vs. staff navigation.
+- `absences` now references `person_id` instead of `patient_id`.
+- Login is now unified through `index.php`.
+- Staff users are redirected to `personal.php` after login based on `is_staff`.
+- Staff can open `index.php` via menu item "Abwesenheit" to start/end their own absence.
+- Password change no longer asks for the old password.
+
+### Added
+- Migration logic in `tools/init_database.php` for v0.8.x databases.
+- `site/person_repository.php`.
+- `tools/check_v090_schema.php`.
+
 ## v0.8.19
 
 ### Changed

@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/bootstrap.php';
 
-
-
 use AbsenceApp\AbsenceRepository;
 use AbsenceApp\Auth;
 use AbsenceApp\Csrf;
@@ -21,10 +19,10 @@ $error = null;
 $message = null;
 
 /*
- * Patient login.
+ * Unified login.
  *
- * On successful login we redirect immediately to the correct next page. This
- * avoids the ambiguous "login accepted but login form is shown again" state.
+ * All persons start at index.php. The persons.is_staff flag determines the
+ * target after login.
  */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$auth->isLoggedIn()) {
     try {
@@ -33,8 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$auth->isLoggedIn()) {
         $id = trim((string) ($_POST['id'] ?? ''));
         $password = (string) ($_POST['password'] ?? '');
 
-        if ($auth->login(Auth::ROLE_PATIENT, $id, $password)) {
-            header('Location: ' . ($auth->isFirstLogin() ? '/change_password.php' : '/index.php'));
+        if ($auth->login($id, $password)) {
+            if ($auth->isFirstLogin()) {
+                header('Location: /change_password.php');
+                exit;
+            }
+
+            header('Location: ' . ($auth->currentRole() === Auth::ROLE_STAFF ? '/personal.php' : '/index.php'));
             exit;
         }
 
@@ -44,38 +47,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$auth->isLoggedIn()) {
     }
 }
 
-/*
- * If another role is logged in on the patient URL, do not show patient data.
- */
-if ($auth->isLoggedIn() && $auth->currentRole() !== Auth::ROLE_PATIENT) {
-    header('Location: /personal.php');
-    exit;
-}
-
-/*
- * First-login password change is mandatory for patients.
- */
-if ($auth->isLoggedIn() && $auth->currentRole() === Auth::ROLE_PATIENT && $auth->isFirstLogin()) {
+if ($auth->isLoggedIn() && $auth->isFirstLogin()) {
     header('Location: /change_password.php');
     exit;
 }
 
 /*
- * Patient absence actions.
+ * Absence actions for every logged-in person, patient and staff.
  */
-if ($auth->isLoggedIn() && $auth->currentRole() === Auth::ROLE_PATIENT && $_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($auth->isLoggedIn() && $_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         Csrf::requireValid($_POST['csrf_token'] ?? null);
 
         $absences = new AbsenceRepository($db);
-        $patientId = (string) $auth->currentUserId();
+        $personId = (string) $auth->currentUserId();
         $action = (string) ($_POST['action'] ?? '');
 
         if ($action === 'start') {
-            $absences->start($patientId, (int) ($_POST['reason_id'] ?? 0));
+            $absences->start($personId, (int) ($_POST['reason_id'] ?? 0));
             $message = 'Ausgang wurde gestartet.';
         } elseif ($action === 'end') {
-            $absences->end($patientId);
+            $absences->end($personId);
             $message = 'Rückkehr wurde gespeichert.';
         }
     } catch (Throwable $exception) {
@@ -83,15 +75,15 @@ if ($auth->isLoggedIn() && $auth->currentRole() === Auth::ROLE_PATIENT && $_SERV
     }
 }
 
-$title = 'Patientenbereich';
+$title = $auth->isLoggedIn() ? 'Abwesenheit' : 'Login';
 require __DIR__ . '/header.php';
 
-if ($auth->isLoggedIn() && $auth->currentRole() === Auth::ROLE_PATIENT):
+if ($auth->isLoggedIn()):
     $absences = new AbsenceRepository($db);
-    $active = $absences->activeForPatient((string) $auth->currentUserId());
+    $active = $absences->activeForPerson((string) $auth->currentUserId());
     ?>
     <section class="card">
-        <h1>Patientenbereich</h1>
+        <h1>Abwesenheit</h1>
 
         <?php if ($message): ?>
             <p class="alert success"><?= Utils::h($message) ?></p>
@@ -139,8 +131,8 @@ if ($auth->isLoggedIn() && $auth->currentRole() === Auth::ROLE_PATIENT):
     </section>
 <?php
 else:
-    $headline = 'Patienten-Login';
-    $idLabel = 'Patienten-ID';
+    $headline = 'Login';
+    $idLabel = 'ID';
     $action = '/index.php';
     require __DIR__ . '/login.php';
 endif;
