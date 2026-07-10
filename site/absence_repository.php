@@ -115,4 +115,23 @@ final class AbsenceRepository
 
         return $stmt->fetchAll();
     }
+    /**
+     * Deletes an absence by ID. Staff members use this for manual cleanup.
+     */
+    public function deleteById(int $id): void
+    {
+        if ($id < 1) {
+            throw new \InvalidArgumentException('Keine Abwesenheit ausgewählt.');
+        }
+
+        $stmt = $this->db->prepare('DELETE FROM absences WHERE id = :id');
+        $stmt->execute(['id' => $id]);
+
+        if ($stmt->rowCount() < 1) {
+            throw new \RuntimeException('Abwesenheit wurde nicht gefunden.');
+        }
+
+        (new ReasonRepository($this->db))->garbageCollectDeleted();
+    }
+
 }

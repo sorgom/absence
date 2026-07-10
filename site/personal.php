@@ -71,6 +71,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: /personal.php');
             exit;
         }
+
+        if ($action === 'delete_absence') {
+            $repository = new AbsenceRepository($db);
+            $repository->deleteById((int) ($_POST['absence_id'] ?? 0));
+
+            header('Location: /personal.php');
+            exit;
+        }
     } catch (Throwable $exception) {
         $error = $exception->getMessage();
     }

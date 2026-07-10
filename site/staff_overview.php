@@ -92,6 +92,7 @@ function staffSortIndicator(string $column, string $currentSort, string $current
                             </form>
                         </th>
                         <th>Rückkehr</th>
+                        <th>Aktion</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -105,6 +106,14 @@ function staffSortIndicator(string $column, string $currentSort, string $current
                             <td data-label="Aufbruch"><?= Utils::localTimeElement((string) $absence['departure_time']) ?></td>
                             <td data-label="Rückkehr">
                                 <?= $absence['return_time'] === null ? '' : Utils::localTimeElement((string) $absence['return_time']) ?>
+                            </td>
+                            <td data-label="Aktion">
+                                <form method="post" action="/personal.php" class="inline-form" data-confirm-message="Abwesenheit wirklich löschen?">
+                                    <?= Csrf::field() ?>
+                                    <input type="hidden" name="action" value="delete_absence">
+                                    <input type="hidden" name="absence_id" value="<?= (int) $absence['id'] ?>">
+                                    <button type="submit" class="danger small">Löschen</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>

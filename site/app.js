@@ -120,3 +120,18 @@ document.querySelectorAll('[data-local-time]').forEach((element) => {
 
   element.title = element.dateTime;
 });
+
+
+/*
+ * Temporary confirmation handling.
+ * A custom design dialog will replace this in a later UI release.
+ */
+document.querySelectorAll('form[data-confirm-message]').forEach((form) => {
+  form.addEventListener('submit', (event) => {
+    const message = form.getAttribute('data-confirm-message') || 'Wirklich fortfahren?';
+
+    if (!window.confirm(message)) {
+      event.preventDefault();
+    }
+  });
+});

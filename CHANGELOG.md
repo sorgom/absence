@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v0.9.3
+
+### Added
+- Staff overview now allows manual deletion of active and completed absences.
+- Added `AbsenceRepository::deleteById()`.
+- Deleting an absence triggers garbage collection for soft-deleted reasons.
+- Added `tools/check_absence_manual_delete.php`.
+
 ## v0.9.2
 
 ### Changed

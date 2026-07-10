@@ -1,6 +1,6 @@
 # Abwesenheits-App
 
-Version **v0.9.2**
+Version **v0.9.3**
 
 ## Wichtigste Änderung in v0.9.0
 
@@ -101,4 +101,15 @@ Zusätzlicher Check:
 
 ```bash
 php tools/check_reasons_soft_delete.php
+```
+
+
+## Abwesenheiten manuell löschen
+
+Personal-Members können in der Übersicht aktive und abgelaufene Abwesenheiten manuell löschen.
+
+Zusätzlicher Check:
+
+```bash
+php tools/check_absence_manual_delete.php
 ```
