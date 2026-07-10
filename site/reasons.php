@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $reasons = $repository->listAll();
 
-$title = 'Gründe / Ziele bearbeiten';
+$title = 'Gründe und Ziele';
 require __DIR__ . '/header.php';
 require __DIR__ . '/templates_reasons.php';
 require __DIR__ . '/footer.php';

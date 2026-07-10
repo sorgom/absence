@@ -77,6 +77,8 @@ final class AbsenceRepository
 
         $stmt = $this->db->prepare('UPDATE absences SET return_time = CURRENT_TIMESTAMP WHERE id = :id');
         $stmt->execute(['id' => $active['id']]);
+
+        (new ReasonRepository($this->db))->garbageCollectDeleted();
     }
 
     /**

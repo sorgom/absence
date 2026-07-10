@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS persons (
 CREATE TABLE IF NOT EXISTS reasons (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL UNIQUE,
+    deleted INTEGER NOT NULL DEFAULT 0,
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -31,6 +32,7 @@ CREATE TABLE IF NOT EXISTS settings (
 );
 
 CREATE INDEX IF NOT EXISTS idx_persons_is_staff ON persons(is_staff);
+CREATE INDEX IF NOT EXISTS idx_reasons_deleted ON reasons(deleted);
 CREATE INDEX IF NOT EXISTS idx_absences_person_id ON absences(person_id);
 CREATE INDEX IF NOT EXISTS idx_absences_departure_time ON absences(departure_time);
 CREATE INDEX IF NOT EXISTS idx_absences_return_time ON absences(return_time);

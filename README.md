@@ -1,6 +1,6 @@
 # Abwesenheits-App
 
-Version **v0.9.1**
+Version **v0.9.2**
 
 ## Wichtigste Änderung in v0.9.0
 
@@ -85,4 +85,20 @@ Zusätzlicher Check:
 
 ```bash
 php tools/check_person_management.php
+```
+
+
+## Soft-Delete für Gründe und Ziele
+
+`reasons` enthält jetzt ein `deleted`-Flag.
+
+- Neue Abwesenheiten zeigen nur Gründe mit `deleted = 0`.
+- Beim Löschen wird ein Grund nur ausgeblendet.
+- Bestehende Abwesenheiten zeigen den alten Grund weiterhin.
+- Nicht mehr referenzierte gelöschte Gründe werden durch Garbage Collection entfernt.
+
+Zusätzlicher Check:
+
+```bash
+php tools/check_reasons_soft_delete.php
 ```

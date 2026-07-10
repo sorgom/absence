@@ -132,6 +132,10 @@ if (!$hasPersons && ($hasOldPatients || $hasOldStaff || $hasOldAbsences)) {
 
 $pdo->exec($sql);
 
+if (!columnExists($pdo, 'reasons', 'deleted')) {
+    $pdo->exec('ALTER TABLE reasons ADD COLUMN deleted INTEGER NOT NULL DEFAULT 0');
+}
+
 $staffStatement = $pdo->prepare(
     'INSERT OR IGNORE INTO persons (id, password_hash, is_staff, first_login)
      VALUES (:id, :password_hash, 1, 1)'
@@ -149,7 +153,7 @@ $defaultReasons = [
     'Ortserkundung',
 ];
 
-$reasonStatement = $pdo->prepare('INSERT OR IGNORE INTO reasons (name) VALUES (:name)');
+$reasonStatement = $pdo->prepare('INSERT OR IGNORE INTO reasons (name, deleted) VALUES (:name, 0)');
 
 foreach ($defaultReasons as $reason) {
     $reasonStatement->execute(['name' => $reason]);

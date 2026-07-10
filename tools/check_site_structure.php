@@ -35,6 +35,7 @@ $requiredRootTools = [
     'check_filenames.php',
     'check_v090_schema.php',
     'check_person_management.php',
+    'check_reasons_soft_delete.php',
     'init_database.php',
 ];
 

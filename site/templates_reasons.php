@@ -9,7 +9,7 @@ use AbsenceApp\Utils;
 /** @var string|null $success */
 ?>
 <section class="card">
-    <h1>Liste „Grund / Ziel des Ausgangs“ bearbeiten</h1>
+    <h1>Gründe und Ziele</h1>
 
     <?php if ($error): ?>
         <p class="alert error"><?= Utils::h($error) ?></p>
@@ -48,4 +48,5 @@ use AbsenceApp\Utils;
             <button type="submit" class="danger-button">Löschen</button>
         </form>
     <?php endif; ?>
+<p class="hint">Gelöschte Gründe verschwinden aus der Auswahl für neue Abwesenheiten. In bestehenden Abwesenheiten bleiben sie sichtbar.</p>
 </section>

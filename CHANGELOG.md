@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v0.9.2
+
+### Changed
+- `reasons` now has a `deleted` flag.
+- Deleting a reason now performs a soft delete.
+- New absences only offer non-deleted reasons.
+- Existing absences still display deleted reasons.
+- Reasons page title changed to `Gründe und Ziele`.
+
+### Added
+- Garbage collection for deleted, unreferenced reasons.
+- Migration for existing databases to add `reasons.deleted`.
+- `tools/check_reasons_soft_delete.php`.
+
 ## v0.9.1
 
 ### Changed
