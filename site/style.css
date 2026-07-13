@@ -571,22 +571,25 @@ button.small,
 
 
 
+
+
 /*
- * v0.9.5.2: CSS-first dropdown overlay.
+ * v0.9.5.3: CSS-first dropdown overlay anchored to the hamburger button.
  *
- * This follows the classic CSS dropdown approach:
- * hidden by default, absolutely positioned, visible through .is-open.
- * The menu is not part of the document flow and does not push content down.
+ * The menu is positioned relative to .menu-dropdown-anchor, so it appears
+ * next to the button instead of at the opposite side of the header.
  */
-.app-header {
+.menu-dropdown-anchor {
     position: relative;
+    display: inline-block;
 }
 
 .drawer-menu {
     display: none !important;
     position: absolute !important;
     top: calc(100% + 0.35rem);
-    right: 1rem;
+    left: 0;
+    right: auto;
     z-index: 1000;
     width: min(18rem, calc(100vw - 2rem));
     height: auto;

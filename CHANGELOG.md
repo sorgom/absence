@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v0.9.5.3
+
+### Fixed
+- Dropdown menu is now anchored to the hamburger button.
+- Menu no longer opens on the opposite side of the header.
+- Added `.menu-dropdown-anchor` wrapper.
+
 ## v0.9.5.2
 
 ### Fixed

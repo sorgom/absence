@@ -10,11 +10,12 @@ $header = file_get_contents($site . '/header.php') ?: '';
 $errors = [];
 
 foreach ([
-    'v0.9.5.2: CSS-first dropdown overlay',
+    'v0.9.5.3: CSS-first dropdown overlay anchored',
     'display: none !important',
     'position: absolute !important',
     'top: calc(100% + 0.35rem)',
-    'right: 1rem',
+    'left: 0',
+    'right: auto',
     '.drawer-menu.is-open',
     'display: grid !important',
 ] as $marker) {
@@ -39,6 +40,7 @@ foreach ([
     'data-menu-toggle',
     'aria-controls="drawer-menu"',
     'aria-expanded="false"',
+    'menu-dropdown-anchor',
 ] as $marker) {
     if (!str_contains($header, $marker)) {
         $errors[] = "Missing header marker: {$marker}";

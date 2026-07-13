@@ -1,6 +1,6 @@
 # Abwesenheits-App
 
-Version **v0.9.5.2**
+Version **v0.9.5.3**
 
 ## Wichtigste Änderung in v0.9.0
 
@@ -181,3 +181,17 @@ Das Hamburger-Menü ist jetzt als einfaches CSS-Dropdown umgesetzt:
 - JavaScript schaltet nur `.is-open` und `aria-expanded`
 
 Das entspricht dem klassischen CSS-Dropdown-Prinzip.
+
+
+## v0.9.5.3 Menüposition
+
+Das Dropdown-Menü ist jetzt an einem Wrapper um den Hamburger-Button verankert:
+
+```html
+<div class="menu-dropdown-anchor">
+    <button ...>☰</button>
+    <nav id="drawer-menu">...</nav>
+</div>
+```
+
+Dadurch erscheint das Menü direkt am Button.
