@@ -20,7 +20,7 @@ foreach (['delete_absence', 'absence_id'] as $marker) {
     }
 }
 
-foreach (['data-confirm-message="Abwesenheit wirklich löschen?"', 'value="delete_absence"', 'Löschen'] as $marker) {
+foreach (['value="delete_absence"', 'Löschen', 'Möchten Sie die Abwesenheit von {value} wirklich löschen?'] as $marker) {
     if (!str_contains($template, $marker)) {
         $errors[] = "Missing overview marker: {$marker}";
     }

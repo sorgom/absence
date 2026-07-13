@@ -22,8 +22,10 @@ $userId = (string) Session::get('user_id', '');
 <body>
 <header class="app-header">
     <div class="header-left">
-        <?php require __DIR__ . '/menu.php'; ?>
-        <button class="menu-toggle" type="button" data-menu-toggle aria-controls="drawer-menu" aria-expanded="false" aria-label="Menü öffnen">☰</button>
+        <div class="menu-dropdown-anchor">
+            <button class="menu-toggle" type="button" data-menu-toggle aria-controls="drawer-menu" aria-expanded="false" aria-label="Menü öffnen">☰</button>
+            <?php require __DIR__ . '/menu.php'; ?>
+        </div>
     <a class="brand" href="<?= $role === Auth::ROLE_STAFF ? '/personal.php' : '/index.php' ?>">
             <?= Utils::h((string) Config::get('app_name')) ?>
         </a>

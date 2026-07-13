@@ -1,151 +1,49 @@
-'use strict';
-
 /*
- * Shared frontend bootstrap.
- * Handles the role-aware hamburger menu and password visibility toggles.
+ * Client-side helpers for the Abwesenheits-App.
  */
-document.documentElement.classList.add('js-enabled');
 
-const menuToggle = document.querySelector('.menu-toggle');
-const appMenu = document.querySelector('#app-menu');
+(() => {
+  const showPasswords = document.querySelector('[data-show-passwords]');
 
-if (menuToggle && appMenu) {
-  menuToggle.addEventListener('click', () => {
-    const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
-    menuToggle.setAttribute('aria-expanded', String(!isOpen));
-    appMenu.hidden = isOpen;
-  });
+  if (!showPasswords) {
+    return;
+  }
 
-  document.addEventListener('click', (event) => {
-    if (!appMenu.hidden && !appMenu.contains(event.target) && !menuToggle.contains(event.target)) {
-      menuToggle.setAttribute('aria-expanded', 'false');
-      appMenu.hidden = true;
-    }
-  });
-}
+  const passwordFields = document.querySelectorAll('input[type="password"], input[data-password-field="true"]');
 
-const showPasswords = document.querySelector('#show-passwords');
-if (showPasswords) {
   showPasswords.addEventListener('change', () => {
-    document.querySelectorAll('input[type="password"], input[data-password-field="true"]').forEach((input) => {
+    passwordFields.forEach((input) => {
       input.type = showPasswords.checked ? 'text' : 'password';
       input.dataset.passwordField = 'true';
     });
   });
-}
+})();
 
+(() => {
+  const formatter = new Intl.DateTimeFormat(undefined, {
+    dateStyle: 'short',
+    timeStyle: 'short',
+  });
 
-document.addEventListener('submit', (event) => {
-  const form = event.target;
-  if (!(form instanceof HTMLFormElement)) {
-    return;
-  }
+  document.querySelectorAll('[data-local-time]').forEach((element) => {
+    const isoValue = element.getAttribute('datetime');
 
-  const message = form.dataset.confirm;
-  if (message && !window.confirm(message)) {
-    event.preventDefault();
-  }
-});
-
-
-document.addEventListener('click', (event) => {
-  const target = event.target;
-  if (!(target instanceof HTMLElement)) {
-    return;
-  }
-
-  const toggle = target.closest('[data-menu-toggle]');
-  if (!toggle) {
-    return;
-  }
-
-  const menu = document.getElementById('drawer-menu');
-  if (menu) {
-    menu.classList.toggle('is-open');
-  }
-});
-
-
-document.addEventListener('change', (event) => {
-  const target = event.target;
-  if (!(target instanceof HTMLInputElement)) {
-    return;
-  }
-
-  if (!target.matches('[data-toggle-passwords]')) {
-    return;
-  }
-
-  const form = target.closest('form');
-  if (!form) {
-    return;
-  }
-
-  form.querySelectorAll('input[type="password"], input[data-password-visible="true"]').forEach((input) => {
-    if (!(input instanceof HTMLInputElement)) {
+    if (!isoValue) {
       return;
     }
 
-    if (target.checked) {
-      input.dataset.passwordVisible = 'true';
-      input.type = 'text';
-    } else {
-      input.type = 'password';
-      delete input.dataset.passwordVisible;
+    const date = new Date(isoValue);
+
+    if (Number.isNaN(date.getTime())) {
+      return;
     }
+
+    element.textContent = formatter.format(date);
   });
-});
-
-
-/*
- * Convert UTC timestamps rendered by PHP to the browser's local date/time.
- * The browser decides both timezone and locale, which is ideal for PC and
- * smartphone clients in different local settings.
- */
-document.querySelectorAll('[data-local-time]').forEach((element) => {
-  if (!(element instanceof HTMLTimeElement) || !element.dateTime) {
-    return;
-  }
-
-  const date = new Date(element.dateTime);
-
-  if (Number.isNaN(date.getTime())) {
-    return;
-  }
-
-  element.textContent = new Intl.DateTimeFormat(undefined, {
-    dateStyle: 'short',
-    timeStyle: 'short'
-  }).format(date);
-
-  element.title = element.dateTime;
-});
-
+})();
 
 /*
- * Temporary confirmation handling.
- * A custom design dialog will replace this in a later UI release.
- */
-document.querySelectorAll('form[data-confirm-message]').forEach((form) => {
-  form.addEventListener('submit', (event) => {
-    const message = form.getAttribute('data-confirm-message') || 'Wirklich fortfahren?';
-
-    if (!window.confirm(message)) {
-      event.preventDefault();
-    }
-  });
-});
-
-
-
-
-
-
-/*
- * v0.9.5.2: minimal JS for CSS dropdown menu.
- *
- * CSS controls positioning and visibility. JavaScript only toggles .is-open
- * for click/touch devices and keeps aria-expanded in sync.
+ * CSS dropdown menu.
  */
 (() => {
   const menu = document.getElementById('drawer-menu');
@@ -162,12 +60,18 @@ document.querySelectorAll('form[data-confirm-message]').forEach((form) => {
 
   toggle.addEventListener('click', (event) => {
     event.preventDefault();
-    event.stopImmediatePropagation();
+    event.stopPropagation();
     setOpen(!menu.classList.contains('is-open'));
-  }, true);
+  });
 
   document.addEventListener('click', (event) => {
-    if (!menu.contains(event.target) && !toggle.contains(event.target)) {
+    const target = event.target;
+
+    if (!(target instanceof Node)) {
+      return;
+    }
+
+    if (!menu.contains(target) && !toggle.contains(target)) {
       setOpen(false);
     }
   });
@@ -183,4 +87,108 @@ document.querySelectorAll('form[data-confirm-message]').forEach((form) => {
   });
 
   setOpen(false);
+})();
+
+/*
+ * Design confirmation modal for forms with data-confirm-message.
+ */
+(() => {
+  const modal = document.getElementById('confirm-modal');
+
+  if (!modal) {
+    return;
+  }
+
+  const messageElement = document.getElementById('confirm-modal-message');
+  const okButton = modal.querySelector('[data-confirm-ok]');
+  const cancelButtons = modal.querySelectorAll('[data-confirm-cancel]');
+  let pendingForm = null;
+  let lastFocusedElement = null;
+
+  const resolveMessage = (form) => {
+    const fallback = form.getAttribute('data-confirm-message') || 'Möchten Sie fortfahren?';
+    const template = form.getAttribute('data-confirm-template');
+
+    if (!template) {
+      return fallback;
+    }
+
+    let value = form.getAttribute('data-confirm-value') || '';
+    const sourceSelector = form.getAttribute('data-confirm-value-source');
+
+    if (sourceSelector) {
+      const source = form.querySelector(sourceSelector) || document.querySelector(sourceSelector);
+
+      if (source) {
+        if ('selectedOptions' in source && source.selectedOptions.length > 0) {
+          value = source.selectedOptions[0].textContent.trim();
+        } else if ('value' in source) {
+          value = String(source.value).trim();
+        } else {
+          value = source.textContent.trim();
+        }
+      }
+    }
+
+    value = value.trim();
+
+    if (value === '') {
+      return fallback;
+    }
+
+    return template.replaceAll('{value}', value);
+  };
+
+  const openModal = (form) => {
+    pendingForm = form;
+    lastFocusedElement = document.activeElement;
+    messageElement.textContent = resolveMessage(form);
+    modal.hidden = false;
+    document.body.classList.add('confirm-modal-open');
+    okButton.focus();
+  };
+
+  const closeModal = () => {
+    modal.hidden = true;
+    document.body.classList.remove('confirm-modal-open');
+    pendingForm = null;
+
+    if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+      lastFocusedElement.focus();
+    }
+  };
+
+  document.querySelectorAll('form[data-confirm-message]').forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      if (form.dataset.confirmAccepted === '1') {
+        delete form.dataset.confirmAccepted;
+        return;
+      }
+
+      event.preventDefault();
+      openModal(form);
+    });
+  });
+
+  okButton.addEventListener('click', () => {
+    if (!pendingForm) {
+      closeModal();
+      return;
+    }
+
+    const form = pendingForm;
+    form.dataset.confirmAccepted = '1';
+    closeModal();
+    form.requestSubmit();
+  });
+
+  cancelButtons.forEach((button) => {
+    button.addEventListener('click', closeModal);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !modal.hidden) {
+      closeModal();
+    }
+  });
 })();

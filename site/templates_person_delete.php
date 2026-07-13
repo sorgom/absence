@@ -28,7 +28,7 @@
     <?php if ($ids === []): ?>
         <p class="alert notice">Es sind keine Personen dieses Typs vorhanden.</p>
     <?php else: ?>
-        <form method="post" action="/person_delete.php" class="stack-form" data-confirm-message="Person wirklich löschen?">
+        <form method="post" action="/person_delete.php" class="stack-form" data-confirm-message="Möchten Sie diese Person wirklich löschen?" data-confirm-template="Möchten Sie Person {value} wirklich löschen?" data-confirm-value-source="#id">
             <?= \AbsenceApp\Csrf::field() ?>
             <input type="hidden" name="action" value="delete">
             <input type="hidden" name="person_type" value="<?= \AbsenceApp\Utils::h($selectedType) ?>">

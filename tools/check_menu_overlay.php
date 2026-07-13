@@ -10,14 +10,13 @@ $header = file_get_contents($site . '/header.php') ?: '';
 $errors = [];
 
 foreach ([
-    'v0.9.5.3: CSS-first dropdown overlay anchored',
+    'v0.9.6.1: authoritative CSS dropdown menu',
+    '.menu-dropdown-anchor',
     'display: none !important',
     'position: absolute !important',
-    'top: calc(100% + 0.35rem)',
     'left: 0',
     'right: auto',
     '.drawer-menu.is-open',
-    'display: grid !important',
 ] as $marker) {
     if (!str_contains($css, $marker)) {
         $errors[] = "Missing CSS marker: {$marker}";
@@ -25,9 +24,10 @@ foreach ([
 }
 
 foreach ([
-    'v0.9.5.2: minimal JS',
+    'CSS dropdown menu',
+    'const menu = document.getElementById',
+    'const toggle = document.querySelector',
     'setOpen',
-    'stopImmediatePropagation',
     'aria-expanded',
     "event.key === 'Escape'",
 ] as $marker) {

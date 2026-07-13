@@ -1,6 +1,6 @@
 # Abwesenheits-App
 
-Version **v0.9.5.3**
+Version **v0.9.6.2**
 
 ## Wichtigste Änderung in v0.9.0
 
@@ -195,3 +195,54 @@ Das Dropdown-Menü ist jetzt an einem Wrapper um den Hamburger-Button verankert:
 ```
 
 Dadurch erscheint das Menü direkt am Button.
+
+
+## Bestätigungsdialog
+
+`window.confirm()` wurde durch ein eigenes Dialog-Modal ersetzt.
+
+Formulare können eine statische Meldung verwenden:
+
+```html
+<form data-confirm-message="Möchten Sie wirklich löschen?">
+```
+
+Oder eine dynamische Meldung mit `{value}`:
+
+```html
+<form
+  data-confirm-template="Möchten Sie Person {value} wirklich löschen?"
+  data-confirm-value-source="#id">
+```
+
+Zusätzlicher Check:
+
+```bash
+php tools/check_confirm_modal.php
+```
+
+
+## v0.9.6.1 JavaScript-Fix
+
+`site/app.js` wurde bereinigt und enthält jetzt nur noch gültige, getrennte Blöcke für:
+
+- Passwortfelder anzeigen
+- lokale Zeitanzeige
+- CSS-Dropdown-Menü
+- Bestätigungsmodal
+
+Zusätzlicher Check:
+
+```bash
+php tools/check_js_syntax.php
+```
+
+
+## v0.9.6.2 Modal-Hintergrund
+
+Der Bestätigungsdialog trennt jetzt Backdrop und Dialog sauber:
+
+- transparenter Backdrop als eigene Ebene
+- Dialog in eigener Panel-Ebene
+- Dialog-Hintergrund explizit deckend
+- keine Opacity auf dem gemeinsamen Parent

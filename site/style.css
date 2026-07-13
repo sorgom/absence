@@ -609,3 +609,99 @@ button.small,
 .drawer-close {
     display: none !important;
 }
+
+
+/*
+ * v0.9.6.1: authoritative CSS dropdown menu.
+ */
+.menu-dropdown-anchor {
+    position: relative;
+    display: inline-block;
+}
+
+.drawer-menu {
+    display: none !important;
+    position: absolute !important;
+    top: calc(100% + 0.35rem);
+    left: 0;
+    right: auto;
+    z-index: 1000;
+    width: min(18rem, calc(100vw - 2rem));
+    height: auto;
+    max-height: calc(100vh - 5rem);
+    overflow-y: auto;
+    margin: 0 !important;
+    padding: 0.75rem;
+    box-shadow: 0 0.75rem 2rem rgb(0 0 0 / 25%);
+}
+
+.drawer-menu.is-open {
+    display: grid !important;
+    gap: 0.35rem;
+}
+
+.drawer-backdrop,
+.drawer-close {
+    display: none !important;
+}
+
+
+/*
+ * v0.9.6.2: solid confirmation modal.
+ *
+ * The transparent backdrop and the opaque dialog are siblings. Opacity is
+ * never applied to the shared parent, so the dialog itself stays solid.
+ */
+.confirm-modal[hidden] {
+    display: none !important;
+}
+
+.confirm-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+}
+
+.confirm-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: rgb(0 0 0 / 45%);
+}
+
+.confirm-modal__panel {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    pointer-events: none;
+}
+
+.confirm-modal__dialog {
+    pointer-events: auto;
+    width: min(28rem, 100%);
+    background: var(--card-background, var(--card-bg, Canvas));
+    color: var(--text-color, CanvasText);
+    border: 1px solid var(--border-color, currentColor);
+    border-radius: 0.9rem;
+    box-shadow: 0 1rem 3rem rgb(0 0 0 / 35%);
+    padding: 1.25rem;
+    opacity: 1;
+}
+
+.confirm-modal__dialog h2 {
+    margin-top: 0;
+}
+
+.confirm-modal__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+}
+
+body.confirm-modal-open {
+    overflow: hidden;
+}

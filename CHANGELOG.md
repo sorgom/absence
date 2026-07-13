@@ -1,5 +1,33 @@
 # CHANGELOG
 
+## v0.9.6.2
+
+### Fixed
+- Confirmation modal dialog is now opaque.
+- Transparent backdrop and solid dialog are separated into sibling layers.
+- Dialog background now has an explicit solid fallback.
+
+## v0.9.6.1
+
+### Fixed
+- Fixed `app.js` syntax error near the old confirm handler.
+- Restored hamburger dropdown behavior.
+- Rebuilt `app.js` with clean, separate helper blocks.
+- Added `tools/check_js_syntax.php`.
+
+## v0.9.6
+
+### Changed
+- Replaced `window.confirm()` with a reusable design confirmation modal.
+- Confirmation messages can now use dynamic values.
+- Person deletion now asks e.g. `Möchten Sie Person 233 wirklich löschen?`.
+- Absence deletion now includes the affected person ID where possible.
+
+### Added
+- Modal markup in `footer.php`.
+- Confirmation modal CSS and JavaScript.
+- `tools/check_confirm_modal.php`.
+
 ## v0.9.5.3
 
 ### Fixed
