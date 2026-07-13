@@ -40,6 +40,7 @@ $requiredRootTools = [
     'init_database.php',
     'seed_test_data.php',
     'check_seed_test_data.php',
+    'check_menu_overlay.php',
 ];
 
 $errors = [];

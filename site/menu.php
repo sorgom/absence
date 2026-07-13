@@ -9,7 +9,7 @@ $role = Session::get('role');
 $userId = (string) Session::get('user_id', '');
 ?>
 <nav class="drawer-menu" id="drawer-menu" aria-label="Menü">
-    <?php if ($role === Auth::ROLE_PATIENT): ?>
+<?php if ($role === Auth::ROLE_PATIENT): ?>
         <a href="/index.php">Abwesenheit</a>
         <a href="/change_password.php">Passwort ändern</a>
         <a href="/logout.php">Logout</a>

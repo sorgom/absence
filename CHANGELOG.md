@@ -1,5 +1,31 @@
 # CHANGELOG
 
+## v0.9.5.2
+
+### Fixed
+- Replaced side drawer with a simple CSS-first dropdown overlay.
+- Menu no longer uses fixed drawer/backdrop/body-scroll behavior.
+- JavaScript only toggles `.is-open` and `aria-expanded`.
+- Removed drawer close button from menu markup.
+
+## v0.9.5.1
+
+### Fixed
+- Reworked hamburger overlay as CSS-first drawer.
+- Removed conflicting appended overlay behavior.
+- Drawer is now forced out of document flow with `position: fixed`.
+- JavaScript now only toggles `is-open`, `drawer-open` and `aria-expanded`.
+
+## v0.9.5
+
+### Changed
+- Hamburger menu now opens as a fixed overlay drawer.
+- Page content is no longer pushed down when the menu opens.
+- Added backdrop, close button and Escape-key handling.
+
+### Added
+- `tools/check_menu_overlay.php`.
+
 ## v0.9.4
 
 ### Added

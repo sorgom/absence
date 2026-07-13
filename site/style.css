@@ -565,3 +565,44 @@ button.small,
     padding: 0.35rem 0.6rem;
     font-size: 0.9rem;
 }
+
+
+
+
+
+
+/*
+ * v0.9.5.2: CSS-first dropdown overlay.
+ *
+ * This follows the classic CSS dropdown approach:
+ * hidden by default, absolutely positioned, visible through .is-open.
+ * The menu is not part of the document flow and does not push content down.
+ */
+.app-header {
+    position: relative;
+}
+
+.drawer-menu {
+    display: none !important;
+    position: absolute !important;
+    top: calc(100% + 0.35rem);
+    right: 1rem;
+    z-index: 1000;
+    width: min(18rem, calc(100vw - 2rem));
+    height: auto;
+    max-height: calc(100vh - 5rem);
+    overflow-y: auto;
+    margin: 0 !important;
+    padding: 0.75rem;
+    box-shadow: 0 0.75rem 2rem rgb(0 0 0 / 25%);
+}
+
+.drawer-menu.is-open {
+    display: grid !important;
+    gap: 0.35rem;
+}
+
+.drawer-backdrop,
+.drawer-close {
+    display: none !important;
+}

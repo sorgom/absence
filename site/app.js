@@ -135,3 +135,52 @@ document.querySelectorAll('form[data-confirm-message]').forEach((form) => {
     }
   });
 });
+
+
+
+
+
+
+/*
+ * v0.9.5.2: minimal JS for CSS dropdown menu.
+ *
+ * CSS controls positioning and visibility. JavaScript only toggles .is-open
+ * for click/touch devices and keeps aria-expanded in sync.
+ */
+(() => {
+  const menu = document.getElementById('drawer-menu');
+  const toggle = document.querySelector('[data-menu-toggle]');
+
+  if (!menu || !toggle) {
+    return;
+  }
+
+  const setOpen = (open) => {
+    menu.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
+
+  toggle.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    setOpen(!menu.classList.contains('is-open'));
+  }, true);
+
+  document.addEventListener('click', (event) => {
+    if (!menu.contains(event.target) && !toggle.contains(event.target)) {
+      setOpen(false);
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      setOpen(false);
+    }
+  });
+
+  menu.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setOpen(false));
+  });
+
+  setOpen(false);
+})();

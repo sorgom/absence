@@ -1,6 +1,6 @@
 # Abwesenheits-App
 
-Version **v0.9.4**
+Version **v0.9.5.2**
 
 ## Wichtigste Änderung in v0.9.0
 
@@ -158,3 +158,26 @@ Zusätzlicher Check:
 ```bash
 php tools/check_seed_test_data.php
 ```
+
+
+## Hamburger-Menü Overlay
+
+Das Hamburger-Menü wird als Overlay geöffnet und schiebt den Seiteninhalt nicht mehr nach unten.
+
+Zusätzlicher Check:
+
+```bash
+php tools/check_menu_overlay.php
+```
+
+
+## v0.9.5.2 Menü-Dropdown
+
+Das Hamburger-Menü ist jetzt als einfaches CSS-Dropdown umgesetzt:
+
+- `display: none` im geschlossenen Zustand
+- `position: absolute` über dem Inhalt
+- `.is-open` zeigt das Menü
+- JavaScript schaltet nur `.is-open` und `aria-expanded`
+
+Das entspricht dem klassischen CSS-Dropdown-Prinzip.
