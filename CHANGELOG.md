@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v0.9.4
+
+### Added
+- `personen.csv` with compact CSV-driven test data.
+- `tools/seed_test_data.php` reads semicolon-separated CSV files.
+- The seed script creates persons, passwords, first-login flags and absences from CSV columns.
+- `tools/check_seed_test_data.php`.
+
 ## v0.9.3
 
 ### Added

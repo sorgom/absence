@@ -1,6 +1,6 @@
 # Abwesenheits-App
 
-Version **v0.9.3**
+Version **v0.9.4**
 
 ## Wichtigste Änderung in v0.9.0
 
@@ -112,4 +112,49 @@ Zusätzlicher Check:
 
 ```bash
 php tools/check_absence_manual_delete.php
+```
+
+
+## CSV-Testdaten
+
+Das Projekt enthält eine Testdaten-CSV:
+
+```text
+personen.csv
+```
+
+Seed ausführen:
+
+```bash
+php tools/init_database.php
+php tools/seed_test_data.php
+```
+
+Alternativ kann eine andere CSV übergeben werden:
+
+```bash
+php tools/seed_test_data.php pfad/zur/datei.csv
+```
+
+Erwartete Spalten mit Semikolon als Trennzeichen:
+
+```text
+UID;is Staff;Passwort;muss PW ändern;Aufbruch;Rückkehr
+```
+
+Bedeutung:
+
+- `is Staff = X`: Person ist Personal
+- leer bei `is Staff`: Person ist Patient
+- `muss PW ändern = X`: initiale Passwortänderung erforderlich
+- `Aufbruch = X`, `Rückkehr` leer: aktive Abwesenheit
+- `Aufbruch = X`, `Rückkehr = X`: abgeschlossene Abwesenheit
+- `Aufbruch` leer: keine Abwesenheit
+
+Die Logins werden nach dem Seed direkt im Terminal ausgegeben.
+
+Zusätzlicher Check:
+
+```bash
+php tools/check_seed_test_data.php
 ```

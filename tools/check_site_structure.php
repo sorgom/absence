@@ -38,6 +38,8 @@ $requiredRootTools = [
     'check_reasons_soft_delete.php',
     'check_absence_manual_delete.php',
     'init_database.php',
+    'seed_test_data.php',
+    'check_seed_test_data.php',
 ];
 
 $errors = [];
