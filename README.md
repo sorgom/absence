@@ -1,6 +1,6 @@
 # Abwesenheits-App
 
-Version **v0.9.6.2**
+Version **v0.9.6.3**
 
 ## Wichtigste Änderung in v0.9.0
 
@@ -246,3 +246,8 @@ Der Bestätigungsdialog trennt jetzt Backdrop und Dialog sauber:
 - Dialog in eigener Panel-Ebene
 - Dialog-Hintergrund explizit deckend
 - keine Opacity auf dem gemeinsamen Parent
+
+
+## v0.9.6.3 Passwort anzeigen
+
+Die Checkbox „Passwort anzeigen“ wird wieder unterstützt. Der JavaScript-Code erkennt mehrere Markup-Varianten robust.

@@ -28,7 +28,7 @@ use AbsenceApp\Utils;
         <input type="hidden" name="action" value="change">
 
         <label class="switch-row">
-            <input class="checkbox" type="checkbox" data-toggle-passwords>
+            <input class="checkbox" type="checkbox" data-toggle-passwords data-show-passwords>
             <span>Passwörter anzeigen</span>
         </label>
 

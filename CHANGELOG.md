@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v0.9.6.3
+
+### Fixed
+- Restored password visibility toggle.
+- Password toggle JavaScript now supports multiple markup variants.
+- Added `tools/check_password_toggle.php`.
+
 ## v0.9.6.2
 
 ### Fixed

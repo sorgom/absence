@@ -2,21 +2,42 @@
  * Client-side helpers for the Abwesenheits-App.
  */
 
+/*
+ * Password visibility toggle.
+ *
+ * Supports current and older markup:
+ * - [data-show-passwords]
+ * - [data-password-toggle]
+ * - #show_passwords
+ * - name="show_passwords"
+ */
 (() => {
-  const showPasswords = document.querySelector('[data-show-passwords]');
+  const toggle = document.querySelector(
+    '[data-show-passwords], [data-password-toggle], #show_passwords, input[name="show_passwords"]'
+  );
 
-  if (!showPasswords) {
+  if (!toggle) {
     return;
   }
 
-  const passwordFields = document.querySelectorAll('input[type="password"], input[data-password-field="true"]');
+  const form = toggle.closest('form') || document;
+  const passwordFields = form.querySelectorAll(
+    'input[type="password"], input[data-password-field="true"], input[data-original-type="password"]'
+  );
 
-  showPasswords.addEventListener('change', () => {
-    passwordFields.forEach((input) => {
-      input.type = showPasswords.checked ? 'text' : 'password';
-      input.dataset.passwordField = 'true';
-    });
+  passwordFields.forEach((input) => {
+    input.dataset.passwordField = 'true';
+    input.dataset.originalType = 'password';
   });
+
+  const syncPasswordVisibility = () => {
+    passwordFields.forEach((input) => {
+      input.type = toggle.checked ? 'text' : 'password';
+    });
+  };
+
+  toggle.addEventListener('change', syncPasswordVisibility);
+  syncPasswordVisibility();
 })();
 
 (() => {

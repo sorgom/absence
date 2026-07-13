@@ -5,6 +5,7 @@ $js = file_get_contents(dirname(__DIR__) . '/site/app.js') ?: '';
 $errors = [];
 
 foreach ([
+    'Password visibility toggle',
     'CSS dropdown menu',
     'Design confirmation modal',
     'data-confirm-message',
