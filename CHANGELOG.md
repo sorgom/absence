@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v0.9.6.4
+
+### Fixed
+- Reason/destination deletion now uses the design confirmation modal.
+- Confirmation message includes the selected reason/destination name.
+- Added `tools/check_reasons_confirm.php`.
+
 ## v0.9.6.3
 
 ### Fixed

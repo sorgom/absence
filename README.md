@@ -1,6 +1,6 @@
 # Abwesenheits-App
 
-Version **v0.9.6.3**
+Version **v0.9.6.4**
 
 ## Wichtigste Änderung in v0.9.0
 
@@ -251,3 +251,9 @@ Der Bestätigungsdialog trennt jetzt Backdrop und Dialog sauber:
 ## v0.9.6.3 Passwort anzeigen
 
 Die Checkbox „Passwort anzeigen“ wird wieder unterstützt. Der JavaScript-Code erkennt mehrere Markup-Varianten robust.
+
+
+## v0.9.6.4 Gründe/Ziele-Bestätigung
+
+Beim Löschen von Gründen/Zielen wird jetzt ebenfalls das Design-Bestätigungsmodal angezeigt.
+Die Meldung enthält den Namen des Grundes/Ziels.

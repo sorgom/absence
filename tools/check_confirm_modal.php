@@ -7,6 +7,7 @@ $js = file_get_contents($site . '/app.js') ?: '';
 $css = file_get_contents($site . '/style.css') ?: '';
 $personDelete = file_get_contents($site . '/templates_person_delete.php') ?: '';
 $overview = file_get_contents($site . '/staff_overview.php') ?: '';
+$reasons = file_get_contents($site . '/templates_reasons.php') ?: '';
 
 $errors = [];
 
@@ -36,6 +37,14 @@ foreach (['Möchten Sie Person {value} wirklich löschen?', 'data-confirm-value-
 
 if (!str_contains($overview, 'Möchten Sie die Abwesenheit von {value} wirklich löschen?')) {
     $errors[] = 'Missing dynamic absence delete message.';
+}
+
+if (!str_contains($reasons, 'Möchten Sie „{value}“ wirklich löschen?')) {
+    $errors[] = 'Missing dynamic reason delete message.';
+}
+
+if (!str_contains($reasons, 'data-confirm-message="Möchten Sie diesen Grund / dieses Ziel wirklich löschen?"')) {
+    $errors[] = 'Missing reason confirm message.';
 }
 
 if ($errors !== []) {

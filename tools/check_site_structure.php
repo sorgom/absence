@@ -44,6 +44,7 @@ $requiredRootTools = [
     'check_confirm_modal.php',
     'check_js_syntax.php',
     'check_password_toggle.php',
+    'check_reasons_confirm.php',
 ];
 
 $errors = [];

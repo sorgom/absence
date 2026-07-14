@@ -34,7 +34,7 @@ use AbsenceApp\Utils;
     <?php if ($reasons === []): ?>
         <p class="alert notice">Es sind keine Gründe / Ziele vorhanden.</p>
     <?php else: ?>
-        <form method="post" action="/reasons.php" class="stack-form" data-confirm="Eintrag wirklich löschen?">
+        <form data-confirm-message="Möchten Sie diesen Grund / dieses Ziel wirklich löschen?" data-confirm-template="Möchten Sie „{value}“ wirklich löschen?" data-confirm-value-source="#reason_id" method="post" action="/reasons.php" class="stack-form">
             <?= Csrf::field() ?>
             <input type="hidden" name="action" value="delete">
 
