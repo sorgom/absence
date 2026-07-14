@@ -1,6 +1,6 @@
 # Abwesenheits-App
 
-Version **v0.9.6.4**
+Version **v0.9.7**
 
 ## Wichtigste Änderung in v0.9.0
 
@@ -257,3 +257,19 @@ Die Checkbox „Passwort anzeigen“ wird wieder unterstützt. Der JavaScript-Co
 
 Beim Löschen von Gründen/Zielen wird jetzt ebenfalls das Design-Bestätigungsmodal angezeigt.
 Die Meldung enthält den Namen des Grundes/Ziels.
+
+
+## v0.9.7 Login-Startverhalten
+
+Nach dem Login gilt:
+
+- Pflicht-Passwortwechsel hat Vorrang.
+- Personal mit aktiver eigener Abwesenheit landet auf der Abwesenheits-/Rückkehrseite.
+- Personal ohne aktive eigene Abwesenheit landet in der Übersicht.
+- Patienten bleiben im normalen Abwesenheitsfluss.
+
+Zusätzlicher Check:
+
+```bash
+php tools/check_login_start_flow.php
+```

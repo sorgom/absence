@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## v0.9.7
+
+### Changed
+- Staff login target now depends on the staff member's own active absence.
+- Staff with an active absence are sent to the return page.
+- Staff without an active absence are sent to the staff overview.
+- First-login password change still has priority over all other targets.
+
+### Added
+- `tools/check_login_start_flow.php`.
+
 ## v0.9.6.4
 
 ### Fixed

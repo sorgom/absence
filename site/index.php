@@ -37,7 +37,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$auth->isLoggedIn()) {
                 exit;
             }
 
-            header('Location: ' . ($auth->currentRole() === Auth::ROLE_STAFF ? '/personal.php' : '/index.php'));
+            if ($auth->currentRole() === Auth::ROLE_STAFF) {
+                $absences = new AbsenceRepository($db);
+                $target = $absences->activeForPerson((string) $auth->currentUserId()) !== null
+                    ? '/index.php'
+                    : '/personal.php';
+
+                header('Location: ' . $target);
+                exit;
+            }
+
+            header('Location: /index.php');
             exit;
         }
 
