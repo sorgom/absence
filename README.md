@@ -1,6 +1,6 @@
 # Abwesenheits-App
 
-Version **v0.9.9**
+Version **v1.0.0-beta**
 
 ## Wichtigste Änderung in v0.9.0
 
@@ -380,3 +380,33 @@ php tools/check_version_consistency.php
 ```
 
 Der Check-Runner führt die vorhandenen Einzelchecks gesammelt aus und bricht bei Fehlern mit Exit-Code `1` ab.
+
+## v1.0.0-beta Beta-Release
+
+Dieser Stand ist der erste Beta-Release der Abwesenheits-App.
+
+Enthaltene Kernfunktionen:
+
+- gemeinsamer Login für Patientinnen/Patienten und Personal
+- Rollensteuerung über Personen-Datensatz
+- verpflichtende initiale Passwortänderung
+- Abwesenheit starten und beenden
+- Personalübersicht mit aktiven und abgeschlossenen Abwesenheiten
+- manuelles Löschen von Abwesenheiten durch Personal
+- Gründe und Ziele verwalten
+- Soft-Delete für Gründe und Ziele
+- automatische Bereinigung abgeschlossener Abwesenheiten N Stunden nach Rückkehr
+- aktive Abwesenheiten ohne Rückkehrzeit bleiben erhalten
+- Person anlegen und löschen
+- CSV-basierte Testdaten
+- zentrale Prüfungen über:
+
+```bash
+php tools/run_all_checks.php
+```
+
+Beta-Hinweis:
+
+Dieser Stand ist für fachliche Abnahme, Testbetrieb und Entscheidungsvorbereitung gedacht.
+Vor einem produktiven Einsatz sollten reale Betriebsparameter, Backup-Verfahren und Hosting-Konfiguration final geprüft werden.
+

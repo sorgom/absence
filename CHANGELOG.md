@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## v1.0.0-beta
+
+### Release
+- First beta release of the absence app.
+- Consolidates the v0.9.x feature set for acceptance testing and decision-maker review.
+
+### Included
+- Unified login and role-based routing.
+- Shared persons data model for patients and staff.
+- Absence start and return flow.
+- Staff overview with sorting, active/all toggle and manual deletion.
+- Person management.
+- Reasons and destinations with soft-delete.
+- Automatic cleanup of completed absences N hours after return time.
+- Active absences are not automatically deleted.
+- CSV-based test data.
+- Central release validation via `tools/run_all_checks.php`.
+
 ## v0.9.9
 
 ### Added
