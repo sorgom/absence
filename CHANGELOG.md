@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## v0.9.9
+
+### Added
+- `tools/run_all_checks.php` as central check runner.
+- `tools/check_version_consistency.php`.
+- `tools/check_php_lint_all.php`.
+
+### Changed
+- Documentation now points to the central check runner for release validation.
+
 ## v0.9.8.4
 
 ### Fixed

@@ -1,6 +1,6 @@
 # Abwesenheits-App
 
-Version **v0.9.8.4**
+Version **v0.9.9**
 
 ## Wichtigste Änderung in v0.9.0
 
@@ -362,3 +362,21 @@ php tools/check_cleanup_test_data.php
 ## v0.9.8.4 Cleanup-Seed Passwort
 
 `tools/seed_expired_absences.php` verwendet jetzt die tatsächlich vorhandene Passwort-Hash-Methode aus `PasswordService`.
+
+
+## v0.9.9 Stabilisierung
+
+Vor dem v1.0.0-Release gibt es einen zentralen Check-Runner:
+
+```bash
+php tools/run_all_checks.php
+```
+
+Zusätzliche Stabilitätschecks:
+
+```bash
+php tools/check_php_lint_all.php
+php tools/check_version_consistency.php
+```
+
+Der Check-Runner führt die vorhandenen Einzelchecks gesammelt aus und bricht bei Fehlern mit Exit-Code `1` ab.
