@@ -1,0 +1,707 @@
+:root {
+  color-scheme: light dark;
+  --bg: #f5f6f8;
+  --fg: #1b1f24;
+  --card: #ffffff;
+  --border: #d9dee7;
+  --accent: #2457c5;
+  --accent-fg: #ffffff;
+  --muted: #687282;
+  --error-bg: #ffe8e8;
+  --error-fg: #8a1f1f;
+  --notice-bg: #fff7d6;
+  --notice-fg: #6a5100;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111418;
+    --fg: #f2f4f8;
+    --card: #1b2027;
+    --border: #343b45;
+    --accent: #7aa2ff;
+    --accent-fg: #111418;
+    --muted: #a9b2bf;
+    --error-bg: #3a1c1c;
+    --error-fg: #ffb8b8;
+    --notice-bg: #302806;
+    --notice-fg: #ffe58a;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+}
+
+.app-header,
+.app-footer {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 0.85rem 1rem;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.app-footer {
+  border-top: 1px solid var(--border);
+  border-bottom: 0;
+  text-align: center;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.brand {
+  color: var(--fg);
+  font-weight: 700;
+  overflow: hidden;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.login-info {
+  color: var(--muted);
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.menu-toggle {
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  color: var(--fg);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 1.25rem;
+  height: 2.5rem;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  width: 2.5rem;
+}
+
+.menu-toggle:hover,
+.menu-toggle[aria-expanded="true"] {
+  border-color: var(--accent);
+}
+
+.app-menu {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  box-shadow: 0 1rem 2rem rgb(0 0 0 / 0.16);
+  display: grid;
+  gap: 0.15rem;
+  left: 1rem;
+  min-width: min(22rem, calc(100vw - 2rem));
+  padding: 0.5rem;
+  position: absolute;
+  top: 4.25rem;
+  z-index: 20;
+}
+
+.app-menu[hidden] { display: none; }
+
+.menu-header {
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  margin-bottom: 0.25rem;
+  padding: 0.65rem 0.75rem;
+}
+
+.app-menu a {
+  border-radius: 0.6rem;
+  color: var(--fg);
+  padding: 0.7rem 0.75rem;
+  text-decoration: none;
+}
+
+.app-menu a:hover,
+.app-menu a[aria-current="page"] {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.app-menu a[aria-disabled="true"] {
+  color: var(--muted);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+  width: min(100%, 46rem);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1.5rem rgb(0 0 0 / 0.06);
+  padding: 1.25rem;
+}
+
+.login-card {
+  margin: 2rem auto;
+  max-width: 28rem;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+input,
+select,
+button,
+.button-secondary {
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  font: inherit;
+  min-height: 2.75rem;
+  padding: 0.7rem 0.8rem;
+  width: 100%;
+}
+
+input,
+select {
+  background: var(--card);
+  color: var(--fg);
+  margin-top: 0.35rem;
+}
+
+button,
+.button-secondary {
+  align-items: center;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-fg);
+  cursor: pointer;
+  display: inline-flex;
+  font-weight: 700;
+  justify-content: center;
+  margin-top: 1.25rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+.button-secondary {
+  background: transparent;
+  color: var(--fg);
+}
+
+.checkbox {
+  min-height: auto;
+  width: auto;
+}
+
+.alert {
+  border-radius: 0.6rem;
+  padding: 0.75rem;
+}
+
+.error {
+  background: var(--error-bg);
+  color: var(--error-fg);
+}
+
+.notice {
+  background: var(--notice-bg);
+  color: var(--notice-fg);
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+@media (max-width: 34rem) {
+  .login-info {
+    display: none;
+  }
+}
+
+/* Staff overview --------------------------------------------------------- */
+.wide-card {
+  width: min(100%, 68rem);
+}
+
+.page-title-row {
+  align-items: flex-start;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.muted {
+  color: var(--muted);
+  margin-top: -0.5rem;
+}
+
+.toolbar {
+  align-items: end;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 1fr;
+  margin: 1rem 0 1.25rem;
+}
+
+.switch-row {
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0;
+}
+
+.inline-select {
+  margin-top: 0;
+}
+
+.compact {
+  margin-top: 0;
+  min-height: 2.4rem;
+  padding: 0.45rem 0.75rem;
+  width: auto;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  min-width: 42rem;
+  width: 100%;
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  font-weight: 700;
+}
+
+tr.is-active td:first-child {
+  border-left: 0.25rem solid var(--accent);
+}
+
+.status-active {
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  display: inline-block;
+  font-weight: 700;
+  padding: 0.15rem 0.55rem;
+}
+
+@media (min-width: 48rem) {
+  .container {
+    width: min(100%, 72rem);
+  }
+
+  .toolbar {
+    grid-template-columns: 1.4fr 12rem auto;
+  }
+}
+
+@media (max-width: 42rem) {
+  .page-title-row {
+    display: block;
+  }
+
+  table {
+    min-width: 0;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr,
+  td {
+    display: block;
+  }
+
+  tr {
+    border: 1px solid var(--border);
+    border-radius: 0.8rem;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+  }
+
+  td {
+    border-bottom: 1px solid var(--border);
+    padding-left: 45%;
+    position: relative;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    left: 0.75rem;
+    position: absolute;
+    width: 38%;
+  }
+}
+
+
+.sort-form {
+  margin: 0;
+}
+
+.table-sort-button {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.table-sort-button:hover,
+.table-sort-button:focus {
+  text-decoration: underline;
+}
+
+
+.stack-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+select {
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.75rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--border);
+  font: inherit;
+  background: var(--card);
+  color: var(--fg);
+}
+
+.success {
+  background: color-mix(in srgb, #1f8f4a 18%, transparent);
+  color: var(--fg);
+}
+
+.result-box {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  margin: 1rem 0;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.result-box code {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.danger-button {
+  background: #b3261e;
+  border-color: #b3261e;
+  color: #fff;
+}
+
+.danger-button:hover,
+.danger-button:focus {
+  filter: brightness(1.05);
+}
+
+
+.drawer-menu {
+  display: none;
+  gap: 0.25rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+}
+
+.drawer-menu.is-open {
+  display: grid;
+}
+
+.drawer-menu a,
+.drawer-menu .menu-login {
+  display: block;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.55rem;
+}
+
+.drawer-menu a {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.drawer-menu a:hover,
+.drawer-menu a:focus {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.menu-login {
+  margin: 0;
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+.menu-toggle {
+  width: auto;
+  margin: 0;
+  padding: 0.45rem 0.7rem;
+  line-height: 1;
+}
+
+@media (min-width: 48rem) {
+  .drawer-menu {
+    max-width: 46rem;
+    margin: 0 auto;
+    border: 1px solid var(--border);
+    border-top: 0;
+    border-radius: 0 0 0.75rem 0.75rem;
+  }
+}
+
+
+.section-divider {
+  margin: 1.5rem 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+
+.button-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.button-row button {
+  flex: 1 1 10rem;
+}
+
+input:focus,
+select:focus,
+button:focus {
+  outline: 3px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  outline-offset: 2px;
+}
+
+
+.radio-group {
+    border: 0;
+    padding: 0;
+    margin: 0 0 1rem;
+    display: grid;
+    gap: 0.5rem;
+}
+
+.radio-group legend {
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+}
+
+.radio-group label {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.result-box {
+    background: var(--muted-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+.inline-form {
+    display: inline;
+    margin: 0;
+}
+
+button.small,
+.button.small {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.9rem;
+}
+
+
+
+
+
+
+
+
+/*
+ * v0.9.5.3: CSS-first dropdown overlay anchored to the hamburger button.
+ *
+ * The menu is positioned relative to .menu-dropdown-anchor, so it appears
+ * next to the button instead of at the opposite side of the header.
+ */
+.menu-dropdown-anchor {
+    position: relative;
+    display: inline-block;
+}
+
+.drawer-menu {
+    display: none !important;
+    position: absolute !important;
+    top: calc(100% + 0.35rem);
+    left: 0;
+    right: auto;
+    z-index: 1000;
+    width: min(18rem, calc(100vw - 2rem));
+    height: auto;
+    max-height: calc(100vh - 5rem);
+    overflow-y: auto;
+    margin: 0 !important;
+    padding: 0.75rem;
+    box-shadow: 0 0.75rem 2rem rgb(0 0 0 / 25%);
+}
+
+.drawer-menu.is-open {
+    display: grid !important;
+    gap: 0.35rem;
+}
+
+.drawer-backdrop,
+.drawer-close {
+    display: none !important;
+}
+
+
+/*
+ * v0.9.6.1: authoritative CSS dropdown menu.
+ */
+.menu-dropdown-anchor {
+    position: relative;
+    display: inline-block;
+}
+
+.drawer-menu {
+    display: none !important;
+    position: absolute !important;
+    top: calc(100% + 0.35rem);
+    left: 0;
+    right: auto;
+    z-index: 1000;
+    width: min(18rem, calc(100vw - 2rem));
+    height: auto;
+    max-height: calc(100vh - 5rem);
+    overflow-y: auto;
+    margin: 0 !important;
+    padding: 0.75rem;
+    box-shadow: 0 0.75rem 2rem rgb(0 0 0 / 25%);
+}
+
+.drawer-menu.is-open {
+    display: grid !important;
+    gap: 0.35rem;
+}
+
+.drawer-backdrop,
+.drawer-close {
+    display: none !important;
+}
+
+
+/*
+ * v0.9.6.2: solid confirmation modal.
+ *
+ * The transparent backdrop and the opaque dialog are siblings. Opacity is
+ * never applied to the shared parent, so the dialog itself stays solid.
+ */
+.confirm-modal[hidden] {
+    display: none !important;
+}
+
+.confirm-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+}
+
+.confirm-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: rgb(0 0 0 / 45%);
+}
+
+.confirm-modal__panel {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    pointer-events: none;
+}
+
+.confirm-modal__dialog {
+    pointer-events: auto;
+    width: min(28rem, 100%);
+    background: var(--card-background, var(--card-bg, Canvas));
+    color: var(--text-color, CanvasText);
+    border: 1px solid var(--border-color, currentColor);
+    border-radius: 0.9rem;
+    box-shadow: 0 1rem 3rem rgb(0 0 0 / 35%);
+    padding: 1.25rem;
+    opacity: 1;
+}
+
+.confirm-modal__dialog h2 {
+    margin-top: 0;
+}
+
+.confirm-modal__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+}
+
+body.confirm-modal-open {
+    overflow: hidden;
+}
