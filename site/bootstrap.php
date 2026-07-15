@@ -13,5 +13,6 @@ require_once __DIR__ . '/app_info.php';
 require_once __DIR__ . '/person_repository.php';
 require_once __DIR__ . '/reason_repository.php';
 require_once __DIR__ . '/absence_repository.php';
+require_once __DIR__ . '/absence_cleanup.php';
 require_once __DIR__ . '/patient_repository.php';
 require_once __DIR__ . '/staff_repository.php';

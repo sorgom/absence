@@ -1,5 +1,52 @@
 # CHANGELOG
 
+## v0.9.8.4
+
+### Fixed
+- Fixed `tools/seed_expired_absences.php` calling a non-existing password hash method.
+- Added `tools/check_cleanup_seed_runtime.php`.
+
+## v0.9.8.3
+
+### Changed
+- Cleanup test seed now uses three explicit test persons.
+- Added a clearly visible active absence whose departure time is older than N hours.
+- Active old absence remains because `return_time` is `NULL`.
+
+### Added
+- `tools/show_cleanup_test_absences.php`.
+- `tools/check_cleanup_test_data.php`.
+
+## v0.9.8.2
+
+### Fixed
+- Fixed fatal error in `absence_cleanup.php`.
+- Cleanup now reads `default_absence_retention_hours` via keyed `Config::get()`.
+- Added `tools/check_config_usage.php`.
+
+## v0.9.8.1
+
+### Changed
+- Automatic cleanup now uses `return_time` instead of `departure_time`.
+- Active absences without return time are no longer deleted by automatic cleanup.
+- Cleanup test seed now creates one expired completed absence, one fresh completed absence and one old active absence.
+
+### Added
+- `tools/check_cleanup_return_time.php`.
+
+## v0.9.8
+
+### Added
+- Automatic cleanup of absences older than the configured retention time.
+- `site/absence_cleanup.php`.
+- `tools/run_absence_cleanup.php`.
+- `tools/seed_expired_absences.php`.
+- `tools/check_absence_cleanup.php`.
+
+### Changed
+- `index.php` and `personal.php` run absence cleanup automatically.
+- The default retention remains `48` hours via `site/app_config.php`.
+
 ## v0.9.7
 
 ### Changed

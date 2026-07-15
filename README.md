@@ -1,6 +1,6 @@
 # Abwesenheits-App
 
-Version **v0.9.7**
+Version **v0.9.8.4**
 
 ## Wichtigste Änderung in v0.9.0
 
@@ -273,3 +273,92 @@ Zusätzlicher Check:
 ```bash
 php tools/check_login_start_flow.php
 ```
+
+
+## v0.9.8 Automatische Bereinigung alter Abwesenheiten
+
+Abgeschlossene Abwesenheiten werden automatisch gelöscht, wenn ihre Rückkehrzeit älter ist als die konfigurierte Aufbewahrungszeit. Aktive Abwesenheiten ohne Rückkehrzeit werden nicht automatisch gelöscht.
+
+Standard in `site/app_config.php`:
+
+```php
+'default_absence_retention_hours' => 48,
+```
+
+Die Bereinigung läuft beim Aufruf der zentralen Seiten automatisch mit.
+
+Manueller Test:
+
+```bash
+php tools/init_database.php
+php tools/seed_expired_absences.php
+php tools/run_absence_cleanup.php
+```
+
+Erwartung:
+- eine alte abgeschlossene Test-Abwesenheit wird gelöscht
+- eine frische abgeschlossene Test-Abwesenheit bleibt erhalten
+- eine alte aktive Test-Abwesenheit bleibt erhalten
+
+Zusätzlicher Check:
+
+```bash
+php tools/check_absence_cleanup.php
+```
+
+
+## v0.9.8.1 Rückkehrzeit als Cleanup-Basis
+
+Die automatische Bereinigung verwendet jetzt `return_time` statt `departure_time`.
+
+Regeln:
+
+- aktive Abwesenheiten mit `return_time IS NULL` werden nicht automatisch gelöscht
+- abgeschlossene Abwesenheiten werden `N` Stunden nach Rückkehr gelöscht
+
+Zusätzlicher Check:
+
+```bash
+php tools/check_cleanup_return_time.php
+```
+
+
+## v0.9.8.2 Config-Zugriff
+
+`absence_cleanup.php` liest die Aufbewahrungszeit jetzt korrekt über:
+
+```php
+Config::get('default_absence_retention_hours', 48)
+```
+
+
+## v0.9.8.3 Cleanup-Testdaten
+
+Die Cleanup-Testdaten enthalten jetzt drei sprechende Testpersonen:
+
+- `cleanup_done_expired`: abgeschlossen, Rückkehr älter als N Stunden, wird gelöscht
+- `cleanup_done_fresh`: abgeschlossen, Rückkehr jünger als N Stunden, bleibt
+- `cleanup_active_old`: aktiv, Aufbruch älter als N Stunden, bleibt
+
+Testablauf:
+
+```bash
+php tools/seed_expired_absences.php
+php tools/show_cleanup_test_absences.php
+php tools/run_absence_cleanup.php
+php tools/show_cleanup_test_absences.php
+```
+
+Nach dem Cleanup sollte `cleanup_done_expired` verschwunden sein.
+`cleanup_done_fresh` und `cleanup_active_old` sollten bleiben.
+
+Zusätzliche Checks:
+
+```bash
+php tools/check_cleanup_test_data.php
+```
+
+
+## v0.9.8.4 Cleanup-Seed Passwort
+
+`tools/seed_expired_absences.php` verwendet jetzt die tatsächlich vorhandene Passwort-Hash-Methode aus `PasswordService`.

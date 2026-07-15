@@ -115,6 +115,53 @@ final class AbsenceRepository
 
         return $stmt->fetchAll();
     }
+
+    /**
+     * Deletes completed absences whose return time is older than the configured retention time.
+     */
+    public function deleteExpired(int $retentionHours): int
+    {
+        if ($retentionHours < 1) {
+            throw new \InvalidArgumentException('Aufbewahrungszeit muss mindestens eine Stunde betragen.');
+        }
+
+        $stmt = $this->db->prepare(
+            "DELETE FROM absences
+             WHERE return_time IS NOT NULL
+               AND return_time < datetime('now', :modifier)"
+        );
+        $stmt->execute([
+            'modifier' => '-' . $retentionHours . ' hours',
+        ]);
+
+        $deleted = $stmt->rowCount();
+        (new ReasonRepository($this->db))->garbageCollectDeleted();
+
+        return $deleted;
+    }
+
+    /**
+     * Counts completed absences whose return time is older than the configured retention time.
+     */
+    public function countExpired(int $retentionHours): int
+    {
+        if ($retentionHours < 1) {
+            throw new \InvalidArgumentException('Aufbewahrungszeit muss mindestens eine Stunde betragen.');
+        }
+
+        $stmt = $this->db->prepare(
+            "SELECT COUNT(*)
+             FROM absences
+             WHERE return_time IS NOT NULL
+               AND return_time < datetime('now', :modifier)"
+        );
+        $stmt->execute([
+            'modifier' => '-' . $retentionHours . ' hours',
+        ]);
+
+        return (int) $stmt->fetchColumn();
+    }
+
     /**
      * Deletes an absence by ID. Staff members use this for manual cleanup.
      */

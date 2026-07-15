@@ -46,6 +46,14 @@ $requiredRootTools = [
     'check_password_toggle.php',
     'check_reasons_confirm.php',
     'check_login_start_flow.php',
+    'check_absence_cleanup.php',
+    'check_cleanup_return_time.php',
+    'check_config_usage.php',
+    'check_cleanup_test_data.php',
+    'check_cleanup_seed_runtime.php',
+    'show_cleanup_test_absences.php',
+    'seed_expired_absences.php',
+    'run_absence_cleanup.php',
 ];
 
 $errors = [];

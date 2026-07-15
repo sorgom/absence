@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/bootstrap.php';
 
+use AbsenceApp\AbsenceCleanup;
 use AbsenceApp\AbsenceRepository;
 use AbsenceApp\Auth;
 use AbsenceApp\Csrf;
@@ -12,6 +13,7 @@ use AbsenceApp\Session;
 Session::start();
 
 $db = Database::getConnection();
+AbsenceCleanup::run($db);
 $auth = new Auth($db);
 
 if (!$auth->isLoggedIn()) {
