@@ -1,5 +1,33 @@
 # CHANGELOG
 
+## v1.0.0-beta.2
+
+### Removed
+- Removed legacy repository files:
+  - `site/patient_repository.php`
+  - `site/staff_repository.php`
+
+### Added
+- `tools/check_no_legacy_repositories.php`.
+
+### Changed
+- Bootstrap and structure checks now expect only `site/person_repository.php`.
+
+## v1.0.0-beta.1
+
+### Removed
+- Removed legacy compatibility entrypoints:
+  - `site/patient_create.php`
+  - `site/patient_delete.php`
+  - `site/staff_create.php`
+  - `site/staff_delete.php`
+
+### Added
+- `tools/check_no_legacy_entrypoints.php`.
+
+### Changed
+- Site structure and release checks now expect only the unified person management entrypoints.
+
 ## v1.0.0-beta
 
 ### Release

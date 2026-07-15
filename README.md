@@ -1,6 +1,6 @@
 # Abwesenheits-App
 
-Version **v1.0.0-beta**
+Version **v1.0.0-beta.2**
 
 ## Wichtigste Änderung in v0.9.0
 
@@ -409,4 +409,41 @@ Beta-Hinweis:
 
 Dieser Stand ist für fachliche Abnahme, Testbetrieb und Entscheidungsvorbereitung gedacht.
 Vor einem produktiven Einsatz sollten reale Betriebsparameter, Backup-Verfahren und Hosting-Konfiguration final geprüft werden.
+
+## v1.0.0-beta.1 Bereinigung alter Einstiegspunkte
+
+Die alten Übergangsdateien aus der Umstellung auf die gemeinsame Personenverwaltung wurden entfernt:
+
+- `site/patient_create.php`
+- `site/patient_delete.php`
+- `site/staff_create.php`
+- `site/staff_delete.php`
+
+Aktuelle Einstiegspunkte sind:
+
+- `site/person_create.php`
+- `site/person_delete.php`
+
+Zusätzlicher Check:
+
+```bash
+php tools/check_no_legacy_entrypoints.php
+```
+
+## v1.0.0-beta.2 Repository-Bereinigung
+
+Die alten Repository-Dateien aus der getrennten Patienten-/Personalverwaltung wurden entfernt:
+
+- `site/patient_repository.php`
+- `site/staff_repository.php`
+
+Die gemeinsame Personenverwaltung läuft über:
+
+- `site/person_repository.php`
+
+Zusätzlicher Check:
+
+```bash
+php tools/check_no_legacy_repositories.php
+```
 
