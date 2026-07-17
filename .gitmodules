@@ -1,0 +1,3 @@
+[submodule "ngx"]
+	path = ngx
+	url = git@github.com:sorgom/ngx.git
