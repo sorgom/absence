@@ -7,6 +7,9 @@ $tools = __DIR__;
 $checks = [
     'check_php_lint_all.php',
     'check_version_consistency.php',
+    'check_bootstrap_no_legacy.php',
+    'check_no_legacy_entrypoints.php',
+    'check_no_legacy_repositories.php',
     'check_site_structure.php',
     'check_windows_filenames.php',
     'check_filenames.php',

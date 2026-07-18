@@ -39,3 +39,20 @@ Vor produktivem Betrieb sollten insbesondere geprüft werden:
 - finaler HTTPS-/Reverse-Proxy-Betrieb
 - organisatorische Aufbewahrungsfristen
 - Rollen- und Benutzerverwaltung im Echtbetrieb
+
+
+## Nachtrag v1.0.0-beta.1
+
+Alte Übergangsdateien für getrennte Patienten-/Personalverwaltung wurden entfernt.
+Die Verwaltung läuft nun ausschließlich über `person_create.php` und `person_delete.php`.
+
+
+## Nachtrag v1.0.0-beta.2
+
+Alte Repository-Dateien für getrennte Patienten-/Personalverwaltung wurden entfernt.
+Die gemeinsame Personenverwaltung läuft ausschließlich über `person_repository.php`.
+
+
+## Nachtrag v1.0.0-beta.3
+
+Verbleibende Altlasten und alte Bootstrap-Referenzen wurden bereinigt.

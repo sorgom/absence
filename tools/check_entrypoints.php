@@ -8,10 +8,6 @@ $entrypoints = [
     'personal.php',
     'logout.php',
     'change_password.php',
-    'patient_create.php',
-    'patient_delete.php',
-    'staff_create.php',
-    'staff_delete.php',
     'reasons.php',
 ];
 
@@ -39,7 +35,7 @@ foreach ($entrypoints as $entrypoint) {
 
     $bootstrapPosition = $match[0][1];
 
-    foreach (['Session::', 'new Auth', 'new PatientRepository', 'new StaffRepository', 'new ReasonRepository', 'new AbsenceRepository'] as $marker) {
+    foreach (['Session::', 'new Auth', 'new PersonRepository', 'new PersonRepository', 'new ReasonRepository', 'new AbsenceRepository'] as $marker) {
         $markerPosition = strpos($content, $marker);
 
         if ($markerPosition !== false && $markerPosition < $bootstrapPosition) {

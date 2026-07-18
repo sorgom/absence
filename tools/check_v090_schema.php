@@ -17,7 +17,7 @@ foreach (['CREATE TABLE IF NOT EXISTS patients', 'CREATE TABLE IF NOT EXISTS sta
     }
 }
 
-foreach (['auth.php', 'absence_repository.php', 'patient_repository.php', 'staff_repository.php'] as $file) {
+foreach (['auth.php', 'absence_repository.php', 'person_repository.php'] as $file) {
     if (!is_file($site . '/' . $file)) {
         $errors[] = "Missing site/{$file}";
     }
