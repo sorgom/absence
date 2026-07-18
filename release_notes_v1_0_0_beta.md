@@ -126,3 +126,16 @@ Review and decide:
 ## Update v1.0.0-beta.5.1
 
 Adds the missing `person_created.php` page and `check_person_created_print.php` check file to the Git patch.
+
+
+## Update v1.0.0-beta.6
+
+### Added
+- QR code image on the printable account handout.
+- `site/qr_code.php` endpoint for local QR code generation.
+- `tools/check_qr_code_handout.php`.
+
+### Notes
+- QR code generation uses the `site/php-qrcode` Git submodule.
+- The QR code contains only the current application URL.
+- Arbitrary query data is intentionally not supported.

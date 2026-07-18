@@ -31,7 +31,7 @@ foreach ([
     "unset(\$_SESSION['created_person'])",
     'HTTP_X_FORWARDED_PROTO',
     'HTTP_HOST',
-    'QR-Code folgt',
+    'src="/qr_code.php"',
     'window.print()',
     'Weitere Person anlegen',
 ] as $marker) {

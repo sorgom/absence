@@ -1,6 +1,6 @@
 # Absence App
 
-Version **v1.0.0-beta.5.1**
+Version **v1.0.0-beta.6**
 
 The Absence App replaces paper-based absence lists with a simple browser-based workflow for recording departures, returns and current absence status.
 
@@ -224,6 +224,17 @@ The page contains:
 - UID
 - initial password
 
-The print view hides navigation, buttons and layout chrome. It prints only the handout data needed for account handover.
+The print view hides navigation, buttons and layout chrome. It prints only the handout data needed for account handover, including the QR code.
 
 The initial password is not stored in plain text. It is only passed through the session once immediately after account creation.
+
+
+## QR code generation
+
+The printable account handout includes a QR code for the application URL.
+
+QR code generation is handled locally through the `site/php-qrcode` Git submodule and the internal endpoint:
+
+    site/qr_code.php
+
+The endpoint only encodes the current application URL. It does not accept arbitrary URL or text input.

@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## v1.0.0-beta.6
+
+### Added
+- `site/qr_code.php` for local QR code image generation.
+- QR code image on the printable person handout.
+- `tools/check_qr_code_handout.php`.
+
+### Changed
+- The printable handout now shows a real QR code instead of a placeholder.
+- Filename checks now ignore the `site/php-qrcode` submodule directory.
+
 ## v1.0.0-beta.5.1
 
 ### Fixed

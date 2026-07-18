@@ -28,7 +28,7 @@ foreach ($iterator as $file) {
 
     $path = $file->getPathname();
 
-    foreach (['.git', 'logs', 'temp', 'ngx'] as $ignoredDirectory) {
+    foreach (['.git', 'logs', 'temp', 'ngx', 'php-qrcode'] as $ignoredDirectory) {
         if (str_contains($path, DIRECTORY_SEPARATOR . $ignoredDirectory . DIRECTORY_SEPARATOR)) {
             continue 2;
         }

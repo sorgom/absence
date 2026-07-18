@@ -67,7 +67,13 @@ require __DIR__ . '/header.php';
 
             <div class="qr-placeholder">
                 <dt>QR-Code</dt>
-                <dd>QR-Code folgt</dd>
+                <dd>
+                    <img
+                        class="qr-code-image"
+                        src="/qr_code.php"
+                        alt="QR-Code für <?= Utils::h($appUrl) ?>"
+                    >
+                </dd>
             </div>
 
             <div>
