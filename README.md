@@ -1,6 +1,6 @@
 # Absence App
 
-Version **v1.0.0-beta.6**
+Version **v1.0.0-beta.7**
 
 The Absence App replaces paper-based absence lists with a simple browser-based workflow for recording departures, returns and current absence status.
 
@@ -238,3 +238,14 @@ QR code generation is handled locally through the `site/php-qrcode` Git submodul
     site/qr_code.php
 
 The endpoint only encodes the current application URL. It does not accept arbitrary URL or text input.
+
+
+## Compact header layout
+
+The application header is intentionally minimal:
+
+- menu button on the left
+- current UID right-aligned
+- status indicator on the far right
+
+The status indicator is rendered as a CSS circle. It is blue while the current person has an active absence and gray otherwise.

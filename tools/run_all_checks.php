@@ -33,6 +33,7 @@ $checks = [
     'check_cleanup_test_data.php',
     'check_cleanup_seed_runtime.php',
     'check_forms.php',
+    'check_header_layout.php',
     'check_client_time_markup.php',
     'check_bootstrap.php',
     'check_entrypoints.php',

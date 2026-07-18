@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## v1.0.0-beta.7
+
+### Changed
+- Simplified the header layout: menu button left, UID right-aligned, status indicator far right.
+- Removed the visible "Current login" label from the header.
+- Removed the app brand link from the header.
+- The status indicator is now rendered as a CSS circle.
+
+### Added
+- `tools/check_header_layout.php`.
+
 ## v1.0.0-beta.6
 
 ### Added

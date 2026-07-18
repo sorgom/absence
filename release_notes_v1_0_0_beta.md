@@ -139,3 +139,12 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 - QR code generation uses the `site/php-qrcode` Git submodule.
 - The QR code contains only the current application URL.
 - Arbitrary query data is intentionally not supported.
+
+
+## Update v1.0.0-beta.7
+
+### Changed
+- Simplified the application header.
+- Removed the visible "Current login" label from the header.
+- Removed the app title from the header next to the menu button.
+- Added a right-aligned UID and a CSS status indicator.

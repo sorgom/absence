@@ -11,6 +11,8 @@
   --error-fg: #8a1f1f;
   --notice-bg: #fff7d6;
   --notice-fg: #6a5100;
+  --status-active: #1fc1dd;
+  --status-inactive: #808080;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -26,6 +28,8 @@
     --error-fg: #ffb8b8;
     --notice-bg: #302806;
     --notice-fg: #ffe58a;
+    --status-active: #1fc1dd;
+    --status-inactive: #8b8f94;
   }
 }
 
@@ -69,19 +73,39 @@ body {
   min-width: 0;
 }
 
-.brand {
+.header-right {
+  align-items: center;
+  display: flex;
+  gap: 0.9rem;
+  justify-content: flex-end;
+  margin-left: auto;
+  min-width: 0;
+}
+
+.login-id {
   color: var(--fg);
-  font-weight: 700;
-  overflow: hidden;
-  text-decoration: none;
-  text-overflow: ellipsis;
+  font-size: clamp(1.45rem, 6vw, 1.7rem);
+  font-weight: 500;
+  line-height: 1;
+  text-align: right;
   white-space: nowrap;
 }
 
-.login-info {
-  color: var(--muted);
-  font-size: 0.95rem;
-  white-space: nowrap;
+.status-indicator {
+  background: var(--status-inactive);
+  border-radius: 999px;
+  display: inline-block;
+  flex: 0 0 auto;
+  height: 2.25rem;
+  width: 2.25rem;
+}
+
+.status-indicator.is-active {
+  background: var(--status-active);
+}
+
+.status-indicator.is-inactive {
+  background: var(--status-inactive);
 }
 
 .menu-toggle {
@@ -242,11 +266,6 @@ button,
   width: 1px;
 }
 
-@media (max-width: 34rem) {
-  .login-info {
-    display: none;
-  }
-}
 
 /* Staff overview --------------------------------------------------------- */
 .wide-card {
