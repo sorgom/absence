@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v1.0.0-beta.4
+
+### Changed
+- Rewrote `README.md` in English.
+- Rewrote `release_notes_v1_0_0_beta.md` in English.
+- Updated documentation to describe the current beta state instead of the historical v0.9.x migration path.
+- Removed outdated documentation references to legacy patient/staff redirect files.
+
+### Notes
+- No application behavior was changed in this release.
+
+
 ## v1.0.0-beta.3
 
 ### Removed

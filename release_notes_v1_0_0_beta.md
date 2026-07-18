@@ -1,58 +1,111 @@
-# Release Notes v1.0.0-beta
+# Release Notes v1.0.0-beta.4
 
-Dies ist der erste Beta-Release der Abwesenheits-App.
+This is the first beta release line of the Absence App.
 
-## Zweck
+The beta release is intended for functional acceptance testing, pilot operation and decision-maker review.
 
-Der Beta-Stand ist für fachliche Tests, interne Abnahme und die Vorbereitung einer Entscheidungsvorlage gedacht.
+## Purpose
 
-## Wichtigste Funktionen
+The Absence App replaces paper-based absence lists with a simple digital workflow:
 
-- gemeinsamer Login über `index.php`
-- Personenmodell für Patientinnen/Patienten und Personal
-- rollenbasierte Weiterleitung nach Login
-- initiale Passwortänderung
-- Abwesenheit starten und Rückkehr erfassen
-- Personalübersicht
-- manuelles Löschen von Abwesenheiten
-- Gründe und Ziele verwalten
-- Soft-Delete für Gründe und Ziele
-- automatische Löschung abgeschlossener Abwesenheiten nach Rückkehrzeit
-- aktive Abwesenheiten bleiben erhalten
-- Testdaten-Import und Cleanup-Testdaten
-- zentraler Check-Runner
+- record when a person leaves
+- show who is currently absent
+- record when a person returns
+- keep staff informed during daily work and shift handovers
+- remove completed records automatically after the configured retention time
 
-## Validierung
+## Main user benefit
 
-Vor Commit oder Deployment:
+The app reduces the operational problems caused by paper lists:
+
+- unclear current status
+- manual corrections
+- search effort
+- duplicate or outdated information
+- missing or late return entries
+
+## Included functionality
+
+- shared login via `index.php`
+- role-based routing for patients and staff
+- mandatory password change on first login
+- own absence start and return flow
+- staff overview for active and completed absences
+- manual deletion of absences by staff
+- shared person management for patients and staff
+- reason and destination management
+- soft-delete for reasons and destinations
+- automatic cleanup of completed absences N hours after return time
+- active absences remain visible until a return is recorded
+- CSV-based test data
+- cleanup-specific test data
+- central validation via `tools/run_all_checks.php`
+
+## Removed legacy files
+
+The old split patient/staff management files have been removed. The beta now uses the shared person management flow only.
+
+Current files:
+
+```text
+site/person_create.php
+site/person_delete.php
+site/person_repository.php
+```
+
+Removed legacy files:
+
+```text
+site/create_patient.php
+site/patient_create.php
+site/patient_delete.php
+site/patient_repository.php
+site/staff_create.php
+site/staff_delete.php
+site/staff_repository.php
+```
+
+## Validation
+
+Before committing or deploying a beta build, run:
 
 ```bash
 php tools/run_all_checks.php
 ```
 
-## Beta-Hinweis
+The validation suite includes checks for:
 
-Vor produktivem Betrieb sollten insbesondere geprüft werden:
+- PHP syntax
+- version consistency
+- flat file structure
+- legacy file references
+- login routing
+- person management
+- reason soft-delete behavior
+- confirmation modal behavior
+- password visibility toggle
+- automatic absence cleanup
+- cleanup test data
 
-- Backup/Restore der SQLite-Datenbank
-- Schreibrechte des Webservers
-- finaler HTTPS-/Reverse-Proxy-Betrieb
-- organisatorische Aufbewahrungsfristen
-- Rollen- und Benutzerverwaltung im Echtbetrieb
+## Pilot recommendation
 
+Use this release for a limited pilot area first.
 
-## Nachtrag v1.0.0-beta.1
+During the pilot, collect feedback on:
 
-Alte Übergangsdateien für getrennte Patienten-/Personalverwaltung wurden entfernt.
-Die Verwaltung läuft nun ausschließlich über `person_create.php` und `person_delete.php`.
+- clarity of the staff overview
+- ease of starting and ending absences
+- handling of missed return entries
+- suitability of the retention period
+- practical workflow during shift handover
 
+## Before production use
 
-## Nachtrag v1.0.0-beta.2
+Review and decide:
 
-Alte Repository-Dateien für getrennte Patienten-/Personalverwaltung wurden entfernt.
-Die gemeinsame Personenverwaltung läuft ausschließlich über `person_repository.php`.
-
-
-## Nachtrag v1.0.0-beta.3
-
-Verbleibende Altlasten und alte Bootstrap-Referenzen wurden bereinigt.
+- backup and restore process
+- runtime database permissions
+- final hosting setup
+- retention policy
+- operational support responsibility
+- onboarding process for staff

@@ -1,3 +1,5 @@
+# chat-gpt patches
+*.patch
 # Runtime files
 /site/database.sqlite
 /site/*.sqlite-shm
