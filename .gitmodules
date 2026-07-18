@@ -1,3 +1,6 @@
 [submodule "ngx"]
 	path = ngx
 	url = git@github.com:sorgom/ngx.git
+[submodule "site/php-qrcode"]
+	path = site/php-qrcode
+	url = git@github.com:psyon/php-qrcode.git
