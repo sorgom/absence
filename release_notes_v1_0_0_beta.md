@@ -109,3 +109,20 @@ Review and decide:
 - retention policy
 - operational support responsibility
 - onboarding process for staff
+
+
+## Update v1.0.0-beta.5
+
+### Added
+- Printable handout page after creating a new person.
+- Print layout that contains only the application URL, QR code placeholder, UID and initial password.
+- Static check for the printable account handout flow.
+
+### Notes
+- QR code generation is prepared as a placeholder and can be added in a later version.
+- The initial password is shown only once after account creation and is not stored in plain text.
+
+
+## Update v1.0.0-beta.5.1
+
+Adds the missing `person_created.php` page and `check_person_created_print.php` check file to the Git patch.

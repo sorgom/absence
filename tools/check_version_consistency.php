@@ -2,10 +2,10 @@
 declare(strict_types=1);
 
 $root = dirname(__DIR__);
-$rootVersion = trim((string) file_get_contents($root . '/version'));
+$rootVersion = trim((string) file_get_contents($root . '/VERSION'));
 $siteVersion = trim((string) file_get_contents($root . '/site/version'));
-$readme = file_get_contents($root . '/readme.md') ?: '';
-$changelog = file_get_contents($root . '/changelog.md') ?: '';
+$readme = file_get_contents($root . '/README.md') ?: '';
+$changelog = file_get_contents($root . '/CHANGELOG.md') ?: '';
 
 $errors = [];
 
@@ -18,11 +18,11 @@ if ($rootVersion !== $siteVersion) {
 }
 
 if (!str_contains($readme, "Version **v{$rootVersion}**")) {
-    $errors[] = "readme.md does not mention Version **v{$rootVersion}**.";
+    $errors[] = "README.md does not mention Version **v{$rootVersion}**.";
 }
 
 if (!str_contains($changelog, "## v{$rootVersion}")) {
-    $errors[] = "changelog.md does not contain ## v{$rootVersion}.";
+    $errors[] = "CHANGELOG.md does not contain ## v{$rootVersion}.";
 }
 
 if ($errors !== []) {

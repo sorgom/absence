@@ -1,5 +1,26 @@
 # CHANGELOG
 
+## v1.0.0-beta.5.1
+
+### Fixed
+- Added missing `site/person_created.php` file to the patch.
+- Added missing `tools/check_person_created_print.php` file to the patch.
+
+## v1.0.0-beta.5
+
+### Added
+- `site/person_created.php` as printable account handout page after person creation.
+- Print-only layout for URL, QR code placeholder, UID and initial password.
+- `tools/check_person_created_print.php`.
+
+### Fixed
+- `tools/check_version_consistency.php` now follows the public repository's uppercase root documentation filenames.
+- `tools/check_filenames.php` allows conventional uppercase root documentation files and ignores local runtime/submodule folders.
+
+### Changed
+- `site/person_create.php` now redirects to the handout page after successful creation.
+- The initial password is no longer displayed inline on the person creation form.
+
 ## v1.0.0-beta.4
 
 ### Changed

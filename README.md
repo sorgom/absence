@@ -1,6 +1,6 @@
 # Absence App
 
-Version **v1.0.0-beta.4**
+Version **v1.0.0-beta.5.1**
 
 The Absence App replaces paper-based absence lists with a simple browser-based workflow for recording departures, returns and current absence status.
 
@@ -211,3 +211,19 @@ Before production use, review:
 ## Suggested decision
 
 Start a limited beta pilot, collect feedback from daily use and decide on final production rollout after the pilot phase.
+
+
+## Printable account handout
+
+After a staff member creates a new person, the app redirects to a printable handout page.
+
+The page contains:
+
+- application URL
+- QR code placeholder
+- UID
+- initial password
+
+The print view hides navigation, buttons and layout chrome. It prints only the handout data needed for account handover.
+
+The initial password is not stored in plain text. It is only passed through the session once immediately after account creation.

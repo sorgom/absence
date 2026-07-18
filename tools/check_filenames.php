@@ -7,6 +7,14 @@ $errors = [];
 $allowedSpecial = [
     '.gitignore' => true,
     '.editorconfig' => true,
+    '.gitattributes' => true,
+    '.gitmodules' => true,
+    'CHANGELOG.md' => true,
+    'LICENSE' => true,
+    'README.md' => true,
+    'ROADMAP.md' => true,
+    'TODO.md' => true,
+    'VERSION' => true,
 ];
 
 $iterator = new RecursiveIteratorIterator(
@@ -20,8 +28,10 @@ foreach ($iterator as $file) {
 
     $path = $file->getPathname();
 
-    if (str_contains($path, DIRECTORY_SEPARATOR . '.git' . DIRECTORY_SEPARATOR)) {
-        continue;
+    foreach (['.git', 'logs', 'temp', 'ngx'] as $ignoredDirectory) {
+        if (str_contains($path, DIRECTORY_SEPARATOR . $ignoredDirectory . DIRECTORY_SEPARATOR)) {
+            continue 2;
+        }
     }
 
     $name = $file->getFilename();

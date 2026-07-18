@@ -16,6 +16,7 @@ $checks = [
     'check_flat_paths.php',
     'check_v090_schema.php',
     'check_person_management.php',
+    'check_person_created_print.php',
     'check_reasons_soft_delete.php',
     'check_absence_manual_delete.php',
     'check_seed_test_data.php',

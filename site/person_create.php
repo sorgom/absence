@@ -22,9 +22,6 @@ if (!$auth->isLoggedIn()) {
 $auth->requireRole(Auth::ROLE_STAFF);
 
 $error = null;
-$success = null;
-$createdId = null;
-$generatedPassword = null;
 $createdType = 'Patient';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -39,7 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $createdId = trim((string) ($_POST['id'] ?? ''));
         $generatedPassword = $repository->create($createdId, $isStaff);
 
-        $success = 'Person wurde angelegt.';
+        Session::set('created_person', [
+            'id' => $createdId,
+            'type' => $createdType,
+            'initial_password' => $generatedPassword,
+        ]);
+
+        header('Location: /person_created.php');
+        exit;
     } catch (Throwable $exception) {
         $error = $exception->getMessage();
     }
