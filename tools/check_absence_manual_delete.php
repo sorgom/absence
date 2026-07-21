@@ -27,7 +27,7 @@ foreach (['value="delete_absence"', 'icon-button danger-icon', 'Möchten Sie die
     }
 }
 
-foreach (['background-image: url("/trash.svg")'] as $marker) {
+foreach (['background-image: url("/trash_b.svg")', 'background-image: url("/trash_w.svg")'] as $marker) {
     if (!str_contains($style, $marker)) {
         $errors[] = "Missing overview style marker: {$marker}";
     }

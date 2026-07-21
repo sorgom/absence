@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.2
+
+### Changed
+- Staff overview delete icon now switches between `trash_b.svg` and `trash_w.svg` based on the color scheme.
+- Removed the blue left border from active overview rows.
+
+### Added
+- `tools/check_overview_theme_icons.php`.
+
 ## v1.0.0-beta.10.1
 
 ### Changed

@@ -48,6 +48,7 @@ $requiredRootTools = [
     'check_absence_manual_delete.php',
     'check_staff_overview_mobile.php',
     'check_staff_overview_table_icons.php',
+    'check_overview_theme_icons.php',
     'check_staff_overview_filters.php',
     'init_database.php',
     'seed_test_data.php',

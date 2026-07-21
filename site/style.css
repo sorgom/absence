@@ -334,9 +334,6 @@ th {
   font-weight: 700;
 }
 
-tr.is-active td:first-child {
-  border-left: 0.25rem solid var(--accent);
-}
 
 .status-active {
   border: 1px solid var(--accent);
@@ -1003,7 +1000,13 @@ body.confirm-modal-open {
 }
 
 .danger-icon {
-  background-image: url("/trash.svg");
+  background-image: url("/trash_b.svg");
+}
+
+@media (prefers-color-scheme: dark) {
+  .danger-icon {
+    background-image: url("/trash_w.svg");
+  }
 }
 
 .icon-button:hover,

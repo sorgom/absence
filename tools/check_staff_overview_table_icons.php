@@ -23,7 +23,8 @@ foreach ([
     'var(--status-active)',
     'var(--status-inactive)',
     '.icon-button',
-    'background-image: url("/trash.svg")',
+    'background-image: url("/trash_b.svg")',
+    'background-image: url("/trash_w.svg")',
     'background-size: 1rem 1rem',
     'height: 1.45rem',
     'width: 1.45rem',
@@ -47,6 +48,10 @@ foreach ([
 
 if (str_contains($overview, '<img')) {
     $errors[] = 'Delete icon button must not contain a visible img element.';
+}
+
+if (str_contains($style, 'tr.is-active td:first-child') || str_contains($style, 'border-left: 0.25rem solid var(--accent)')) {
+    $errors[] = 'Active overview rows must not have a blue left border.';
 }
 
 if ($errors !== []) {

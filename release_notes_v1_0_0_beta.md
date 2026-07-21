@@ -191,3 +191,10 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 ### Changed
 - Delete action in the staff overview is now a smaller icon-only button.
 - The trash icon is rendered via CSS `background-image` instead of an inline image element.
+
+
+## Update v1.0.0-beta.10.2
+
+### Changed
+- Staff overview delete icon now uses `trash_b.svg` in light theme and `trash_w.svg` in dark theme.
+- Removed the blue left border from active overview rows.

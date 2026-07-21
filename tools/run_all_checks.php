@@ -25,6 +25,7 @@ $checks = [
     'check_absence_manual_delete.php',
     'check_staff_overview_mobile.php',
     'check_staff_overview_table_icons.php',
+    'check_overview_theme_icons.php',
     'check_staff_overview_filters.php',
     'check_seed_test_data.php',
     'check_menu_overlay.php',
