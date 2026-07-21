@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.2
+
+### Removed
+- Removed `tools/check_favicon.php`.
+
+### Changed
+- Removed favicon-check references from `tools/run_all_checks.php`, `tools/check_site_structure.php`, and `tools/check_repository_artifact_ignores.php`.
+
+### Added
+- `tools/check_no_favicon_test.php` to ensure the old favicon test stays removed while the favicon link remains present.
+
 ## v1.0.0-beta.10.5.1
 
 ### Fixed

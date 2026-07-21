@@ -225,3 +225,12 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Fixed
 - Removed PHP warnings from `tools/check_repository_artifact_ignores.php`.
+
+
+## Update v1.0.0-beta.10.5.2
+
+### Removed
+- Removed the overly strict favicon validation check.
+
+### Notes
+- The favicon itself and the HTML favicon link remain unchanged.
