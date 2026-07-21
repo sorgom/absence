@@ -19,7 +19,7 @@ if (!is_file($csv)) {
 $content = file_get_contents($script) ?: '';
 
 foreach ([
-    'fgetcsv($handle, 0, \';\')',
+    'fgetcsv($handle, 0, \';\', \'"\', \'\\\\\')',
     'UID',
     'is Staff',
     'Passwort',

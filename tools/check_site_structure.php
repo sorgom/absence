@@ -56,6 +56,7 @@ $requiredRootTools = [
     'init_database.php',
     'seed_test_data.php',
     'check_seed_test_data.php',
+    'check_fgetcsv_escape.php',
     'check_menu_overlay.php',
     'check_confirm_modal.php',
     'check_js_syntax.php',

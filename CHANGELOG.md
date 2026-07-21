@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.3
+
+### Fixed
+- Added the explicit `fgetcsv()` escape parameter in `tools/seed_test_data.php` to avoid PHP deprecation warnings.
+
+### Added
+- `tools/check_fgetcsv_escape.php`.
+
 ## v1.0.0-beta.10.5.2
 
 ### Removed

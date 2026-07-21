@@ -31,6 +31,7 @@ $checks = [
     'check_overview_theme_icons.php',
     'check_staff_overview_filters.php',
     'check_seed_test_data.php',
+    'check_fgetcsv_escape.php',
     'check_menu_overlay.php',
     'check_confirm_modal.php',
     'check_js_syntax.php',

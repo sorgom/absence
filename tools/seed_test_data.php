@@ -53,7 +53,7 @@ function readPersonsCsv(string $csvPath): array
         throw new RuntimeException("Could not open CSV: {$csvPath}");
     }
 
-    $header = fgetcsv($handle, 0, ';');
+    $header = fgetcsv($handle, 0, ';', '"', '\\');
 
     if ($header === false) {
         fclose($handle);
@@ -72,7 +72,7 @@ function readPersonsCsv(string $csvPath): array
 
     $rows = [];
 
-    while (($values = fgetcsv($handle, 0, ';')) !== false) {
+    while (($values = fgetcsv($handle, 0, ';', '"', '\\')) !== false) {
         $values = array_map(static fn (string $value): string => trim(csvUtf8($value)), $values);
 
         if (count(array_filter($values, static fn (string $value): bool => $value !== '')) === 0) {

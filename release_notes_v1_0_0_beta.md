@@ -234,3 +234,12 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Notes
 - The favicon itself and the HTML favicon link remain unchanged.
+
+
+## Update v1.0.0-beta.10.5.3
+
+### Fixed
+- `tools/seed_test_data.php` now passes the `fgetcsv()` escape parameter explicitly to avoid PHP deprecation warnings.
+
+### Added
+- `tools/check_fgetcsv_escape.php`.
