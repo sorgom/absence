@@ -30,7 +30,7 @@ if ($auth->isFirstLogin()) {
 
 $error = null;
 
-$allowedView = ['active', 'all'];
+$allowedView = ['active', 'ended', 'all'];
 $allowedSort = ['departure', 'patient'];
 $allowedOrder = ['asc', 'desc'];
 
@@ -97,10 +97,8 @@ $view = in_array($view, $allowedView, true) ? $view : 'active';
 $sort = in_array($sort, $allowedSort, true) ? $sort : 'departure';
 $order = in_array($order, $allowedOrder, true) ? $order : 'asc';
 
-$activeOnly = $view !== 'all';
-
 $absenceRepository = new AbsenceRepository($db);
-$absences = $absenceRepository->listForStaff($activeOnly, $sort, $order);
+$absences = $absenceRepository->listForStaffByView($view, $sort, $order);
 
 require __DIR__ . '/staff_overview.php';
 require __DIR__ . '/footer.php';

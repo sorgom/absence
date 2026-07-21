@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## v1.0.0-beta.10
+
+### Added
+- Staff overview filter option `Beendet`.
+- Mobile sort popup for the staff overview.
+- `tools/check_staff_overview_filters.php`.
+- `tools/check_staff_overview_table_icons.php`.
+- `tools/check_staff_overview_mobile.php`.
+
+### Changed
+- Replaced the active-only checkbox with radio buttons `Aktiv`, `Beendet`, `Alle`.
+- Replaced status text with LED indicators in the overview table.
+- Replaced delete text button with the `trash.svg` icon.
+- Empty return fields are hidden on smartphone table cards.
+
 ## v1.0.0-beta.9
 
 ### Changed

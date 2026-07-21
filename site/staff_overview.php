@@ -11,13 +11,10 @@ use AbsenceApp\Csrf;
 use AbsenceApp\Utils;
 
 /** @var array<int,array<string,mixed>> $absences */
-/** @var bool $activeOnly */
+/** @var string $view */
 /** @var string $sort */
 /** @var string $order */
 
-/**
- * Returns the visible arrow for the active sort column.
- */
 function staffSortIndicator(string $column, string $currentSort, string $currentOrder): string
 {
     if ($column !== $currentSort) {
@@ -26,13 +23,32 @@ function staffSortIndicator(string $column, string $currentSort, string $current
 
     return $currentOrder === 'asc' ? ' ▲' : ' ▼';
 }
+
+function staffOverviewViewLabel(string $view): string
+{
+    return match ($view) {
+        'ended' => 'Beendet',
+        'all' => 'Alle',
+        default => 'Aktiv',
+    };
+}
+
+function staffOverviewEmptyLabel(string $view): string
+{
+    return match ($view) {
+        'ended' => 'beendeten ',
+        'all' => '',
+        default => 'aktiven ',
+    };
+}
 ?>
 <section class="card wide-card">
     <div class="page-title-row">
         <div>
             <h1>Übersicht Abwesenheiten</h1>
             <p class="muted">
-                <?= $activeOnly ? 'Nur aktive Abwesenheiten' : 'Alle Abwesenheiten' ?> ·
+                Auswahl:
+                <?= Utils::h(staffOverviewViewLabel($view)) ?> ·
                 Sortierung:
                 <?= Utils::h($sort === 'patient' ? 'ID' : 'Aufbruch') ?>
                 <?= Utils::h($order === 'asc' ? 'aufsteigend' : 'absteigend') ?>
@@ -46,30 +62,63 @@ function staffSortIndicator(string $column, string $currentSort, string $current
         </form>
     </div>
 
-    <form class="toolbar" method="post" action="/personal.php">
-        <?= Csrf::field() ?>
-        <input type="hidden" name="action" value="overview_view">
-        <input type="hidden" name="view" value="<?= $activeOnly ? 'all' : 'active' ?>">
+    <div class="overview-controls">
+        <form class="overview-view-form" method="post" action="/personal.php">
+            <?= Csrf::field() ?>
+            <input type="hidden" name="action" value="overview_view">
 
-        <label class="switch-row">
-            <input
-                class="checkbox"
-                type="checkbox"
-                onchange="this.form.submit()"
-                <?= $activeOnly ? 'checked' : '' ?>
-            >
-            <span>Nur aktive Abwesenheiten</span>
-        </label>
-    </form>
+            <fieldset class="radio-group radio-group-compact overview-view-choice">
+                <legend>Auswahl</legend>
+
+                <label>
+                    <input type="radio" name="view" value="active" <?= $view === 'active' ? 'checked' : '' ?> onchange="this.form.submit()">
+                    Aktiv
+                </label>
+
+                <label>
+                    <input type="radio" name="view" value="ended" <?= $view === 'ended' ? 'checked' : '' ?> onchange="this.form.submit()">
+                    Beendet
+                </label>
+
+                <label>
+                    <input type="radio" name="view" value="all" <?= $view === 'all' ? 'checked' : '' ?> onchange="this.form.submit()">
+                    Alle
+                </label>
+            </fieldset>
+        </form>
+
+        <details class="overview-sort-popup">
+            <summary>Sortieren</summary>
+            <div class="overview-sort-popup__panel">
+                <form method="post" action="/personal.php">
+                    <?= Csrf::field() ?>
+                    <input type="hidden" name="action" value="overview_sort">
+                    <input type="hidden" name="sort" value="patient">
+                    <button class="button-secondary compact" type="submit">
+                        ID<?= Utils::h(staffSortIndicator('patient', $sort, $order)) ?>
+                    </button>
+                </form>
+
+                <form method="post" action="/personal.php">
+                    <?= Csrf::field() ?>
+                    <input type="hidden" name="action" value="overview_sort">
+                    <input type="hidden" name="sort" value="departure">
+                    <button class="button-secondary compact" type="submit">
+                        Aufbruch<?= Utils::h(staffSortIndicator('departure', $sort, $order)) ?>
+                    </button>
+                </form>
+            </div>
+        </details>
+    </div>
 
     <?php if ($absences === []): ?>
-        <p class="alert notice">Keine <?= $activeOnly ? 'aktiven ' : '' ?>Abwesenheiten gefunden.</p>
+        <p class="alert notice">Keine <?= staffOverviewEmptyLabel($view) ?>Abwesenheiten gefunden.</p>
     <?php else: ?>
         <div class="table-scroll" role="region" aria-label="Abwesenheiten" tabindex="0">
-            <table>
+            <table class="absence-overview-table">
                 <thead>
                     <tr>
-                        <th>Status</th>
+                        <th class="status-column" aria-label="Status"></th>
                         <th>
                             <form class="sort-form" method="post" action="/personal.php">
                                 <?= Csrf::field() ?>
@@ -92,27 +141,34 @@ function staffSortIndicator(string $column, string $currentSort, string $current
                             </form>
                         </th>
                         <th>Rückkehr</th>
-                        <th>Aktion</th>
+                        <th class="action-column" aria-label="Aktion"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($absences as $absence): ?>
-                        <tr class="<?= $absence['return_time'] === null ? 'is-active' : '' ?>">
-                            <td data-label="Status">
-                                <?= $absence['return_time'] === null ? '<span class="status-active">Unterwegs</span>' : 'Zurück' ?>
+                        <?php $isActive = $absence['return_time'] === null; ?>
+                        <tr class="<?= $isActive ? 'is-active' : '' ?>">
+                            <td class="status-cell" data-label="">
+                                <span
+                                    class="overview-status-dot <?= $isActive ? 'is-active' : 'is-inactive' ?>"
+                                    aria-label="<?= $isActive ? 'Aktiv' : 'Beendet' ?>"
+                                    title="<?= $isActive ? 'Aktiv' : 'Beendet' ?>"
+                                ></span>
                             </td>
                             <td data-label="ID"><?= Utils::h((string) $absence['person_id']) ?></td>
                             <td data-label="Grund / Ziel"><?= Utils::h((string) $absence['reason_name']) ?></td>
                             <td data-label="Aufbruch"><?= Utils::localTimeElement((string) $absence['departure_time']) ?></td>
-                            <td data-label="Rückkehr">
-                                <?= $absence['return_time'] === null ? '' : Utils::localTimeElement((string) $absence['return_time']) ?>
+                            <td class="<?= $isActive ? 'empty-on-mobile' : '' ?>" data-label="Rückkehr">
+                                <?= $isActive ? '' : Utils::localTimeElement((string) $absence['return_time']) ?>
                             </td>
-                            <td data-label="Aktion">
+                            <td class="action-cell" data-label="">
                                 <form method="post" action="/personal.php" class="inline-form" data-confirm-message="Möchten Sie diese Abwesenheit wirklich löschen?" data-confirm-template="Möchten Sie die Abwesenheit von {value} wirklich löschen?" data-confirm-value="<?= Utils::h((string) $absence['person_id']) ?>">
                                     <?= Csrf::field() ?>
                                     <input type="hidden" name="action" value="delete_absence">
                                     <input type="hidden" name="absence_id" value="<?= (int) $absence['id'] ?>">
-                                    <button type="submit" class="danger small">Löschen</button>
+                                    <button type="submit" class="icon-button danger-icon" aria-label="Abwesenheit löschen">
+                                        <img src="/trash.svg" alt="" aria-hidden="true">
+                                    </button>
                                 </form>
                             </td>
                         </tr>

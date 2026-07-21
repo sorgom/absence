@@ -130,7 +130,21 @@ final class AbsenceRepository
      */
     public function listForStaff(bool $activeOnly = true, string $sort = 'departure', string $order = 'asc'): array
     {
-        $where = $activeOnly ? 'WHERE a.return_time IS NULL' : '';
+        return $this->listForStaffByView($activeOnly ? 'active' : 'all', $sort, $order);
+    }
+
+    /**
+     * Lists absences for staff overview using an explicit view filter.
+     *
+     * @return array<int,array<string,mixed>>
+     */
+    public function listForStaffByView(string $view = 'active', string $sort = 'departure', string $order = 'asc'): array
+    {
+        $where = match ($view) {
+            'ended' => 'WHERE a.return_time IS NOT NULL',
+            'all' => '',
+            default => 'WHERE a.return_time IS NULL',
+        };
 
         $direction = $order === 'desc' ? 'DESC' : 'ASC';
 

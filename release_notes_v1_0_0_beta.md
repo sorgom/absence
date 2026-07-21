@@ -174,3 +174,13 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 ### Added
 - SVG favicon.
 - Static checks for the password handout, delete role UI and favicon.
+
+
+## Update v1.0.0-beta.10
+
+### Changed
+- Staff overview filter now uses radio buttons: Active, Ended and All.
+- Status column now uses LED indicators instead of text.
+- Delete action now uses the existing trash icon instead of a text button.
+- Smartphone overview includes a sort popup.
+- Empty return fields are hidden on smartphone cards.
