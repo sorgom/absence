@@ -211,3 +211,17 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 ### Changed
 - Person creation role selector now uses the same compact radio-button layout as person deletion.
 - The fieldset legend is now `Rolle`.
+
+
+## Update v1.0.0-beta.10.5
+
+### Fixed
+- Structure check now allows the intentional `site/php-qrcode` submodule.
+- Filename check now ignores root patch files.
+- Favicon check now accepts both single and double quotes around the SVG `viewBox`.
+
+
+## Update v1.0.0-beta.10.5.1
+
+### Fixed
+- Removed PHP warnings from `tools/check_repository_artifact_ignores.php`.

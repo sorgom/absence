@@ -34,6 +34,10 @@ foreach ($iterator as $file) {
         }
     }
 
+    if ($file->getExtension() === 'patch') {
+        continue;
+    }
+
     $name = $file->getFilename();
 
     if (isset($allowedSpecial[$name])) {

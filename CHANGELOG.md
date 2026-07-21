@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.1
+
+### Fixed
+- Escaped literal `$file` markers in `tools/check_repository_artifact_ignores.php` to avoid PHP warnings.
+
+## v1.0.0-beta.10.5
+
+### Fixed
+- `tools/check_site_structure.php` now allows the intentional `site/php-qrcode` submodule directory.
+- `tools/check_filenames.php` now ignores `.patch` files and the `php-qrcode` submodule.
+- `tools/check_favicon.php` now accepts single-quoted and double-quoted SVG `viewBox` attributes.
+
+### Added
+- `tools/check_repository_artifact_ignores.php`.
+
 ## v1.0.0-beta.10.4
 
 ### Changed

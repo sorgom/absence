@@ -20,13 +20,12 @@ foreach ([
     }
 }
 
-foreach ([
-    '<svg',
-    'viewBox="0 0 64 64"',
-] as $marker) {
-    if (!str_contains($icon, $marker)) {
-        $errors[] = "Missing icon marker: {$marker}";
-    }
+if (!str_contains($icon, '<svg')) {
+    $errors[] = 'Missing icon marker: <svg';
+}
+
+if (!preg_match('/viewBox\s*=\s*["\']0 0 64 64["\']/', $icon)) {
+    $errors[] = 'Missing icon marker: viewBox 0 0 64 64';
 }
 
 if ($errors !== []) {

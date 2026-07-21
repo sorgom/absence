@@ -18,6 +18,7 @@ $checks = [
     'check_person_management.php',
     'check_person_created_print.php',
     'check_favicon.php',
+    'check_repository_artifact_ignores.php',
     'check_person_delete_role_ui.php',
     'check_person_create_role_ui.php',
     'check_person_password_handout.php',
