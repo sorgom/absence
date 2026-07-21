@@ -204,3 +204,10 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Fixed
 - Mobile sort popup is now anchored below the sort button instead of drifting to the left.
+
+
+## Update v1.0.0-beta.10.4
+
+### Changed
+- Person creation role selector now uses the same compact radio-button layout as person deletion.
+- The fieldset legend is now `Rolle`.

@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.4
+
+### Changed
+- Person creation role selector now uses the compact, left-aligned radio-button layout.
+- Person creation role selector legend changed from `Personentyp` to `Rolle`.
+
+### Added
+- `tools/check_person_create_role_ui.php`.
+
 ## v1.0.0-beta.10.3
 
 ### Fixed

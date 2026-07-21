@@ -8,8 +8,8 @@
     <form method="post" action="/person_create.php" class="stack-form">
         <?= \AbsenceApp\Csrf::field() ?>
 
-        <fieldset class="radio-group">
-            <legend>Personentyp</legend>
+        <fieldset class="radio-group radio-group-compact">
+            <legend>Rolle</legend>
 
             <label>
                 <input type="radio" name="person_type" value="patient" checked>

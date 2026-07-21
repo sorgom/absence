@@ -19,6 +19,7 @@ $checks = [
     'check_person_created_print.php',
     'check_favicon.php',
     'check_person_delete_role_ui.php',
+    'check_person_create_role_ui.php',
     'check_person_password_handout.php',
     'check_qr_code_handout.php',
     'check_reasons_soft_delete.php',
