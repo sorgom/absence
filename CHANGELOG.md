@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.1
+
+### Changed
+- Reduced the staff overview delete icon button size.
+- Rendered the delete icon via CSS `background-image: url("/trash.svg")`.
+- Removed the inline `<img>` from the delete button.
+
 ## v1.0.0-beta.10
 
 ### Added

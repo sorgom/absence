@@ -184,3 +184,10 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 - Delete action now uses the existing trash icon instead of a text button.
 - Smartphone overview includes a sort popup.
 - Empty return fields are hidden on smartphone cards.
+
+
+## Update v1.0.0-beta.10.1
+
+### Changed
+- Delete action in the staff overview is now a smaller icon-only button.
+- The trash icon is rendered via CSS `background-image` instead of an inline image element.

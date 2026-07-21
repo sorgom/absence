@@ -987,29 +987,28 @@ body.confirm-modal-open {
 }
 
 .icon-button {
-  align-items: center;
-  background: transparent;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 1rem 1rem;
   border: 0;
-  border-radius: 0.45rem;
+  border-radius: 0.35rem;
   color: var(--fg);
-  display: inline-flex;
-  height: 2rem;
-  justify-content: center;
+  display: inline-block;
+  height: 1.45rem;
   margin: 0;
   min-height: 0;
-  padding: 0.25rem;
-  width: 2rem;
+  padding: 0;
+  width: 1.45rem;
 }
 
-.icon-button img {
-  display: block;
-  height: 1.1rem;
-  width: 1.1rem;
+.danger-icon {
+  background-image: url("/trash.svg");
 }
 
 .icon-button:hover,
 .icon-button:focus-visible {
-  background: color-mix(in srgb, #b3261e 12%, transparent);
+  background-color: color-mix(in srgb, #b3261e 12%, transparent);
 }
 
 @media (min-width: 42.001rem) {

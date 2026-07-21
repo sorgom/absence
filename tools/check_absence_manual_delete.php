@@ -7,6 +7,7 @@ $errors = [];
 $repository = file_get_contents($site . '/absence_repository.php') ?: '';
 $personal = file_get_contents($site . '/personal.php') ?: '';
 $template = file_get_contents($site . '/staff_overview.php') ?: '';
+$style = file_get_contents($site . '/style.css') ?: '';
 
 foreach (['deleteById', 'DELETE FROM absences', 'garbageCollectDeleted'] as $marker) {
     if (!str_contains($repository, $marker)) {
@@ -20,10 +21,15 @@ foreach (['delete_absence', 'absence_id'] as $marker) {
     }
 }
 
-foreach (['value="delete_absence"', 'icon-button danger-icon',
-    'src="/trash.svg"', 'Möchten Sie die Abwesenheit von {value} wirklich löschen?'] as $marker) {
+foreach (['value="delete_absence"', 'icon-button danger-icon', 'Möchten Sie die Abwesenheit von {value} wirklich löschen?'] as $marker) {
     if (!str_contains($template, $marker)) {
         $errors[] = "Missing overview marker: {$marker}";
+    }
+}
+
+foreach (['background-image: url("/trash.svg")'] as $marker) {
+    if (!str_contains($style, $marker)) {
+        $errors[] = "Missing overview style marker: {$marker}";
     }
 }
 

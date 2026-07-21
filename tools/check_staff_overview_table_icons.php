@@ -11,7 +11,7 @@ foreach ([
     'overview-status-dot',
     'aria-label="Aktion"',
     'icon-button danger-icon',
-    'src="/trash.svg"',
+    'aria-label="Abwesenheit löschen"',
 ] as $marker) {
     if (!str_contains($overview, $marker)) {
         $errors[] = "Missing table icon marker: {$marker}";
@@ -23,6 +23,10 @@ foreach ([
     'var(--status-active)',
     'var(--status-inactive)',
     '.icon-button',
+    'background-image: url("/trash.svg")',
+    'background-size: 1rem 1rem',
+    'height: 1.45rem',
+    'width: 1.45rem',
 ] as $marker) {
     if (!str_contains($style, $marker)) {
         $errors[] = "Missing table icon style marker: {$marker}";
@@ -39,6 +43,10 @@ foreach ([
     if (str_contains($overview, $forbidden)) {
         $errors[] = "Old table text still present: {$forbidden}";
     }
+}
+
+if (str_contains($overview, '<img')) {
+    $errors[] = 'Delete icon button must not contain a visible img element.';
 }
 
 if ($errors !== []) {

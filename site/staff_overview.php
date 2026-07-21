@@ -166,9 +166,7 @@ function staffOverviewEmptyLabel(string $view): string
                                     <?= Csrf::field() ?>
                                     <input type="hidden" name="action" value="delete_absence">
                                     <input type="hidden" name="absence_id" value="<?= (int) $absence['id'] ?>">
-                                    <button type="submit" class="icon-button danger-icon" aria-label="Abwesenheit löschen">
-                                        <img src="/trash.svg" alt="" aria-hidden="true">
-                                    </button>
+                                    <button type="submit" class="icon-button danger-icon" aria-label="Abwesenheit löschen"></button>
                                 </form>
                             </td>
                         </tr>
