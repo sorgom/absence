@@ -51,6 +51,8 @@ $requiredRootTools = [
     'check_password_toggle.php',
     'check_reasons_confirm.php',
     'check_login_start_flow.php',
+    'check_short_absence_delete.php',
+    'check_outing_labels.php',
     'check_absence_cleanup.php',
     'check_cleanup_return_time.php',
     'check_config_usage.php',

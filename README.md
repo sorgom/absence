@@ -1,6 +1,6 @@
 # Absence App
 
-Version **v1.0.0-beta.7**
+Version **v1.0.0-beta.8**
 
 The Absence App replaces paper-based absence lists with a simple browser-based workflow for recording departures, returns and current absence status.
 
@@ -249,3 +249,14 @@ The application header is intentionally minimal:
 - status indicator on the far right
 
 The status indicator is rendered as a CSS circle. It is blue while the current person has an active absence and gray otherwise.
+
+
+## Short outing correction window
+
+If an outing is ended shortly after it was started, it is treated as a correction and removed from the database instead of being stored as a completed outing.
+
+The window is configured in `site/app_config.php`:
+
+```php
+'short_absence_delete_minutes' => 10,
+```

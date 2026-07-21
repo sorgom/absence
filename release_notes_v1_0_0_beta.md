@@ -148,3 +148,16 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 - Removed the visible "Current login" label from the header.
 - Removed the app title from the header next to the menu button.
 - Added a right-aligned UID and a CSS status indicator.
+
+
+## Update v1.0.0-beta.8
+
+### Changed
+- Start page wording now uses "Ausgang".
+- Active outing page title is "Ausgang aktiv"; the word "aktiv" uses the same color as the active header indicator.
+- Start and end button labels were updated.
+
+### Added
+- Short outing correction window.
+- Outings ended within the configured number of minutes are deleted without confirmation.
+- Default correction window: 10 minutes.

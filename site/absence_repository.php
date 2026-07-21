@@ -81,6 +81,48 @@ final class AbsenceRepository
         (new ReasonRepository($this->db))->garbageCollectDeleted();
     }
 
+
+    /**
+     * Ends the active absence or deletes it when it is closed shortly after start.
+     *
+     * This supports quick correction of accidentally selected destinations.
+     */
+    public function endOrDeleteShort(string $personId, int $deleteWithinMinutes): string
+    {
+        if ($deleteWithinMinutes < 0) {
+            throw new \InvalidArgumentException('Korrekturzeit darf nicht negativ sein.');
+        }
+
+        $active = $this->activeForPerson($personId);
+
+        if ($active === null) {
+            throw new \RuntimeException('Es gibt keinen aktiven Ausgang.');
+        }
+
+        $stmt = $this->db->prepare(
+            "DELETE FROM absences
+             WHERE id = :id
+               AND departure_time >= datetime('now', :modifier)"
+        );
+        $stmt->execute([
+            'id' => $active['id'],
+            'modifier' => '-' . $deleteWithinMinutes . ' minutes',
+        ]);
+
+        if ($stmt->rowCount() > 0) {
+            (new ReasonRepository($this->db))->garbageCollectDeleted();
+
+            return 'deleted';
+        }
+
+        $stmt = $this->db->prepare('UPDATE absences SET return_time = CURRENT_TIMESTAMP WHERE id = :id');
+        $stmt->execute(['id' => $active['id']]);
+
+        (new ReasonRepository($this->db))->garbageCollectDeleted();
+
+        return 'ended';
+    }
+
     /**
      * Lists absences for staff overview.
      *

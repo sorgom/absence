@@ -6,6 +6,7 @@ require_once __DIR__ . '/bootstrap.php';
 use AbsenceApp\AbsenceCleanup;
 use AbsenceApp\AbsenceRepository;
 use AbsenceApp\Auth;
+use AbsenceApp\Config;
 use AbsenceApp\Csrf;
 use AbsenceApp\Database;
 use AbsenceApp\ReasonRepository;
@@ -79,15 +80,20 @@ if ($auth->isLoggedIn() && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $absences->start($personId, (int) ($_POST['reason_id'] ?? 0));
             $message = 'Ausgang wurde gestartet.';
         } elseif ($action === 'end') {
-            $absences->end($personId);
-            $message = 'Rückkehr wurde gespeichert.';
+            $result = $absences->endOrDeleteShort(
+                $personId,
+                (int) Config::get('short_absence_delete_minutes')
+            );
+            $message = $result === 'deleted'
+                ? 'Ausgang wurde verworfen.'
+                : 'Rückkehr wurde gespeichert.';
         }
     } catch (Throwable $exception) {
         $error = $exception->getMessage();
     }
 }
 
-$title = $auth->isLoggedIn() ? 'Abwesenheit' : 'Login';
+$title = $auth->isLoggedIn() ? 'Ausgang' : 'Login';
 require __DIR__ . '/header.php';
 
 if ($auth->isLoggedIn()):
@@ -95,7 +101,11 @@ if ($auth->isLoggedIn()):
     $active = $absences->activeForPerson((string) $auth->currentUserId());
     ?>
     <section class="card">
-        <h1>Abwesenheit</h1>
+        <?php if ($active): ?>
+            <h1 class="active-outing-title">Ausgang <span>aktiv</span></h1>
+        <?php else: ?>
+            <h1>Ausgang</h1>
+        <?php endif; ?>
 
         <?php if ($message): ?>
             <p class="alert success"><?= Utils::h($message) ?></p>
@@ -106,19 +116,16 @@ if ($auth->isLoggedIn()):
         <?php endif; ?>
 
         <?php if ($active): ?>
-            <h2>Rückkehr</h2>
             <p><strong>Grund / Ziel:</strong> <?= Utils::h((string) $active['reason_name']) ?></p>
             <p><strong>Aufbruch:</strong> <?= Utils::localTimeElement((string) $active['departure_time']) ?></p>
 
             <form method="post" action="/index.php">
                 <?= Csrf::field() ?>
                 <input type="hidden" name="action" value="end">
-                <button type="submit">Ende</button>
+                <button type="submit">Ausgang beenden</button>
             </form>
         <?php else: ?>
             <?php $reasons = (new ReasonRepository($db))->listAll(); ?>
-
-            <h2>Ausgang starten</h2>
 
             <?php if ($reasons === []): ?>
                 <p class="alert notice">Es sind noch keine Gründe / Ziele angelegt.</p>
@@ -127,7 +134,7 @@ if ($auth->isLoggedIn()):
                     <?= Csrf::field() ?>
                     <input type="hidden" name="action" value="start">
 
-                    <label for="reason_id">Grund / Ziel des Ausgangs</label>
+                    <label for="reason_id">Grund / Ziel auswählen:</label>
                     <select id="reason_id" name="reason_id" required>
                         <?php foreach ($reasons as $reason): ?>
                             <option value="<?= (int) $reason['id'] ?>">
@@ -136,7 +143,7 @@ if ($auth->isLoggedIn()):
                         <?php endforeach; ?>
                     </select>
 
-                    <button type="submit">Start</button>
+                    <button type="submit">Ausgang starten</button>
                 </form>
             <?php endif; ?>
         <?php endif; ?>

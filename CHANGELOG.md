@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## v1.0.0-beta.8
+
+### Added
+- Configurable short outing correction window via `short_absence_delete_minutes`.
+- `AbsenceRepository::endOrDeleteShort()`.
+- `tools/check_outing_labels.php`.
+- `tools/check_short_absence_delete.php`.
+
+### Changed
+- Start page heading is now `Ausgang`.
+- Start label is now `Grund / Ziel auswählen:`.
+- Start button is now `Ausgang starten`.
+- Active outing heading is now `Ausgang aktiv`, with `aktiv` using the active header indicator color.
+- End button is now `Ausgang beenden`.
+
 ## v1.0.0-beta.7
 
 ### Changed
