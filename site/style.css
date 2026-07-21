@@ -856,3 +856,48 @@ body.confirm-modal-open {
 .active-outing-title span {
   color: var(--status-active);
 }
+
+
+/* Compact role radio buttons --------------------------------------------- */
+.radio-group-compact {
+  align-items: flex-start;
+  display: grid;
+  gap: 0.55rem;
+  justify-items: start;
+}
+
+.radio-group-compact legend {
+  margin-bottom: 0.35rem;
+}
+
+.radio-group-compact label {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.45rem;
+  margin: 0;
+  width: auto;
+}
+
+.radio-group-compact input[type="radio"] {
+  accent-color: var(--accent);
+  flex: 0 0 auto;
+  height: 1rem;
+  margin: 0;
+  min-height: 0;
+  padding: 0;
+  width: 1rem;
+}
+
+.radio-group-compact input[type="radio"]:focus {
+  outline: none;
+}
+
+.radio-group-compact input[type="radio"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 0.2rem;
+}
+
+.password-change-hint dd {
+  font-size: 1rem;
+  font-weight: 700;
+}

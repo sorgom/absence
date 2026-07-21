@@ -32,6 +32,20 @@ final class PersonRepository
         );
     }
 
+
+    /**
+     * @return array<int,string>
+     */
+    public function listIdsExcept(?bool $isStaff, string $excludedId): array
+    {
+        $ids = $this->listIds($isStaff);
+
+        return array_values(array_filter(
+            $ids,
+            static fn (string $id): bool => $id !== $excludedId
+        ));
+    }
+
     public function exists(string $id): bool
     {
         $stmt = $this->db->prepare('SELECT COUNT(*) FROM persons WHERE id = :id');
@@ -52,7 +66,7 @@ final class PersonRepository
             throw new \RuntimeException('Diese ID ist bereits vorhanden.');
         }
 
-        $password = $isStaff ? $this->generatePassword() : $this->generatePin();
+        $password = $this->generatePin();
 
         $stmt = $this->db->prepare(
             'INSERT INTO persons (id, password_hash, is_staff, first_login)
@@ -92,16 +106,4 @@ final class PersonRepository
         return str_pad((string) random_int(0, 9999), 4, '0', STR_PAD_LEFT);
     }
 
-    private function generatePassword(): string
-    {
-        $alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789';
-        $length = 10;
-        $password = '';
-
-        for ($i = 0; $i < $length; $i++) {
-            $password .= $alphabet[random_int(0, strlen($alphabet) - 1)];
-        }
-
-        return $password;
-    }
 }

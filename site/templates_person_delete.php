@@ -10,8 +10,8 @@
     <?php endif; ?>
 
     <form method="get" action="/person_delete.php" class="stack-form">
-        <fieldset class="radio-group">
-            <legend>Personentyp</legend>
+        <fieldset class="radio-group radio-group-compact">
+            <legend>Rolle</legend>
 
             <label>
                 <input type="radio" name="person_type" value="patient" <?= $selectedType === 'patient' ? 'checked' : '' ?> onchange="this.form.submit()">

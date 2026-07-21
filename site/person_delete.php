@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delet
     }
 }
 
-$ids = $repository->listIds($isStaffSelection);
+$ids = $repository->listIdsExcept($isStaffSelection, (string) $auth->currentUserId());
 
 $title = 'Person löschen';
 require __DIR__ . '/header.php';

@@ -85,6 +85,11 @@ require __DIR__ . '/header.php';
                 <dt>Initiales Passwort</dt>
                 <dd><?= Utils::h($initialPassword) ?></dd>
             </div>
+
+            <div class="password-change-hint">
+                <dt>Hinweis</dt>
+                <dd>Das Passwort muss beim ersten Login geändert werden.</dd>
+            </div>
         </dl>
     </div>
 

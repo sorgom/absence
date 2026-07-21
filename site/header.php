@@ -28,6 +28,7 @@ if ($userId !== '') {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= Utils::h((string) $title) ?></title>
+    <link rel="icon" type="image/svg+xml" href="/icon.svg">
     <link rel="stylesheet" href="/style.css">
     <script src="/app.js" defer></script>
 </head>

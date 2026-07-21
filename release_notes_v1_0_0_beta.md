@@ -161,3 +161,16 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 - Short outing correction window.
 - Outings ended within the configured number of minutes are deleted without confirmation.
 - Default correction window: 10 minutes.
+
+
+## Update v1.0.0-beta.9
+
+### Changed
+- Initial passwords are always four-digit numeric PINs for both patients and staff.
+- Printable account handout now states that the password must be changed on first login.
+- Person deletion role selection now uses compact left-aligned radio buttons.
+- The current logged-in person is excluded from the delete selection list.
+
+### Added
+- SVG favicon.
+- Static checks for the password handout, delete role UI and favicon.

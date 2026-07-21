@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v1.0.0-beta.9
+
+### Changed
+- Initial passwords for patients and staff are now always four-digit numeric PINs.
+- Printable account handout now includes the first-login password-change notice.
+- Person delete role selector is more compact, left-aligned and uses the title `Rolle`.
+- The current logged-in person is no longer listed as a delete option.
+
+### Added
+- `site/icon.svg` and favicon link in the HTML header.
+- `tools/check_person_password_handout.php`.
+- `tools/check_person_delete_role_ui.php`.
+- `tools/check_favicon.php`.
+
 ## v1.0.0-beta.8
 
 ### Added

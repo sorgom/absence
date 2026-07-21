@@ -1,6 +1,6 @@
 # Absence App
 
-Version **v1.0.0-beta.8**
+Version **v1.0.0-beta.9**
 
 The Absence App replaces paper-based absence lists with a simple browser-based workflow for recording departures, returns and current absence status.
 
@@ -260,3 +260,10 @@ The window is configured in `site/app_config.php`:
 ```php
 'short_absence_delete_minutes' => 10,
 ```
+
+
+## Account handout and deletion refinements
+
+Initial passwords are four-digit numeric PINs for every newly created person. The printable handout includes a reminder that the password must be changed on first login.
+
+The person deletion page does not offer the current logged-in person in the delete list.
