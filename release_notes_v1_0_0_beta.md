@@ -198,3 +198,9 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 ### Changed
 - Staff overview delete icon now uses `trash_b.svg` in light theme and `trash_w.svg` in dark theme.
 - Removed the blue left border from active overview rows.
+
+
+## Update v1.0.0-beta.10.3
+
+### Fixed
+- Mobile sort popup is now anchored below the sort button instead of drifting to the left.

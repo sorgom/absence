@@ -22,11 +22,15 @@ foreach ([
     '.empty-on-mobile',
     'display: none',
     '.overview-sort-popup__panel',
+    'left: 0',
+    'right: auto',
+    'max-width: calc(100vw - 3rem)',
 ] as $marker) {
     if (!str_contains($style, $marker)) {
         $errors[] = "Missing mobile style marker: {$marker}";
     }
 }
+
 
 if ($errors !== []) {
     fwrite(STDERR, "Staff overview mobile check failed:\n");

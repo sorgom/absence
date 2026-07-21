@@ -24,6 +24,7 @@ $checks = [
     'check_reasons_soft_delete.php',
     'check_absence_manual_delete.php',
     'check_staff_overview_mobile.php',
+    'check_sort_popup_anchor.php',
     'check_staff_overview_table_icons.php',
     'check_overview_theme_icons.php',
     'check_staff_overview_filters.php',

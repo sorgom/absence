@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.3
+
+### Fixed
+- Mobile staff overview sort popup is now left-anchored below the sort button.
+- Sort popup width is constrained to the viewport.
+
+### Added
+- `tools/check_sort_popup_anchor.php`.
+
 ## v1.0.0-beta.10.2
 
 ### Changed
