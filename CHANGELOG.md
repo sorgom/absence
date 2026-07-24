@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.4
+
+### Changed
+- Increased dark-mode contrast for the hamburger menu border.
+- Increased dark-mode contrast for input, select and textarea borders.
+
+### Added
+- `tools/check_dark_mode_contrast.php`.
+
 ## v1.0.0-beta.10.5.3
 
 ### Fixed

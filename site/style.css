@@ -1073,3 +1073,27 @@ body.confirm-modal-open {
     width: max-content;
   }
 }
+
+
+/* v1.0.0-beta.10.5.4: stronger dark-mode borders ----------------------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --border: #4a5568;
+    --field-border: #526179;
+    --menu-border: #5f7fbf;
+  }
+
+  .menu-toggle {
+    border: 1px solid var(--menu-border);
+  }
+
+  .drawer-menu {
+    border-color: var(--border);
+  }
+
+  input,
+  select,
+  textarea {
+    border-color: var(--field-border);
+  }
+}

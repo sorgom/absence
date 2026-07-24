@@ -47,6 +47,7 @@ $checks = [
     'check_cleanup_seed_runtime.php',
     'check_forms.php',
     'check_header_layout.php',
+    'check_dark_mode_contrast.php',
     'check_client_time_markup.php',
     'check_bootstrap.php',
     'check_entrypoints.php',

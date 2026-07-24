@@ -243,3 +243,13 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Added
 - `tools/check_fgetcsv_escape.php`.
+
+
+## Update v1.0.0-beta.10.5.4
+
+### Changed
+- Improved dark-mode border contrast for the hamburger menu and form fields.
+- Added explicit dark-mode border variables for menu and input field outlines.
+
+### Added
+- `tools/check_dark_mode_contrast.php`.
