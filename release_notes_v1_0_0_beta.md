@@ -260,3 +260,11 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 ### Changed
 - Further increased dark-mode border contrast for hamburger menu, cards, tables and form fields.
 - Added subtle extra outlines for the hamburger button and form fields in dark mode.
+
+
+## Update v1.0.0-beta.10.5.6
+
+### Changed
+- Kept the hamburger button visually stable in open and closed state.
+- Increased the dark-mode border contrast of the opened hamburger menu.
+- Kept the improved dark-mode input field borders unchanged.

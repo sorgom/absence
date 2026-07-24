@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.6
+
+### Changed
+- Removed the special dark-mode border treatment from the hamburger button.
+- Kept the hamburger button style stable while the menu is open.
+- Strengthened the dark-mode border of the opened hamburger menu.
+- Kept the improved dark-mode input field borders unchanged.
+
 ## v1.0.0-beta.10.5.5
 
 ### Changed

@@ -1075,20 +1075,19 @@ body.confirm-modal-open {
 }
 
 
-/* v1.0.0-beta.10.5.5: strong dark-mode borders ------------------------- */
+/* v1.0.0-beta.10.5.6: dark-mode field and menu borders ------------------ */
 @media (prefers-color-scheme: dark) {
   :root {
     --border: #64748b;
     --field-border: #94a3b8;
-    --menu-border: #8fb1ff;
+    --menu-border: #94a3b8;
   }
 
-  .menu-toggle {
-    border: 1.5px solid var(--menu-border);
-    box-shadow: 0 0 0 1px color-mix(in srgb, var(--menu-border) 28%, transparent);
+  .drawer-menu {
+    border: 2px solid var(--menu-border);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--menu-border) 35%, transparent);
   }
 
-  .drawer-menu,
   .card,
   .table-scroll,
   tr {
@@ -1101,4 +1100,11 @@ body.confirm-modal-open {
     border-color: var(--field-border);
     box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--field-border) 28%, transparent);
   }
+}
+
+
+/* Hamburger button: keep visual style stable while menu is open. */
+.menu-toggle[aria-expanded="true"] {
+  background: transparent;
+  color: inherit;
 }
