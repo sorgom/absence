@@ -9,10 +9,14 @@ foreach ([
     '--field-border:',
     '--menu-border:',
     '.menu-toggle',
-    'border: 1px solid var(--menu-border)',
+    'border: 1.5px solid var(--menu-border)',
     'input,',
     'select,',
     'textarea',
+    '.card,',
+    '.table-scroll,',
+    'box-shadow: 0 0 0 1px',
+    'box-shadow: inset 0 0 0 1px',
     'border-color: var(--field-border)',
 ] as $marker) {
     if (!str_contains($style, $marker)) {

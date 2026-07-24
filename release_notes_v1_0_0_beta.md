@@ -253,3 +253,10 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Added
 - `tools/check_dark_mode_contrast.php`.
+
+
+## Update v1.0.0-beta.10.5.5
+
+### Changed
+- Further increased dark-mode border contrast for hamburger menu, cards, tables and form fields.
+- Added subtle extra outlines for the hamburger button and form fields in dark mode.

@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.5
+
+### Changed
+- Further increased dark-mode border contrast for the hamburger button.
+- Further increased dark-mode contrast for input, select and textarea borders.
+- Improved dark-mode card, table and menu border visibility.
+
 ## v1.0.0-beta.10.5.4
 
 ### Changed

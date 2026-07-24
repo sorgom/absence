@@ -1075,19 +1075,23 @@ body.confirm-modal-open {
 }
 
 
-/* v1.0.0-beta.10.5.4: stronger dark-mode borders ----------------------- */
+/* v1.0.0-beta.10.5.5: strong dark-mode borders ------------------------- */
 @media (prefers-color-scheme: dark) {
   :root {
-    --border: #4a5568;
-    --field-border: #526179;
-    --menu-border: #5f7fbf;
+    --border: #64748b;
+    --field-border: #94a3b8;
+    --menu-border: #8fb1ff;
   }
 
   .menu-toggle {
-    border: 1px solid var(--menu-border);
+    border: 1.5px solid var(--menu-border);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--menu-border) 28%, transparent);
   }
 
-  .drawer-menu {
+  .drawer-menu,
+  .card,
+  .table-scroll,
+  tr {
     border-color: var(--border);
   }
 
@@ -1095,5 +1099,6 @@ body.confirm-modal-open {
   select,
   textarea {
     border-color: var(--field-border);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--field-border) 28%, transparent);
   }
 }
