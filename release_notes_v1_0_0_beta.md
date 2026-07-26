@@ -291,3 +291,11 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Notes
 - Page headings inside the application remain unchanged.
+
+
+## Update v1.0.0-beta.10.5.9
+
+### Changed
+- Person-created page heading is now `Zugangsdaten`.
+- Removed the success message and one-time-display explanatory text from the person-created page.
+- Removed the duplicate smaller `Zugangsdaten` heading from the credentials card.

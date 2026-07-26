@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.9
+
+### Changed
+- Changed the person-created page title line to `Zugangsdaten`.
+- Removed the person-created success message.
+- Removed explanatory one-time-display text from the person-created page.
+- Removed the duplicate smaller `Zugangsdaten` heading from the credentials card.
+
 ## v1.0.0-beta.10.5.8
 
 ### Changed

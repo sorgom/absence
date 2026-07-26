@@ -34,6 +34,9 @@ foreach ([
     'src="/qr_code.php"',
     'window.print()',
     'Weitere Person anlegen',
+    '$title = \'Zugangsdaten\';',
+    '<h1>Zugangsdaten</h1>',
+    '<dl class="credential-list">',
 ] as $marker) {
     if (!str_contains($page, $marker)) {
         $errors[] = "Missing person_created marker: {$marker}";
@@ -54,6 +57,18 @@ foreach ([
 
 if (str_contains($template, 'Initiales Passwort:')) {
     $errors[] = 'templates_person_create.php still displays the initial password inline.';
+}
+
+foreach ([
+    'Person angelegt',
+    'wurde erfolgreich angelegt',
+    'Diese Seite kann für die Übergabe der Zugangsdaten gedruckt werden',
+    'nicht erneut angezeigt',
+    '<h2>Zugangsdaten</h2>',
+] as $forbidden) {
+    if (str_contains($page, $forbidden)) {
+        $errors[] = "Forbidden person_created text still present: {$forbidden}";
+    }
 }
 
 if ($errors !== []) {

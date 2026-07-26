@@ -37,28 +37,18 @@ $scheme = $forwardedProto !== ''
     : ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http');
 
 $appUrl = $scheme . '://' . $host;
-$createdType = (string) ($createdPerson['type'] ?? 'Person');
 $createdId = (string) $createdPerson['id'];
 $initialPassword = (string) $createdPerson['initial_password'];
 
-$title = 'Person angelegt';
+$title = 'Zugangsdaten';
 require __DIR__ . '/header.php';
 ?>
 <section class="card person-created-card">
     <div class="screen-only">
-        <h1>Person angelegt</h1>
-        <p class="alert success">
-            <?= Utils::h($createdType) ?> wurde erfolgreich angelegt.
-        </p>
-        <p>
-            Diese Seite kann für die Übergabe der Zugangsdaten gedruckt werden.
-            Das initiale Passwort wird danach nicht erneut angezeigt.
-        </p>
+        <h1>Zugangsdaten</h1>
     </div>
 
     <div class="print-card" aria-label="Zugangsdaten für neue Person">
-        <h2>Zugangsdaten</h2>
-
         <dl class="credential-list">
             <div>
                 <dt>URL</dt>
