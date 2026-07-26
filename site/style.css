@@ -126,8 +126,10 @@ body {
 }
 
 .menu-toggle:hover,
+.menu-toggle:focus,
+.menu-toggle:focus-visible,
 .menu-toggle[aria-expanded="true"] {
-  border-color: var(--accent);
+  border-color: var(--border);
 }
 
 .app-menu {
@@ -469,7 +471,8 @@ select {
   display: none;
   gap: 0.25rem;
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
   background: var(--card);
 }
 
@@ -1085,7 +1088,8 @@ body.confirm-modal-open {
 
   .drawer-menu {
     border: 2px solid var(--menu-border);
-    box-shadow: 0 0 0 1px color-mix(in srgb, var(--menu-border) 35%, transparent);
+    border-radius: 0.75rem;
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--menu-border) 45%, transparent);
   }
 
   .card,
@@ -1106,5 +1110,12 @@ body.confirm-modal-open {
 /* Hamburger button: keep visual style stable while menu is open. */
 .menu-toggle[aria-expanded="true"] {
   background: transparent;
+  border-color: var(--border);
   color: inherit;
+}
+
+
+.menu-toggle:focus,
+.menu-toggle:focus-visible {
+  outline: none;
 }

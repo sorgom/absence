@@ -268,3 +268,16 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 - Kept the hamburger button visually stable in open and closed state.
 - Increased the dark-mode border contrast of the opened hamburger menu.
 - Kept the improved dark-mode input field borders unchanged.
+
+
+## Update v1.0.0-beta.10.5.7
+
+### Changed
+- Hamburger button visual state no longer changes on focus or when the menu is open.
+- Hamburger menu now has lightly rounded corners.
+- Staff menu no longer shows the current login line.
+- Staff menu label `Start / Übersicht` changed to `Übersicht`.
+- Staff menu label `Abwesenheit` changed to `Ausgang` and moved before `Passwort ändern`.
+
+### Added
+- `tools/check_hamburger_menu_personal.php`.

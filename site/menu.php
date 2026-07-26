@@ -14,12 +14,11 @@ $userId = (string) Session::get('user_id', '');
         <a href="/change_password.php">Passwort ändern</a>
         <a href="/logout.php">Logout</a>
     <?php elseif ($role === Auth::ROLE_STAFF): ?>
-        <p class="menu-login">Aktueller Login: <?= Utils::h($userId) ?></p>
-        <a href="/personal.php">Start / Übersicht</a>
-        <a href="/index.php">Abwesenheit</a>
+        <a href="/personal.php">Übersicht</a>
         <a href="/reasons.php">Gründe und Ziele</a>
         <a href="/person_create.php">Person anlegen</a>
         <a href="/person_delete.php">Person löschen</a>
+        <a href="/index.php">Ausgang</a>
         <a href="/change_password.php">Passwort ändern</a>
         <a href="/logout.php">Logout</a>
     <?php endif; ?>

@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.7
+
+### Changed
+- Kept the hamburger menu button border stable on focus and open state.
+- Added lightly rounded corners to the hamburger menu.
+- Removed the current-login line from the staff hamburger menu.
+- Renamed staff menu entries to `Übersicht` and `Ausgang`.
+- Moved `Ausgang` before `Passwort ändern`.
+
+### Added
+- `tools/check_hamburger_menu_personal.php`.
+
 ## v1.0.0-beta.10.5.6
 
 ### Changed
