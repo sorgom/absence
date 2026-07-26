@@ -2,11 +2,12 @@
 declare(strict_types=1);
 
 use AbsenceApp\AppInfo;
+use AbsenceApp\Config;
 ?>
 </main>
 
 <footer class="app-footer">
-    <small>Abwesenheits-App · v<?= htmlspecialchars(AppInfo::version(), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></small>
+    <small><?= htmlspecialchars((string) Config::get('app_name'), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?> · v<?= htmlspecialchars(AppInfo::version(), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></small>
 </footer>
 <div class="confirm-modal" id="confirm-modal" hidden>
     <div class="confirm-modal__backdrop" data-confirm-cancel></div>

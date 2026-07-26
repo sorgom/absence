@@ -8,7 +8,8 @@ use AbsenceApp\Session;
 use AbsenceApp\Utils;
 
 Session::start();
-$title = $title ?? Config::get('app_name');
+$appName = (string) Config::get('app_name');
+$title = $title ?? $appName;
 $role = Session::get('role');
 $userId = (string) Session::get('user_id', '');
 $hasActiveAbsence = false;
@@ -27,7 +28,7 @@ if ($userId !== '') {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= Utils::h((string) $title) ?></title>
+    <title><?= Utils::h($appName) ?></title>
     <link rel="icon" type="image/svg+xml" href="/icon.svg">
     <link rel="stylesheet" href="/style.css">
     <script src="/app.js" defer></script>

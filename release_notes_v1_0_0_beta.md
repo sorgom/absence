@@ -281,3 +281,13 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Added
 - `tools/check_hamburger_menu_personal.php`.
+
+
+## Update v1.0.0-beta.10.5.8
+
+### Changed
+- Browser title now always uses the configured app name.
+- Footer now uses the configured app name and the current version.
+
+### Notes
+- Page headings inside the application remain unchanged.

@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 return [
-    'app_name' => 'Abwesenheits-App',
+    'app_name' => 'Ausgangsbuch',
     'database_path' => __DIR__ . '/database.sqlite',
     'session_name' => 'absence_app_session',
     'default_absence_retention_hours' => 48,

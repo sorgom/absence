@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.8
+
+### Changed
+- Browser tab title now always uses `app_name` from `site/app_config.php`.
+- Footer now renders `{app_name} · v{version}` from configuration and version metadata.
+
+### Added
+- `tools/check_app_name_title_footer.php`.
+
 ## v1.0.0-beta.10.5.7
 
 ### Changed

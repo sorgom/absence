@@ -31,6 +31,7 @@ $requiredRootTools = [
     'check_flat_paths.php',
     'check_forms.php',
     'check_header_layout.php',
+    'check_app_name_title_footer.php',
     'check_dark_mode_contrast.php',
     'check_client_time_markup.php',
     'check_bootstrap.php',
