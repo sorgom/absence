@@ -299,3 +299,9 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 - Person-created page heading is now `Zugangsdaten`.
 - Removed the success message and one-time-display explanatory text from the person-created page.
 - Removed the duplicate smaller `Zugangsdaten` heading from the credentials card.
+
+
+## Update v1.0.0-beta.10.5.10
+
+### Changed
+- Header status LED now links to the outing page (`/index.php`), matching the `Ausgang` menu entry.

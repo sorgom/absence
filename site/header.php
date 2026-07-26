@@ -45,11 +45,12 @@ if ($userId !== '') {
     <?php if (Session::has('user_id')): ?>
         <div class="header-right" aria-label="Aktueller Login">
             <span class="login-id"><?= Utils::h($userId) ?></span>
-            <span
+            <a
                 class="status-indicator <?= $hasActiveAbsence ? 'is-active' : 'is-inactive' ?>"
-                aria-label="<?= $hasActiveAbsence ? 'Abwesenheit aktiv' : 'Keine aktive Abwesenheit' ?>"
-                title="<?= $hasActiveAbsence ? 'Abwesenheit aktiv' : 'Keine aktive Abwesenheit' ?>"
-            ></span>
+                href="/index.php"
+                aria-label="<?= $hasActiveAbsence ? 'Ausgang öffnen: Abwesenheit aktiv' : 'Ausgang öffnen: keine aktive Abwesenheit' ?>"
+                title="<?= $hasActiveAbsence ? 'Ausgang öffnen: Abwesenheit aktiv' : 'Ausgang öffnen: keine aktive Abwesenheit' ?>"
+            ></a>
         </div>
     <?php endif; ?>
 </header>

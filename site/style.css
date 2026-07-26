@@ -1119,3 +1119,13 @@ body.confirm-modal-open {
 .menu-toggle:focus-visible {
   outline: none;
 }
+
+
+.status-indicator {
+  text-decoration: none;
+}
+
+.status-indicator:focus,
+.status-indicator:focus-visible {
+  outline: none;
+}

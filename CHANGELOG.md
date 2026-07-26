@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.10
+
+### Changed
+- Header status LED is now a link to `/index.php`, matching the `Ausgang` menu action.
+
+### Added
+- `tools/check_status_led_link.php`.
+
 ## v1.0.0-beta.10.5.9
 
 ### Changed
