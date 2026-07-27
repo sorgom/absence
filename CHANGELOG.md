@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.11
+
+### Added
+- Staff feature `Person Passwort` for resetting passwords.
+- New page `site/person_password.php`.
+- New template `site/templates_person_password.php`.
+- Password reset generates a new four-digit password, marks first login as required, and forwards to the credentials handout page.
+- `tools/check_person_password_reset.php`.
+
 ## v1.0.0-beta.10.5.10
 
 ### Changed

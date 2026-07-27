@@ -1,6 +1,6 @@
 # Absence App
 
-Version **v1.0.0-beta.10.5.10**
+Version **v1.0.0-beta.10.5.11**
 
 The Absence App replaces paper-based absence lists with a simple browser-based workflow for recording departures, returns and current absence status.
 

@@ -305,3 +305,12 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Changed
 - Header status LED now links to the outing page (`/index.php`), matching the `Ausgang` menu entry.
+
+
+## Update v1.0.0-beta.10.5.11
+
+### Added
+- Staff menu entry `Person Passwort`.
+- Staff page `Passwort zurücksetzen`.
+- Password reset flow creates a new initial password and forwards to the credentials handout page.
+- `tools/check_person_password_reset.php`.

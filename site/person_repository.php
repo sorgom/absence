@@ -81,6 +81,34 @@ final class PersonRepository
         return $password;
     }
 
+
+    public function resetPassword(string $id): string
+    {
+        $id = trim($id);
+
+        if ($id === '') {
+            throw new \InvalidArgumentException('Keine ID ausgewählt.');
+        }
+
+        $password = $this->generatePin();
+
+        $stmt = $this->db->prepare(
+            'UPDATE persons
+             SET password_hash = :password_hash, first_login = 1
+             WHERE id = :id'
+        );
+        $stmt->execute([
+            'id' => $id,
+            'password_hash' => password_hash($password, PASSWORD_DEFAULT),
+        ]);
+
+        if ($stmt->rowCount() < 1) {
+            throw new \RuntimeException('Person wurde nicht gefunden.');
+        }
+
+        return $password;
+    }
+
     public function delete(string $id, ?string $currentUserId = null): void
     {
         $id = trim($id);
