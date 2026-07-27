@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.13
+
+### Changed
+- Removed success feedback messages from the outing page after starting or ending an outing.
+- Removed the short-correction deletion feedback message on the outing page.
+- Error feedback remains unchanged.
+
+### Added
+- `tools/check_outing_no_feedback.php`.
+
 ## v1.0.0-beta.10.5.12
 
 ### Changed

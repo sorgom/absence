@@ -19,7 +19,6 @@ $db = Database::getConnection();
 AbsenceCleanup::run($db);
 $auth = new Auth($db);
 $error = null;
-$message = null;
 
 /*
  * Unified login.
@@ -78,15 +77,11 @@ if ($auth->isLoggedIn() && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($action === 'start') {
             $absences->start($personId, (int) ($_POST['reason_id'] ?? 0));
-            $message = 'Ausgang wurde gestartet.';
         } elseif ($action === 'end') {
-            $result = $absences->endOrDeleteShort(
+            $absences->endOrDeleteShort(
                 $personId,
                 (int) Config::get('short_absence_delete_minutes')
             );
-            $message = $result === 'deleted'
-                ? 'Ausgang wurde verworfen.'
-                : 'Rückkehr wurde gespeichert.';
         }
     } catch (Throwable $exception) {
         $error = $exception->getMessage();
@@ -105,10 +100,6 @@ if ($auth->isLoggedIn()):
             <h1 class="active-outing-title">Ausgang <span>aktiv</span></h1>
         <?php else: ?>
             <h1>Ausgang</h1>
-        <?php endif; ?>
-
-        <?php if ($message): ?>
-            <p class="alert success"><?= Utils::h($message) ?></p>
         <?php endif; ?>
 
         <?php if ($error): ?>

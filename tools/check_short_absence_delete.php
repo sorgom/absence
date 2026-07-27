@@ -32,8 +32,6 @@ foreach ([
 foreach ([
     "Config::get('short_absence_delete_minutes')",
     'endOrDeleteShort',
-    "Ausgang wurde verworfen.",
-    "Rückkehr wurde gespeichert.",
 ] as $marker) {
     if (!str_contains($index, $marker)) {
         $errors[] = "Missing index marker: {$marker}";

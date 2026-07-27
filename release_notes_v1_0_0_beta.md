@@ -327,3 +327,10 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Added
 - `tools/check_reasons_hint_removed.php`.
+
+
+## Update v1.0.0-beta.10.5.13
+
+### Changed
+- Removed success feedback messages from the outing page after start, return and short correction deletion.
+- Error messages remain visible.
