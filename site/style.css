@@ -742,6 +742,11 @@ body.confirm-modal-open {
   margin-top: 0;
 }
 
+.print-title {
+  display: none;
+  margin-top: 0;
+}
+
 .credential-list {
   display: grid;
   gap: 0.9rem;
@@ -798,6 +803,12 @@ body.confirm-modal-open {
   margin-top: 1rem;
 }
 
+@media screen and (prefers-color-scheme: dark) {
+  .qr-code-image {
+    filter: invert(1);
+  }
+}
+
 @media print {
   body {
     background: #fff;
@@ -823,8 +834,10 @@ body.confirm-modal-open {
     width: 100%;
   }
 
-  .print-card h2 {
-    display: none;
+  .print-title {
+    display: block;
+    font-size: 22pt;
+    margin: 0 0 10mm;
   }
 
   .credential-list {
@@ -849,6 +862,10 @@ body.confirm-modal-open {
     color: #000;
     height: 40mm;
     width: 40mm;
+  }
+
+  .qr-code-image {
+    filter: none;
   }
 }
 

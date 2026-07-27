@@ -49,6 +49,8 @@ require __DIR__ . '/header.php';
     </div>
 
     <div class="print-card" aria-label="Zugangsdaten für neue Person">
+        <h1 class="print-title">Zugangsdaten</h1>
+
         <dl class="credential-list">
             <div>
                 <dt>URL</dt>
@@ -78,14 +80,13 @@ require __DIR__ . '/header.php';
 
             <div class="password-change-hint">
                 <dt>Hinweis</dt>
-                <dd>Das Passwort muss beim ersten Login geändert werden.</dd>
+                <dd>Das Passwort muss beim nächsten Login geändert werden.</dd>
             </div>
         </dl>
     </div>
 
     <div class="screen-actions screen-only">
         <button type="button" onclick="window.print()">Drucken</button>
-        <a class="button-secondary" href="/person_create.php">Weitere Person anlegen</a>
     </div>
 </section>
 <?php

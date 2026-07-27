@@ -33,9 +33,10 @@ foreach ([
     'HTTP_HOST',
     'src="/qr_code.php"',
     'window.print()',
-    'Weitere Person anlegen',
     '$title = \'Zugangsdaten\';',
     '<h1>Zugangsdaten</h1>',
+    '<h1 class="print-title">Zugangsdaten</h1>',
+    'Das Passwort muss beim nächsten Login geändert werden.',
     '<dl class="credential-list">',
 ] as $marker) {
     if (!str_contains($page, $marker)) {
@@ -49,6 +50,9 @@ foreach ([
     'visibility: hidden',
     '.print-card',
     '.qr-placeholder',
+    '.print-title',
+    'filter: invert(1)',
+    'filter: none',
 ] as $marker) {
     if (!str_contains($style, $marker)) {
         $errors[] = "Missing print style marker: {$marker}";
@@ -65,6 +69,8 @@ foreach ([
     'Diese Seite kann für die Übergabe der Zugangsdaten gedruckt werden',
     'nicht erneut angezeigt',
     '<h2>Zugangsdaten</h2>',
+    'Das Passwort muss beim ersten Login geändert werden',
+    'Weitere Person anlegen',
 ] as $forbidden) {
     if (str_contains($page, $forbidden)) {
         $errors[] = "Forbidden person_created text still present: {$forbidden}";

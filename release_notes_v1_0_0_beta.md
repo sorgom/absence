@@ -314,3 +314,16 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 - Staff page `Passwort zurücksetzen`.
 - Password reset flow creates a new initial password and forwards to the credentials handout page.
 - `tools/check_person_password_reset.php`.
+
+
+## Update v1.0.0-beta.10.5.12
+
+### Changed
+- Credentials page now prints the `Zugangsdaten` heading.
+- QR code is inverted on screen in dark mode.
+- Credentials hint now says that the password must be changed at the next login.
+- Removed the `Weitere Person anlegen` button from the credentials page.
+- Removed the deleted-reasons hint from `Gründe und Ziele`.
+
+### Added
+- `tools/check_reasons_hint_removed.php`.

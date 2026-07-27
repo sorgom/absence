@@ -48,5 +48,4 @@ use AbsenceApp\Utils;
             <button type="submit" class="danger-button">Löschen</button>
         </form>
     <?php endif; ?>
-<p class="hint">Gelöschte Gründe verschwinden aus der Auswahl für neue Abwesenheiten. In bestehenden Abwesenheiten bleiben sie sichtbar.</p>
 </section>

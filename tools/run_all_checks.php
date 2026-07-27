@@ -25,6 +25,7 @@ $checks = [
     'check_person_password_reset.php',
     'check_qr_code_handout.php',
     'check_reasons_soft_delete.php',
+    'check_reasons_hint_removed.php',
     'check_absence_manual_delete.php',
     'check_staff_overview_mobile.php',
     'check_sort_popup_anchor.php',

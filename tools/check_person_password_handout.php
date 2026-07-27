@@ -20,7 +20,7 @@ if (str_contains($repository, 'generatePassword')) {
 }
 
 foreach ([
-    'Das Passwort muss beim ersten Login geändert werden.',
+    'Das Passwort muss beim nächsten Login geändert werden.',
     'password-change-hint',
 ] as $marker) {
     if (!str_contains($created, $marker)) {

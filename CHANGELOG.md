@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.12
+
+### Changed
+- Credentials page prints the `Zugangsdaten` heading.
+- QR code is inverted in dark mode on screen.
+- Credentials page hint changed to `Das Passwort muss beim nächsten Login geändert werden.`
+- Removed the `Weitere Person anlegen` button from the credentials page.
+- Removed the deleted-reasons explanatory hint from `Gründe und Ziele`.
+
+### Added
+- `tools/check_reasons_hint_removed.php`.
+
 ## v1.0.0-beta.10.5.11
 
 ### Added
