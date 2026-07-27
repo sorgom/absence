@@ -334,3 +334,12 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 ### Changed
 - Removed success feedback messages from the outing page after start, return and short correction deletion.
 - Error messages remain visible.
+
+
+## Update v1.0.0-beta.10.5.14
+
+### Changed
+- Removed initial focus from the new reason/target input so smartphone keyboards do not open immediately on the `Gründe und Ziele` page.
+
+### Added
+- `tools/check_reasons_no_autofocus.php`.

@@ -24,7 +24,7 @@ use AbsenceApp\Utils;
         <input type="hidden" name="action" value="add">
 
         <label for="name">Neuer Grund / neues Ziel</label>
-        <input id="name" name="name" type="text" autocomplete="off" required autofocus>
+        <input id="name" name="name" type="text" autocomplete="off" required>
 
         <button type="submit">Hinzufügen</button>
     </form>

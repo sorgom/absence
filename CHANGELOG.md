@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.14
+
+### Changed
+- Removed `autofocus` from the new reason/target input on `Gründe und Ziele` to prevent smartphone keyboards from opening immediately.
+
+### Added
+- `tools/check_reasons_no_autofocus.php`.
+
 ## v1.0.0-beta.10.5.13
 
 ### Changed
