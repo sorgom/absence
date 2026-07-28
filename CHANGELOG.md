@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.15
+
+### Changed
+- Renamed patient hamburger menu entry `Abwesenheit` to `Ausgang`.
+
+### Added
+- `tools/check_hamburger_menu_patient.php`.
+
 ## v1.0.0-beta.10.5.14
 
 ### Changed

@@ -343,3 +343,12 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Added
 - `tools/check_reasons_no_autofocus.php`.
+
+
+## Update v1.0.0-beta.10.5.15
+
+### Changed
+- Patient hamburger menu label `Abwesenheit` changed to `Ausgang`.
+
+### Added
+- `tools/check_hamburger_menu_patient.php`.

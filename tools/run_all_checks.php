@@ -37,6 +37,7 @@ $checks = [
     'check_fgetcsv_escape.php',
     'check_menu_overlay.php',
     'check_hamburger_menu_personal.php',
+    'check_hamburger_menu_patient.php',
     'check_confirm_modal.php',
     'check_js_syntax.php',
     'check_password_toggle.php',
