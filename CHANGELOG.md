@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.16
+
+### Changed
+- Kept credentials page data available across browser refreshes.
+- Refreshing the credentials page after password reset no longer redirects to `Person anlegen`.
+
+### Added
+- `tools/check_credentials_refresh_stays.php`.
+
 ## v1.0.0-beta.10.5.15
 
 ### Changed

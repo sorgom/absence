@@ -28,7 +28,6 @@ foreach ([
 
 foreach ([
     "Session::get('created_person')",
-    "unset(\$_SESSION['created_person'])",
     'HTTP_X_FORWARDED_PROTO',
     'HTTP_HOST',
     'src="/qr_code.php"',
@@ -69,6 +68,7 @@ foreach ([
     'Diese Seite kann für die Übergabe der Zugangsdaten gedruckt werden',
     'nicht erneut angezeigt',
     '<h2>Zugangsdaten</h2>',
+    'unset($_SESSION[\'created_person\'])',
     'Das Passwort muss beim ersten Login geändert werden',
     'Weitere Person anlegen',
 ] as $forbidden) {

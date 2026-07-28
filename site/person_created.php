@@ -21,7 +21,6 @@ if (!$auth->isLoggedIn()) {
 $auth->requireRole(Auth::ROLE_STAFF);
 
 $createdPerson = Session::get('created_person');
-unset($_SESSION['created_person']);
 
 if (!is_array($createdPerson)
     || !isset($createdPerson['id'], $createdPerson['initial_password'])

@@ -45,6 +45,7 @@ $requiredRootTools = [
     'check_v090_schema.php',
     'check_person_management.php',
     'check_person_created_print.php',
+    'check_credentials_refresh_stays.php',
     'check_repository_artifact_ignores.php',
     'check_no_favicon_test.php',
     'check_person_delete_role_ui.php',

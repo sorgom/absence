@@ -352,3 +352,13 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Added
 - `tools/check_hamburger_menu_patient.php`.
+
+
+## Update v1.0.0-beta.10.5.16
+
+### Changed
+- Credentials page no longer redirects to `Person anlegen` when refreshed after a password reset.
+- Credentials data remains available in the session for page refreshes.
+
+### Added
+- `tools/check_credentials_refresh_stays.php`.
