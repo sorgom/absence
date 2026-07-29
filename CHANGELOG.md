@@ -1,5 +1,24 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.18
+
+### Changed
+- Removed additional CSS padding around the QR code.
+- Enlarged the QR image inside its frame to visually reduce the white QR quiet zone.
+
+### Added
+- `tools/check_qr_code_less_padding.php`.
+
+## v1.0.0-beta.10.5.17
+
+### Changed
+- QR code display size doubled via CSS.
+- QR code padding reduced.
+- Printed QR code size increased as well.
+
+### Added
+- `tools/check_qr_code_size.php`.
+
 ## v1.0.0-beta.10.5.16
 
 ### Changed

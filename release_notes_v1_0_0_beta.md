@@ -362,3 +362,24 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Added
 - `tools/check_credentials_refresh_stays.php`.
+
+
+## Update v1.0.0-beta.10.5.17
+
+### Changed
+- Enlarged the QR code display area on the credentials page via CSS.
+- Reduced QR code padding.
+- Enlarged the printed QR code as well.
+
+### Added
+- `tools/check_qr_code_size.php`.
+
+
+## Update v1.0.0-beta.10.5.18
+
+### Changed
+- Removed additional padding around the QR code box.
+- Cropped the QR image quiet zone visually via CSS to reduce the white border.
+
+### Added
+- `tools/check_qr_code_less_padding.php`.
