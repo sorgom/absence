@@ -99,27 +99,9 @@ function staffOverviewEmptyLabel(string $view): string
                 <thead>
                     <tr>
                         <th class="status-column" aria-label="Status"></th>
-                        <th>
-                            <form class="sort-form" method="post" action="/personal.php">
-                                <?= Csrf::field() ?>
-                                <input type="hidden" name="action" value="overview_sort">
-                                <input type="hidden" name="sort" value="patient">
-                                <button class="table-sort-button" type="submit">
-                                    ID<?= Utils::h(staffSortIndicator('patient', $sort, $order)) ?>
-                                </button>
-                            </form>
-                        </th>
+                        <th>ID</th>
                         <th>Grund / Ziel</th>
-                        <th>
-                            <form class="sort-form" method="post" action="/personal.php">
-                                <?= Csrf::field() ?>
-                                <input type="hidden" name="action" value="overview_sort">
-                                <input type="hidden" name="sort" value="departure">
-                                <button class="table-sort-button" type="submit">
-                                    Aufbruch<?= Utils::h(staffSortIndicator('departure', $sort, $order)) ?>
-                                </button>
-                            </form>
-                        </th>
+                        <th>Aufbruch</th>
                         <th>Rückkehr</th>
                         <th class="action-column" aria-label="Aktion"></th>
                     </tr>

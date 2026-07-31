@@ -394,3 +394,14 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Added
 - `tools/check_staff_overview_simplified.php`.
+
+
+## Update v1.0.0-beta.10.5.20
+
+### Changed
+- Staff overview desktop sorting now uses the right-side sort buttons only.
+- Removed sorting controls from the table headers.
+- Right-side sort buttons are stacked and equally wide on desktop and mobile.
+
+### Added
+- `tools/check_staff_overview_pc_sort_buttons.php`.

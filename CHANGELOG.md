@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.20
+
+### Changed
+- Staff overview desktop sorting now uses the right-side sort buttons only.
+- Removed table-header sorting from the staff overview.
+- Sort buttons are stacked and equally wide on desktop and mobile.
+
+### Added
+- `tools/check_staff_overview_pc_sort_buttons.php`.
+
 ## v1.0.0-beta.10.5.19
 
 ### Changed

@@ -26,6 +26,8 @@ foreach ([
     '<legend>Auswahl</legend>',
     'overview-sort-popup',
     '<summary>Sortieren</summary>',
+    'table-sort-button',
+    'class="sort-form"',
 ] as $forbidden) {
     if (str_contains($overview . $style, $forbidden)) {
         $errors[] = "Forbidden old overview marker still present: {$forbidden}";

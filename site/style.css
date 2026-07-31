@@ -397,27 +397,6 @@ th {
 }
 
 
-.sort-form {
-  margin: 0;
-}
-
-.table-sort-button {
-  width: auto;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  font-weight: 700;
-  text-align: left;
-  cursor: pointer;
-}
-
-.table-sort-button:hover,
-.table-sort-button:focus {
-  text-decoration: underline;
-}
 
 
 .stack-form {
@@ -946,16 +925,18 @@ body.confirm-modal-open {
 }
 
 .overview-sort-buttons {
-  display: flex;
-  flex-wrap: wrap;
+  align-content: start;
+  display: grid;
   gap: 0.5rem;
-  justify-content: flex-end;
+  justify-content: stretch;
   margin-left: auto;
+  width: 12rem;
 }
 
 .overview-sort-buttons .compact {
   justify-content: center;
   margin-top: 0;
+  width: 100%;
 }
 
 .status-column,
