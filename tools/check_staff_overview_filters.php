@@ -28,7 +28,7 @@ foreach ([
 }
 
 foreach ([
-    '<legend>Auswahl</legend>',
+    'aria-label="Auswahl"',
     'value="active"',
     'value="ended"',
     'value="all"',
@@ -43,6 +43,10 @@ foreach ([
 
 if (str_contains($overview, 'Nur aktive Abwesenheiten')) {
     $errors[] = 'Old checkbox text still present.';
+}
+
+if (str_contains($overview, '<legend>Auswahl</legend>')) {
+    $errors[] = 'Visible Auswahl legend must be removed.';
 }
 
 if ($errors !== []) {

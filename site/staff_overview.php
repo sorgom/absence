@@ -44,32 +44,15 @@ function staffOverviewEmptyLabel(string $view): string
 ?>
 <section class="card wide-card">
     <div class="page-title-row">
-        <div>
-            <h1>Übersicht Abwesenheiten</h1>
-            <p class="muted">
-                Auswahl:
-                <?= Utils::h(staffOverviewViewLabel($view)) ?> ·
-                Sortierung:
-                <?= Utils::h($sort === 'patient' ? 'ID' : 'Aufbruch') ?>
-                <?= Utils::h($order === 'asc' ? 'aufsteigend' : 'absteigend') ?>
-            </p>
-        </div>
-
-        <form method="post" action="/personal.php">
-            <?= Csrf::field() ?>
-            <input type="hidden" name="action" value="overview_refresh">
-            <button class="button-secondary compact" type="submit">Aktualisieren</button>
-        </form>
+        <h1>Übersicht</h1>
     </div>
 
     <div class="overview-controls">
-        <form class="overview-view-form" method="post" action="/personal.php">
+        <form class="overview-view-form" method="post" action="/personal.php" aria-label="Auswahl">
             <?= Csrf::field() ?>
             <input type="hidden" name="action" value="overview_view">
 
-            <fieldset class="radio-group radio-group-compact overview-view-choice">
-                <legend>Auswahl</legend>
-
+            <div class="radio-group radio-group-compact overview-view-choice">
                 <label>
                     <input type="radio" name="view" value="active" <?= $view === 'active' ? 'checked' : '' ?> onchange="this.form.submit()">
                     Aktiv
@@ -84,31 +67,28 @@ function staffOverviewEmptyLabel(string $view): string
                     <input type="radio" name="view" value="all" <?= $view === 'all' ? 'checked' : '' ?> onchange="this.form.submit()">
                     Alle
                 </label>
-            </fieldset>
+            </div>
         </form>
 
-        <details class="overview-sort-popup">
-            <summary>Sortieren</summary>
-            <div class="overview-sort-popup__panel">
-                <form method="post" action="/personal.php">
-                    <?= Csrf::field() ?>
-                    <input type="hidden" name="action" value="overview_sort">
-                    <input type="hidden" name="sort" value="patient">
-                    <button class="button-secondary compact" type="submit">
-                        ID<?= Utils::h(staffSortIndicator('patient', $sort, $order)) ?>
-                    </button>
-                </form>
+        <div class="overview-sort-buttons" aria-label="Sortierung">
+            <form method="post" action="/personal.php">
+                <?= Csrf::field() ?>
+                <input type="hidden" name="action" value="overview_sort">
+                <input type="hidden" name="sort" value="patient">
+                <button class="button-secondary compact" type="submit">
+                    ID<?= Utils::h(staffSortIndicator('patient', $sort, $order)) ?>
+                </button>
+            </form>
 
-                <form method="post" action="/personal.php">
-                    <?= Csrf::field() ?>
-                    <input type="hidden" name="action" value="overview_sort">
-                    <input type="hidden" name="sort" value="departure">
-                    <button class="button-secondary compact" type="submit">
-                        Aufbruch<?= Utils::h(staffSortIndicator('departure', $sort, $order)) ?>
-                    </button>
-                </form>
-            </div>
-        </details>
+            <form method="post" action="/personal.php">
+                <?= Csrf::field() ?>
+                <input type="hidden" name="action" value="overview_sort">
+                <input type="hidden" name="sort" value="departure">
+                <button class="button-secondary compact" type="submit">
+                    Aufbruch<?= Utils::h(staffSortIndicator('departure', $sort, $order)) ?>
+                </button>
+            </form>
+        </div>
     </div>
 
     <?php if ($absences === []): ?>

@@ -932,7 +932,8 @@ body.confirm-modal-open {
   margin: 1rem 0 1.25rem;
 }
 
-.overview-view-form {
+.overview-view-form,
+.overview-sort-buttons form {
   margin: 0;
 }
 
@@ -944,40 +945,17 @@ body.confirm-modal-open {
   font-weight: 600;
 }
 
-.overview-sort-popup {
-  margin-left: auto;
-  position: relative;
-}
-
-.overview-sort-popup summary {
-  border: 1px solid var(--border);
-  border-radius: 0.6rem;
-  cursor: pointer;
-  font-weight: 700;
-  list-style: none;
-  min-height: 2.4rem;
-  padding: 0.45rem 0.75rem;
-}
-
-.overview-sort-popup summary::-webkit-details-marker {
-  display: none;
-}
-
-.overview-sort-popup__panel {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 0.8rem;
-  box-shadow: 0 1rem 2rem rgb(0 0 0 / 0.16);
-  display: grid;
+.overview-sort-buttons {
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
-  left: 0;
-  max-width: calc(100vw - 3rem);
-  min-width: 10rem;
-  padding: 0.75rem;
-  position: absolute;
-  right: auto;
-  top: calc(100% + 0.35rem);
-  z-index: 30;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.overview-sort-buttons .compact {
+  justify-content: center;
+  margin-top: 0;
 }
 
 .status-column,
@@ -1039,21 +1017,27 @@ body.confirm-modal-open {
   background-color: color-mix(in srgb, #b3261e 12%, transparent);
 }
 
-@media (min-width: 42.001rem) {
-  .overview-sort-popup {
-    display: none;
-  }
-}
-
 @media (max-width: 42rem) {
   .overview-controls {
     display: grid;
     gap: 0.9rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 
-  .overview-sort-popup {
-    justify-self: start;
+  .overview-view-choice {
+    gap: 0.45rem;
+  }
+
+  .overview-sort-buttons {
+    align-content: start;
+    display: grid;
+    gap: 0.5rem;
+    justify-content: stretch;
     margin-left: 0;
+  }
+
+  .overview-sort-buttons .compact {
+    width: 100%;
   }
 
   .absence-overview-table .status-cell,
@@ -1072,28 +1056,6 @@ body.confirm-modal-open {
 
   .absence-overview-table .empty-on-mobile {
     display: none;
-  }
-}
-
-
-.overview-sort-popup__panel .compact {
-  justify-content: flex-start;
-  margin-top: 0;
-  width: 100%;
-}
-
-
-@media (max-width: 42rem) {
-  .overview-sort-popup {
-    display: inline-block;
-    justify-self: start;
-    margin-left: 0;
-  }
-
-  .overview-sort-popup__panel {
-    left: 0;
-    right: auto;
-    width: max-content;
   }
 }
 

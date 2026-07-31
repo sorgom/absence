@@ -383,3 +383,14 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Added
 - `tools/check_qr_code_less_padding.php`.
+
+
+## Update v1.0.0-beta.10.5.19
+
+### Changed
+- Simplified staff overview heading to `Übersicht`.
+- Removed overview summary line and refresh button.
+- Replaced mobile sort popup with direct sort buttons in a two-column control layout.
+
+### Added
+- `tools/check_staff_overview_simplified.php`.

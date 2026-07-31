@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.19
+
+### Changed
+- Simplified staff overview heading to `Übersicht`.
+- Removed the overview status/sort summary row and refresh button.
+- Replaced the mobile sort popup with direct sort buttons in a two-column layout.
+
+### Added
+- `tools/check_staff_overview_simplified.php`.
+
 ## v1.0.0-beta.10.5.18
 
 ### Changed

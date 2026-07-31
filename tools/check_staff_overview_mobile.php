@@ -6,12 +6,10 @@ $style = file_get_contents(dirname(__DIR__) . '/site/style.css') ?: '';
 $errors = [];
 
 foreach ([
-    'overview-sort-popup',
-    '<summary>Sortieren</summary>',
-    'overview-sort-popup__panel',
+    'overview-sort-buttons',
     'empty-on-mobile',
 ] as $marker) {
-    $haystack = str_contains($marker, 'empty') || str_starts_with($marker, '<') ? $overview : $style . $overview;
+    $haystack = $marker === 'empty-on-mobile' ? $overview : $style . $overview;
     if (!str_contains($haystack, $marker)) {
         $errors[] = "Missing mobile marker: {$marker}";
     }
@@ -19,18 +17,28 @@ foreach ([
 
 foreach ([
     '@media (max-width: 42rem)',
+    'grid-template-columns: minmax(0, 1fr) minmax(0, 1fr)',
+    '.overview-sort-buttons',
+    'width: 100%',
     '.empty-on-mobile',
     'display: none',
-    '.overview-sort-popup__panel',
-    'left: 0',
-    'right: auto',
-    'max-width: calc(100vw - 3rem)',
 ] as $marker) {
     if (!str_contains($style, $marker)) {
         $errors[] = "Missing mobile style marker: {$marker}";
     }
 }
 
+foreach ([
+    'overview-sort-popup',
+    '<summary>Sortieren</summary>',
+    'overview-sort-popup__panel',
+    'overview_refresh',
+    'Aktualisieren',
+] as $forbidden) {
+    if (str_contains($overview . $style, $forbidden)) {
+        $errors[] = "Forbidden mobile marker still present: {$forbidden}";
+    }
+}
 
 if ($errors !== []) {
     fwrite(STDERR, "Staff overview mobile check failed:\n");
