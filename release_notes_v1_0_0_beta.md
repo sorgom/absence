@@ -405,3 +405,13 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Added
 - `tools/check_staff_overview_pc_sort_buttons.php`.
+
+
+## Update v1.0.0-beta.10.5.21
+
+### Changed
+- Staff overview mobile sort buttons now stay inside the overview card.
+- Mobile sort controls use flexible width instead of the desktop fixed width.
+
+### Added
+- `tools/check_staff_overview_mobile_sort_fit.php`.

@@ -34,6 +34,7 @@ $checks = [
     'check_staff_overview_mobile.php',
     'check_staff_overview_simplified.php',
     'check_staff_overview_pc_sort_buttons.php',
+    'check_staff_overview_mobile_sort_fit.php',
     'check_sort_popup_anchor.php',
     'check_staff_overview_table_icons.php',
     'check_overview_theme_icons.php',

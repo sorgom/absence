@@ -1015,9 +1015,19 @@ body.confirm-modal-open {
     gap: 0.5rem;
     justify-content: stretch;
     margin-left: 0;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .overview-sort-buttons form {
+    min-width: 0;
+    width: 100%;
   }
 
   .overview-sort-buttons .compact {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
     width: 100%;
   }
 

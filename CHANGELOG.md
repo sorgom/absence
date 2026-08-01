@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.21
+
+### Changed
+- Staff overview mobile sort buttons no longer overflow the card edge.
+- Mobile sort button column now uses flexible width and clips long labels safely.
+
+### Added
+- `tools/check_staff_overview_mobile_sort_fit.php`.
+
 ## v1.0.0-beta.10.5.20
 
 ### Changed
