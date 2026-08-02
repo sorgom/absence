@@ -1,6 +1,7 @@
 # general
 tmp.*
 tmp_*.*
+tmp
 # chat-gpt patches
 *.patch
 # Runtime files
