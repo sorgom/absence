@@ -11,7 +11,12 @@ final class AbsenceCleanup
     {
         $retentionHours = (int) Config::get('default_absence_retention_hours', 48);
 
-        return (new AbsenceRepository($db))->deleteExpired($retentionHours);
+        $deleted = (new AbsenceRepository($db))->deleteExpired($retentionHours);
+
+        $windowMinutes = (int) Config::get('login_lockout_window_minutes');
+        (new RateLimiter($db))->purgeOlderThan(max(60, $windowMinutes * 4));
+
+        return $deleted;
     }
 
     public static function countExpired(PDO $db): int

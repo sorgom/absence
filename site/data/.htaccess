@@ -1,0 +1,11 @@
+# Deny all HTTP access to everything in this directory. It exists purely
+# for server-side (filesystem) use by the application - the SQLite database
+# and any future non-public data files belong here.
+Require all denied
+
+# Fallback syntax for Apache 2.2-style hosts where "Require all denied"
+# (Apache 2.4+) is not recognized.
+<IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+</IfModule>

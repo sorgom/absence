@@ -5,10 +5,10 @@ tmp
 # chat-gpt patches
 *.patch
 # Runtime files
-/site/database.sqlite
-/site/*.sqlite-shm
-/site/*.sqlite-wal
-/site/*.log
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.log
 
 # IDE / OS
 .vscode/

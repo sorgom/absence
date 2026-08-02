@@ -8,7 +8,7 @@ if (!extension_loaded('pdo_sqlite')) {
 
 $root = dirname(__DIR__);
 $site = $root . '/site';
-$db = $site . '/database.sqlite';
+$db = $site . '/data/database.sqlite';
 
 @unlink($db);
 @unlink($db . '-shm');

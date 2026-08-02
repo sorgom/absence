@@ -7,6 +7,7 @@ use AbsenceApp\Utils;
 /** @var string|null $error */
 /** @var string|null $success */
 /** @var bool $isFirstLogin */
+/** @var int $minPasswordLength */
 ?>
 <section class="card">
     <h1>Passwort ändern</h1>
@@ -33,7 +34,15 @@ use AbsenceApp\Utils;
         </label>
 
         <label for="new_password">Neues Passwort</label>
-        <input id="new_password" name="new_password" type="password" autocomplete="new-password" required>
+        <input
+            id="new_password"
+            name="new_password"
+            type="password"
+            autocomplete="new-password"
+            minlength="<?= (int) $minPasswordLength ?>"
+            required
+        >
+        <p class="hint">Mindestens <?= (int) $minPasswordLength ?> Zeichen.</p>
 
         <label for="repeat_password">Neues Passwort Wiederholung</label>
         <input id="repeat_password" name="repeat_password" type="password" autocomplete="new-password" required>

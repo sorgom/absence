@@ -21,17 +21,30 @@ final class Auth
      */
     public function login(string $id, string $password): bool
     {
+        $id = trim($id);
+        $limiter = new RateLimiter($this->db);
+
+        if ($limiter->isLocked($id)) {
+            throw new \RuntimeException(
+                'Zu viele fehlgeschlagene Anmeldeversuche. Bitte versuchen Sie es in einigen Minuten erneut.'
+            );
+        }
+
         $stmt = $this->db->prepare(
             'SELECT id, password_hash, is_staff, first_login
              FROM persons
              WHERE id = :id'
         );
-        $stmt->execute(['id' => trim($id)]);
+        $stmt->execute(['id' => $id]);
         $user = $stmt->fetch();
 
         if (!$user || !password_verify($password, (string) $user['password_hash'])) {
+            $limiter->recordFailure($id);
+
             return false;
         }
+
+        $limiter->clearFailures($id);
 
         $role = ((int) $user['is_staff']) === 1 ? self::ROLE_STAFF : self::ROLE_PATIENT;
 
@@ -68,7 +81,35 @@ final class Auth
 
     public function isLoggedIn(): bool
     {
-        return Session::has('user_id') && Session::has('role');
+        if (!Session::has('user_id') || !Session::has('role')) {
+            return false;
+        }
+
+        if (!$this->currentAccountExists()) {
+            // The account behind this session (e.g. deleted by staff while
+            // the person was still logged in) no longer exists. Terminate
+            // the stale session instead of letting later queries fail with
+            // a raw foreign-key/integrity error.
+            $this->logout();
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private function currentAccountExists(): bool
+    {
+        $id = Session::get('user_id');
+
+        if ($id === null || $id === '') {
+            return false;
+        }
+
+        $stmt = $this->db->prepare('SELECT COUNT(*) FROM persons WHERE id = :id');
+        $stmt->execute(['id' => $id]);
+
+        return ((int) $stmt->fetchColumn()) > 0;
     }
 
     public function currentUserId(): ?string

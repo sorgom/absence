@@ -8,6 +8,7 @@ use AbsenceApp\Csrf;
 use AbsenceApp\Database;
 use AbsenceApp\PasswordService;
 use AbsenceApp\Session;
+use AbsenceApp\Utils;
 
 Session::start();
 
@@ -22,6 +23,7 @@ if (!$auth->isLoggedIn()) {
 $error = null;
 $success = null;
 $isFirstLogin = $auth->isFirstLogin();
+$minPasswordLength = PasswordService::minLengthForRole((string) $auth->currentRole());
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = (string) ($_POST['action'] ?? '');
@@ -43,7 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $service->changePasswordForPerson(
                 (string) $auth->currentUserId(),
                 (string) ($_POST['new_password'] ?? ''),
-                (string) ($_POST['repeat_password'] ?? '')
+                (string) ($_POST['repeat_password'] ?? ''),
+                (string) $auth->currentRole()
             );
 
             $success = 'Passwort wurde geändert.';
@@ -52,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
     } catch (Throwable $exception) {
-        $error = $exception->getMessage();
+        $error = Utils::safeMessage($exception);
     }
 }
 

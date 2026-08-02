@@ -11,6 +11,7 @@ use AbsenceApp\Csrf;
 use AbsenceApp\Database;
 use AbsenceApp\ReasonRepository;
 use AbsenceApp\Session;
+use AbsenceApp\Utils;
 
 Session::start();
 
@@ -43,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $success = 'Grund / Ziel wurde gelöscht.';
         }
     } catch (Throwable $exception) {
-        $error = $exception->getMessage();
+        $error = Utils::safeMessage($exception);
     }
 }
 

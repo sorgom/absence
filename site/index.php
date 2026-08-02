@@ -20,6 +20,13 @@ AbsenceCleanup::run($db);
 $auth = new Auth($db);
 $error = null;
 
+// isLoggedIn() also invalidates the session if the account behind it no
+// longer exists (e.g. deleted while the person was still logged in). If
+// that just happened, send them back to a clean login page.
+if (Session::has('user_id') && !$auth->isLoggedIn()) {
+    Utils::redirect('/index.php');
+}
+
 /*
  * Unified login.
  *
@@ -55,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$auth->isLoggedIn()) {
 
         $error = 'Login fehlgeschlagen.';
     } catch (Throwable $exception) {
-        $error = $exception->getMessage();
+        $error = Utils::safeMessage($exception);
     }
 }
 
@@ -84,7 +91,7 @@ if ($auth->isLoggedIn() && $_SERVER['REQUEST_METHOD'] === 'POST') {
             );
         }
     } catch (Throwable $exception) {
-        $error = $exception->getMessage();
+        $error = Utils::safeMessage($exception);
     }
 }
 

@@ -66,7 +66,7 @@ final class PersonRepository
             throw new \RuntimeException('Diese ID ist bereits vorhanden.');
         }
 
-        $password = $this->generatePin();
+        $password = $this->generatePin($isStaff);
 
         $stmt = $this->db->prepare(
             'INSERT INTO persons (id, password_hash, is_staff, first_login)
@@ -90,7 +90,16 @@ final class PersonRepository
             throw new \InvalidArgumentException('Keine ID ausgewählt.');
         }
 
-        $password = $this->generatePin();
+        $stmt = $this->db->prepare('SELECT is_staff FROM persons WHERE id = :id');
+        $stmt->execute(['id' => $id]);
+        $person = $stmt->fetch();
+
+        if ($person === false) {
+            throw new \RuntimeException('Person wurde nicht gefunden.');
+        }
+
+        $isStaff = ((int) $person['is_staff']) === 1;
+        $password = $this->generatePin($isStaff);
 
         $stmt = $this->db->prepare(
             'UPDATE persons
@@ -129,9 +138,25 @@ final class PersonRepository
         }
     }
 
-    private function generatePin(): string
+    /**
+     * Generates a random initial password for a new or reset account.
+     *
+     * Uses lowercase letters (excluding 'l', which is easily confused with
+     * '1' or 'I' in some fonts/handwriting) plus digits 0-9, at the same
+     * length as the role's minimum password length - so the generated
+     * password already satisfies PasswordService's own policy.
+     */
+    private function generatePin(bool $isStaff): string
     {
-        return str_pad((string) random_int(0, 9999), 4, '0', STR_PAD_LEFT);
+        $alphabet = 'abcdefghijkmnopqrstuvwxyz0123456789';
+        $length = PasswordService::minLengthForRole($isStaff ? Auth::ROLE_STAFF : Auth::ROLE_PATIENT);
+        $password = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $password .= $alphabet[random_int(0, strlen($alphabet) - 1)];
+        }
+
+        return $password;
     }
 
 }

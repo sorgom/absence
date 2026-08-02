@@ -24,17 +24,25 @@ final class PasswordService
         string $newPassword,
         string $repeatPassword
     ): void {
-        $this->changePasswordForPerson($userId, $newPassword, $repeatPassword);
+        $this->changePasswordForPerson($userId, $newPassword, $repeatPassword, $role);
     }
 
-    public function changePasswordForPerson(string $userId, string $newPassword, string $repeatPassword): void
-    {
+    public function changePasswordForPerson(
+        string $userId,
+        string $newPassword,
+        string $repeatPassword,
+        string $role
+    ): void {
         if ($userId === '') {
             throw new \InvalidArgumentException('Nicht angemeldet.');
         }
 
-        if ($newPassword === '') {
-            throw new \InvalidArgumentException('Das neue Passwort darf nicht leer sein.');
+        $minLength = self::minLengthForRole($role);
+
+        if (strlen($newPassword) < $minLength) {
+            throw new \InvalidArgumentException(
+                "Das neue Passwort muss mindestens {$minLength} Zeichen lang sein."
+            );
         }
 
         if ($newPassword !== $repeatPassword) {
@@ -56,5 +64,12 @@ final class PasswordService
         }
 
         Session::set('first_login', false);
+    }
+
+    public static function minLengthForRole(string $role): int
+    {
+        return $role === Auth::ROLE_STAFF
+            ? (int) Config::get('password_min_length_staff')
+            : (int) Config::get('password_min_length_patient');
     }
 }

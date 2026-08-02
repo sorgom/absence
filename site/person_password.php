@@ -8,6 +8,7 @@ use AbsenceApp\Csrf;
 use AbsenceApp\Database;
 use AbsenceApp\PersonRepository;
 use AbsenceApp\Session;
+use AbsenceApp\Utils;
 
 Session::start();
 
@@ -44,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'reset
         header('Location: /person_created.php');
         exit;
     } catch (Throwable $exception) {
-        $error = $exception->getMessage();
+        $error = Utils::safeMessage($exception);
     }
 }
 

@@ -9,6 +9,7 @@ use AbsenceApp\Auth;
 use AbsenceApp\Csrf;
 use AbsenceApp\Database;
 use AbsenceApp\Session;
+use AbsenceApp\Utils;
 
 Session::start();
 
@@ -82,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
     } catch (Throwable $exception) {
-        $error = $exception->getMessage();
+        $error = Utils::safeMessage($exception);
     }
 }
 

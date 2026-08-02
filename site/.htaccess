@@ -1,0 +1,11 @@
+# Block direct HTTP access to the SQLite database and its journal/wal files.
+# The application only needs filesystem access to these, never HTTP access.
+<FilesMatch "\.(sqlite|sqlite3|db|db-journal|db-wal|db-shm)$">
+    Require all denied
+</FilesMatch>
+
+# Belt-and-braces: also block by exact common filename in case FilesMatch
+# is overridden by a broader AllowOverride config further down the line.
+<Files "database.sqlite">
+    Require all denied
+</Files>

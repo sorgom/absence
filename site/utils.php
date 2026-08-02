@@ -7,6 +7,57 @@ final class Utils
     public static function redirect(string $target): never { header('Location: ' . $target); exit; }
 
     /**
+     * Returns a message safe to display to the user for a caught exception.
+     *
+     * InvalidArgumentException and RuntimeException are thrown deliberately
+     * throughout this app with German, user-facing text - those are safe to
+     * show as-is. Anything else (TypeError, PDOException, ...) is an
+     * unexpected failure whose message could contain internal details, so it
+     * is logged server-side and a generic message is shown instead.
+     */
+    public static function safeMessage(\Throwable $exception): string
+    {
+        $isDeliberateAppException = !($exception instanceof \PDOException)
+            && ($exception instanceof \InvalidArgumentException || $exception instanceof \RuntimeException);
+
+        if ($isDeliberateAppException) {
+            return $exception->getMessage();
+        }
+
+        self::logUnexpected($exception);
+
+        return 'Es ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es erneut.';
+    }
+
+    /**
+     * Logs an unexpected exception both via error_log() (so it shows up in
+     * the server's normal PHP error log if that is configured) and, as a
+     * fallback that does not depend on the hoster's php.ini, appends it to
+     * a plain-text file inside the HTTP-blocked data/ directory. That file
+     * is not rotated automatically - delete or trim it occasionally.
+     */
+    private static function logUnexpected(\Throwable $exception): void
+    {
+        $line = sprintf(
+            '[%s] %s: %s in %s:%d',
+            date('Y-m-d H:i:s'),
+            $exception::class,
+            $exception->getMessage(),
+            $exception->getFile(),
+            $exception->getLine()
+        );
+
+        error_log($line);
+
+        try {
+            $logPath = dirname((string) Config::get('database_path')) . '/app_errors.log';
+            file_put_contents($logPath, $line . PHP_EOL, FILE_APPEND | LOCK_EX);
+        } catch (\Throwable) {
+            // Logging must never break the request; silently ignore.
+        }
+    }
+
+    /**
      * Converts a SQLite UTC timestamp to an ISO-8601 UTC timestamp.
      */
     public static function utcIsoDateTime(?string $value): string
