@@ -22,8 +22,7 @@ use AbsenceApp\Utils;
     <form method="post" action="/reasons.php" class="stack-form reasons-editor-form" data-dirty-form data-dirty-message="Änderungen verwerfen?">
         <?= Csrf::field() ?>
 
-        <label for="reasons_text">Gründe und Ziele</label>
-        <textarea id="reasons_text" name="reasons_text" rows="14" autocomplete="off" data-dirty-watch><?= Utils::h($reasonsText) ?></textarea>
+        <textarea id="reasons_text" name="reasons_text" rows="14" autocomplete="off" aria-label="Gründe und Ziele" data-dirty-watch><?= Utils::h($reasonsText) ?></textarea>
         <p class="form-hint">Jede Zeile ist ein Eintrag. Leerzeilen werden ignoriert. Die Reihenfolge bestimmt die Auswahlliste.</p>
 
         <div class="form-actions two-actions">

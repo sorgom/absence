@@ -15,6 +15,7 @@ foreach (['replaceFromText', '$reasonsText = $repository->asText();'] as $marker
 
 foreach ([
     '<textarea id="reasons_text"',
+    'aria-label="Gründe und Ziele"',
     'data-dirty-form',
     'data-dirty-watch',
     'data-dirty-message="Änderungen verwerfen?"',
@@ -39,10 +40,14 @@ foreach (['beforeunload', 'window.AbsenceConfirm.open', '[data-dirty-form]'] as 
     }
 }
 
-foreach (['Hinzufügen', 'Löschen', 'name="reason_id"'] as $forbidden) {
+foreach (['Hinzufügen', 'Löschen', 'name="reason_id"', '<label for="reasons_text">Gründe und Ziele</label>'] as $forbidden) {
     if (str_contains($template, $forbidden)) {
         $errors[] = "Old reasons UI still present: {$forbidden}";
     }
+}
+
+if (substr_count($template, 'Gründe und Ziele') !== 2) {
+    $errors[] = 'Reasons page should have exactly one visible title plus one aria-label.';
 }
 
 if ($errors !== []) {

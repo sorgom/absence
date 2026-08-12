@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.23
+
+### Changed
+- Removed the duplicate visible `Gründe und Ziele` label above the reasons textarea.
+- Kept the textarea accessible with an aria-label.
+
+### Fixed
+- Updated `tools/check_person_password_handout.php` to match the current password generator.
+
 ## v1.0.0-beta.10.5.22
 
 ### Changed
