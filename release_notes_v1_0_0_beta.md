@@ -415,3 +415,24 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Added
 - `tools/check_staff_overview_mobile_sort_fit.php`.
+
+
+## Update v1.0.0-beta.10.5.23
+
+### Changed
+- Removed the duplicate visible `Gründe und Ziele` label above the reasons textarea.
+- Kept the textarea accessible with an aria-label.
+
+### Fixed
+- Updated the password handout check to match the current role-based password generator.
+
+
+## Update v1.0.0-beta.10.5.24
+
+### Changed
+- Replaced the free reason field on the outing start page with a textarea.
+- Added CSS `field-sizing: content` for variable textarea height.
+- Kept the outing reason textarea fixed to the form width.
+
+### Added
+- `tools/check_outing_reason_textarea.php`.

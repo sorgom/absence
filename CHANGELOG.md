@@ -1,5 +1,35 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.24
+
+### Changed
+- Replaced the outing start reason input with a textarea.
+- Added CSS `field-sizing: content` for variable textarea height while keeping the field width stable.
+
+### Added
+- `tools/check_outing_reason_textarea.php`.
+
+## v1.0.0-beta.10.5.23
+
+### Changed
+- Removed the duplicate visible `Gründe und Ziele` label above the reasons textarea.
+- Kept the textarea accessible with an aria-label.
+
+### Fixed
+- Updated `tools/check_person_password_handout.php` to match the current password generator.
+
+## v1.0.0-beta.10.5.22
+
+### Changed
+- Ausgang uses a free text reason field. Selecting a list item copies its text into the field.
+- Reasons are edited as one ordered multiline text area.
+- Absences store copied reason text instead of a reason reference.
+- Reason soft-delete and reason garbage collection were removed.
+
+### Added
+- Dirty-change warning for leaving the reasons editor.
+- Checks for denormalized absence reasons and the multiline reasons editor.
+
 ## v1.0.0-beta.10.5.21
 
 ### Changed

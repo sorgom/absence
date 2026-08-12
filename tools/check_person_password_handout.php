@@ -7,16 +7,20 @@ $created = file_get_contents($site . '/person_created.php') ?: '';
 $errors = [];
 
 foreach ([
-    '$password = $this->generatePin();',
-    'str_pad((string) random_int(0, 9999), 4',
+    '$password = $this->generatePin($isStaff);',
+    'PasswordService::minLengthForRole',
+    '$alphabet =',
+    'random_int(0, strlen($alphabet) - 1)',
 ] as $marker) {
     if (!str_contains($repository, $marker)) {
         $errors[] = "Missing password marker: {$marker}";
     }
 }
 
-if (str_contains($repository, 'generatePassword')) {
-    $errors[] = 'Staff must no longer use generatePassword().';
+foreach (['generatePassword', 'str_pad((string) random_int(0, 9999), 4'] as $forbidden) {
+    if (str_contains($repository, $forbidden)) {
+        $errors[] = "Old password generation marker still present: {$forbidden}";
+    }
 }
 
 foreach ([

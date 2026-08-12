@@ -12,17 +12,6 @@ try {
     $reasonName = 'Cleanup-Testgrund';
     $password = 'cleanup';
 
-    $reasonStmt = $db->prepare(
-        'INSERT INTO reasons (name, deleted)
-         VALUES (:name, 0)
-         ON CONFLICT(name) DO UPDATE SET deleted = 0'
-    );
-    $reasonStmt->execute(['name' => $reasonName]);
-
-    $reasonIdStmt = $db->prepare('SELECT id FROM reasons WHERE name = :name');
-    $reasonIdStmt->execute(['name' => $reasonName]);
-    $reasonId = (int) $reasonIdStmt->fetchColumn();
-
     $persons = [
         'cleanup_done_expired' => 'abgeschlossen, Rückkehr älter als N Stunden: wird gelöscht',
         'cleanup_done_fresh' => 'abgeschlossen, Rückkehr jünger als N Stunden: bleibt',
@@ -51,14 +40,14 @@ try {
     )->execute();
 
     $insert = $db->prepare(
-        'INSERT INTO absences (person_id, reason_id, departure_time, return_time)
-         VALUES (:person_id, :reason_id, :departure_time, :return_time)'
+        'INSERT INTO absences (person_id, reason, departure_time, return_time)
+         VALUES (:person_id, :reason, :departure_time, :return_time)'
     );
 
     // Completed and expired: must be deleted by cleanup.
     $insert->execute([
         'person_id' => 'cleanup_done_expired',
-        'reason_id' => $reasonId,
+        'reason' => $reasonName,
         'departure_time' => gmdate('Y-m-d H:i:s', time() - 74 * 3600),
         'return_time' => gmdate('Y-m-d H:i:s', time() - 72 * 3600),
     ]);
@@ -66,7 +55,7 @@ try {
     // Completed but still fresh: must stay.
     $insert->execute([
         'person_id' => 'cleanup_done_fresh',
-        'reason_id' => $reasonId,
+        'reason' => $reasonName,
         'departure_time' => gmdate('Y-m-d H:i:s', time() - 26 * 3600),
         'return_time' => gmdate('Y-m-d H:i:s', time() - 24 * 3600),
     ]);
@@ -74,7 +63,7 @@ try {
     // Active and old: must stay because return_time is NULL, even though departure_time is older than N hours.
     $insert->execute([
         'person_id' => 'cleanup_active_old',
-        'reason_id' => $reasonId,
+        'reason' => $reasonName,
         'departure_time' => gmdate('Y-m-d H:i:s', time() - 96 * 3600),
         'return_time' => null,
     ]);

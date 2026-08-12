@@ -111,20 +111,15 @@ try {
     $completedCount = 0;
 
     $reasons = ['Arzt', 'Einkaufen', 'Lidl', 'Edeka', 'Ortserkundung', 'Apotheke', 'Spaziergang', 'Therapie', 'Besuch'];
-    $reasonStatement = $pdo->prepare('INSERT OR IGNORE INTO reasons (name, deleted) VALUES (:name, 0)');
+    $reasonStatement = $pdo->prepare('INSERT OR IGNORE INTO reasons (name, sort_order) VALUES (:name, :sort_order)');
 
-    foreach ($reasons as $reason) {
-        $reasonStatement->execute(['name' => $reason]);
+    foreach ($reasons as $index => $reason) {
+        $reasonStatement->execute([
+            'name' => $reason,
+            'sort_order' => $index + 1,
+        ]);
     }
 
-    $reasonIds = array_map(
-        static fn (array $row): int => (int) $row['id'],
-        $pdo->query('SELECT id FROM reasons WHERE deleted = 0 ORDER BY id ASC')->fetchAll()
-    );
-
-    if ($reasonIds === []) {
-        throw new RuntimeException('No active reasons available.');
-    }
 
     $insertPerson = $pdo->prepare(
         'INSERT INTO persons (id, password_hash, is_staff, first_login)
@@ -194,8 +189,8 @@ try {
      * Aufbruch empty -> no absence
      */
     $insertAbsence = $pdo->prepare(
-        'INSERT INTO absences (person_id, reason_id, departure_time, return_time, created_at)
-         VALUES (:person_id, :reason_id, :departure_time, :return_time, :created_at)'
+        'INSERT INTO absences (person_id, reason, departure_time, return_time, created_at)
+         VALUES (:person_id, :reason, :departure_time, :return_time, :created_at)'
     );
 
     $now = new DateTimeImmutable('now', new DateTimeZone('UTC'));
@@ -207,7 +202,7 @@ try {
         }
 
         $id = trim((string) $row['UID']);
-        $reasonId = $reasonIds[$absenceIndex % count($reasonIds)];
+        $reason = $reasons[$absenceIndex % count($reasons)];
 
         if (csvMarked($row['Rückkehr'] ?? '')) {
             $departure = $now->modify(sprintf('-%d hours', 2 + $absenceIndex));
@@ -221,7 +216,7 @@ try {
 
         $insertAbsence->execute([
             'person_id' => $id,
-            'reason_id' => $reasonId,
+            'reason' => $reason,
             'departure_time' => $departure->format('Y-m-d H:i:s'),
             'return_time' => $return?->format('Y-m-d H:i:s'),
             'created_at' => $departure->format('Y-m-d H:i:s'),
@@ -230,31 +225,6 @@ try {
         $absenceIndex++;
     }
 
-    /*
-     * Add one referenced soft-deleted reason for testing historical display.
-     */
-    $deletedReasonName = 'Alter Testgrund';
-    $reasonStatement->execute(['name' => $deletedReasonName]);
-
-    $stmt = $pdo->prepare('SELECT id FROM reasons WHERE name = :name');
-    $stmt->execute(['name' => $deletedReasonName]);
-    $deletedReasonId = (int) $stmt->fetchColumn();
-
-    $pdo->prepare('UPDATE reasons SET deleted = 1 WHERE id = :id')->execute(['id' => $deletedReasonId]);
-
-    $referencePersonId = $ids[array_key_last($ids)];
-    $departure = $now->modify('-2 days');
-    $return = $departure->modify('+1 hour');
-
-    $insertAbsence->execute([
-        'person_id' => $referencePersonId,
-        'reason_id' => $deletedReasonId,
-        'departure_time' => $departure->format('Y-m-d H:i:s'),
-        'return_time' => $return->format('Y-m-d H:i:s'),
-        'created_at' => $departure->format('Y-m-d H:i:s'),
-    ]);
-
-    $completedCount++;
 
     $pdo->commit();
 } catch (Throwable $exception) {

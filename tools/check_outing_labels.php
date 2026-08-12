@@ -7,7 +7,9 @@ $errors = [];
 
 foreach ([
     '<h1>Ausgang</h1>',
-    'Grund / Ziel auswählen:',
+    '<legend>Grund / Ziel</legend>',
+    '<label for="reason_select">Auswählen</label>',
+    '<label for="reason">oder Eingeben</label>',
     'Ausgang starten',
     'active-outing-title',
     'Ausgang beenden',

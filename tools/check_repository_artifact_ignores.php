@@ -8,7 +8,7 @@ $filenames = file_get_contents($root . '/tools/check_filenames.php') ?: '';
 $errors = [];
 
 foreach ([
-    "\$file->getFilename() === 'php-qrcode'",
+    "in_array(\$file->getFilename(), ['php-qrcode', 'data'], true)",
 ] as $marker) {
     if (!str_contains($siteStructure, $marker)) {
         $errors[] = "Missing site structure exception marker: {$marker}";

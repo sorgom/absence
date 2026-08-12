@@ -124,6 +124,7 @@
   const okButton = modal.querySelector('[data-confirm-ok]');
   const cancelButtons = modal.querySelectorAll('[data-confirm-cancel]');
   let pendingForm = null;
+  let pendingAction = null;
   let lastFocusedElement = null;
 
   const resolveMessage = (form) => {
@@ -162,6 +163,7 @@
 
   const openModal = (form) => {
     pendingForm = form;
+    pendingAction = null;
     lastFocusedElement = document.activeElement;
     messageElement.textContent = resolveMessage(form);
     modal.hidden = false;
@@ -169,10 +171,25 @@
     okButton.focus();
   };
 
+  const openActionModal = (message, action) => {
+    pendingForm = null;
+    pendingAction = action;
+    lastFocusedElement = document.activeElement;
+    messageElement.textContent = message;
+    modal.hidden = false;
+    document.body.classList.add('confirm-modal-open');
+    okButton.focus();
+  };
+
+  window.AbsenceConfirm = {
+    open: openActionModal,
+  };
+
   const closeModal = () => {
     modal.hidden = true;
     document.body.classList.remove('confirm-modal-open');
     pendingForm = null;
+    pendingAction = null;
 
     if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
       lastFocusedElement.focus();
@@ -192,6 +209,13 @@
   });
 
   okButton.addEventListener('click', () => {
+    if (pendingAction) {
+      const action = pendingAction;
+      closeModal();
+      action();
+      return;
+    }
+
     if (!pendingForm) {
       closeModal();
       return;
@@ -211,5 +235,94 @@
     if (event.key === 'Escape' && !modal.hidden) {
       closeModal();
     }
+  });
+})();
+
+
+/*
+ * Copy selected reason text into the free text field and enable the start button
+ * only when a reason text is present.
+ */
+(() => {
+  const select = document.querySelector('[data-copy-to]');
+
+  if (!select) {
+    return;
+  }
+
+  const input = document.querySelector(select.getAttribute('data-copy-to'));
+
+  if (!input) {
+    return;
+  }
+
+  const buttonSelector = input.getAttribute('data-required-text');
+  const button = buttonSelector ? document.querySelector(buttonSelector) : null;
+
+  const sync = () => {
+    if (button) {
+      button.disabled = input.value.trim() === '';
+    }
+  };
+
+  select.addEventListener('change', () => {
+    input.value = select.value;
+    sync();
+  });
+
+  input.addEventListener('input', sync);
+  sync();
+})();
+
+/*
+ * Warn staff before discarding changed reasons text.
+ */
+(() => {
+  const form = document.querySelector('[data-dirty-form]');
+
+  if (!form) {
+    return;
+  }
+
+  const fields = Array.from(form.querySelectorAll('[data-dirty-watch]'));
+  const message = form.getAttribute('data-dirty-message') || 'Änderungen verwerfen?';
+  let submitting = false;
+
+  fields.forEach((field) => {
+    field.dataset.dirtyInitial = field.value;
+  });
+
+  const isDirty = () => fields.some((field) => field.value !== field.dataset.dirtyInitial);
+
+  form.addEventListener('submit', () => {
+    submitting = true;
+  });
+
+  window.addEventListener('beforeunload', (event) => {
+    if (submitting || !isDirty()) {
+      return;
+    }
+
+    event.preventDefault();
+    event.returnValue = '';
+  });
+
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[href]');
+
+    if (!link || !isDirty()) {
+      return;
+    }
+
+    event.preventDefault();
+
+    if (!window.AbsenceConfirm) {
+      return;
+    }
+
+    window.AbsenceConfirm.open(message, () => {
+      submitting = true;
+      window.location.href = link.href;
+    });
   });
 })();

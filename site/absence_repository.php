@@ -22,9 +22,8 @@ final class AbsenceRepository
     public function activeForPerson(string $personId): ?array
     {
         $stmt = $this->db->prepare(
-            'SELECT a.id, a.person_id, a.reason_id, r.name AS reason_name, a.departure_time, a.return_time
+            'SELECT a.id, a.person_id, a.reason AS reason_name, a.departure_time, a.return_time
              FROM absences a
-             JOIN reasons r ON r.id = a.reason_id
              WHERE a.person_id = :person_id AND a.return_time IS NULL
              ORDER BY a.departure_time DESC
              LIMIT 1'
@@ -48,19 +47,25 @@ final class AbsenceRepository
     /**
      * Starts a new absence for a person.
      */
-    public function start(string $personId, int $reasonId): void
+    public function start(string $personId, string $reason): void
     {
+        $reason = trim($reason);
+
+        if ($reason === '') {
+            throw new \InvalidArgumentException('Grund / Ziel darf nicht leer sein.');
+        }
+
         if ($this->activeForPerson($personId) !== null) {
             throw new \RuntimeException('Es gibt bereits eine aktive Abwesenheit.');
         }
 
         $stmt = $this->db->prepare(
-            'INSERT INTO absences (person_id, reason_id, departure_time)
-             VALUES (:person_id, :reason_id, CURRENT_TIMESTAMP)'
+            'INSERT INTO absences (person_id, reason, departure_time)
+             VALUES (:person_id, :reason, CURRENT_TIMESTAMP)'
         );
         $stmt->execute([
             'person_id' => $personId,
-            'reason_id' => $reasonId,
+            'reason' => $reason,
         ]);
     }
 
@@ -77,8 +82,6 @@ final class AbsenceRepository
 
         $stmt = $this->db->prepare('UPDATE absences SET return_time = CURRENT_TIMESTAMP WHERE id = :id');
         $stmt->execute(['id' => $active['id']]);
-
-        (new ReasonRepository($this->db))->garbageCollectDeleted();
     }
 
 
@@ -110,15 +113,11 @@ final class AbsenceRepository
         ]);
 
         if ($stmt->rowCount() > 0) {
-            (new ReasonRepository($this->db))->garbageCollectDeleted();
-
             return 'deleted';
         }
 
         $stmt = $this->db->prepare('UPDATE absences SET return_time = CURRENT_TIMESTAMP WHERE id = :id');
         $stmt->execute(['id' => $active['id']]);
-
-        (new ReasonRepository($this->db))->garbageCollectDeleted();
 
         return 'ended';
     }
@@ -158,12 +157,11 @@ final class AbsenceRepository
                     a.person_id,
                     a.person_id AS patient_id,
                     p.is_staff,
-                    r.name AS reason_name,
+                    a.reason AS reason_name,
                     a.departure_time,
                     a.return_time
                 FROM absences a
                 JOIN persons p ON p.id = a.person_id
-                JOIN reasons r ON r.id = a.reason_id
                 {$where}
                 ORDER BY {$orderBy}";
 
@@ -191,8 +189,6 @@ final class AbsenceRepository
         ]);
 
         $deleted = $stmt->rowCount();
-        (new ReasonRepository($this->db))->garbageCollectDeleted();
-
         return $deleted;
     }
 
@@ -233,8 +229,6 @@ final class AbsenceRepository
         if ($stmt->rowCount() < 1) {
             throw new \RuntimeException('Abwesenheit wurde nicht gefunden.');
         }
-
-        (new ReasonRepository($this->db))->garbageCollectDeleted();
     }
 
 }

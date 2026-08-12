@@ -23,7 +23,7 @@ foreach (['default_absence_retention_hours', '48'] as $marker) {
     }
 }
 
-foreach (['deleteExpired', 'countExpired', 'DELETE FROM absences', 'return_time IS NOT NULL', "return_time < datetime('now', :modifier)", 'garbageCollectDeleted'] as $marker) {
+foreach (['deleteExpired', 'countExpired', 'DELETE FROM absences', 'return_time IS NOT NULL', "return_time < datetime('now', :modifier)"] as $marker) {
     if (!str_contains($files['repository'], $marker)) {
         $errors[] = "Missing repository marker: {$marker}";
     }
