@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.24
+
+### Changed
+- Replaced the outing start reason input with a textarea.
+- Added CSS `field-sizing: content` for variable textarea height while keeping the field width stable.
+
+### Added
+- `tools/check_outing_reason_textarea.php`.
+
 ## v1.0.0-beta.10.5.23
 
 ### Changed

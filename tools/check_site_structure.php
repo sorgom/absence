@@ -81,6 +81,7 @@ $requiredRootTools = [
     'check_short_absence_delete.php',
     'check_outing_labels.php',
     'check_outing_no_feedback.php',
+    'check_outing_reason_textarea.php',
     'check_absence_cleanup.php',
     'check_cleanup_return_time.php',
     'check_config_usage.php',

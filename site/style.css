@@ -1118,6 +1118,14 @@ body.confirm-modal-open {
   padding: 0;
 }
 
+
+.outing-reason-textarea {
+  field-sizing: content;
+  max-width: 100%;
+  min-height: 2.75rem;
+  resize: none;
+}
+
 textarea {
   background: var(--card);
   border: 1px solid var(--border);

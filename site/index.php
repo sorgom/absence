@@ -146,7 +146,15 @@ if ($auth->isLoggedIn()):
                         </select>
 
                         <label for="reason">oder Eingeben</label>
-                        <input id="reason" name="reason" type="text" autocomplete="off" required data-required-text="#start-outing-button">
+                        <textarea
+                            id="reason"
+                            name="reason"
+                            class="outing-reason-textarea"
+                            rows="1"
+                            autocomplete="off"
+                            required
+                            data-required-text="#start-outing-button"
+                        ></textarea>
                     </fieldset>
 
                     <button id="start-outing-button" type="submit" disabled>Ausgang starten</button>
