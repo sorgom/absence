@@ -7,6 +7,9 @@ use PDO;
 
 /**
  * Repository for managing absence reasons / destinations.
+ *
+ * Reasons are only templates for new absences. The selected/free text is
+ * copied into absences.reason when an absence starts.
  */
 final class ReasonRepository
 {
@@ -15,17 +18,16 @@ final class ReasonRepository
     }
 
     /**
-     * Returns active reasons for selection and management.
+     * Returns reasons in the staff-defined order.
      *
-     * @return array<int,array{id:int,name:string,deleted:int}>
+     * @return array<int,array{id:int,name:string,sort_order:int}>
      */
     public function listAll(): array
     {
         $stmt = $this->db->query(
-            'SELECT id, name, deleted
+            'SELECT id, name, sort_order
              FROM reasons
-             WHERE deleted = 0
-             ORDER BY name COLLATE NOCASE ASC'
+             ORDER BY sort_order ASC, id ASC'
         );
 
         return $stmt->fetchAll();
@@ -34,89 +36,63 @@ final class ReasonRepository
     /**
      * Compatibility alias.
      *
-     * @return array<int,array{id:int,name:string,deleted:int}>
+     * @return array<int,array{id:int,name:string,sort_order:int}>
      */
     public function all(): array
     {
         return $this->listAll();
     }
 
-    /**
-     * Returns all reasons, including soft-deleted records.
-     *
-     * @return array<int,array{id:int,name:string,deleted:int}>
-     */
-    public function listIncludingDeleted(): array
+    public function asText(): string
     {
-        $stmt = $this->db->query(
-            'SELECT id, name, deleted
-             FROM reasons
-             ORDER BY deleted ASC, name COLLATE NOCASE ASC'
+        $names = array_map(
+            static fn (array $row): string => (string) $row['name'],
+            $this->listAll()
         );
 
-        return $stmt->fetchAll();
+        return implode("\n", $names);
     }
 
-    /**
-     * Adds a new reason / destination.
-     */
-    public function add(string $name): void
+    public function replaceFromText(string $text): void
     {
-        $name = trim($name);
+        $lines = preg_split('/\R/u', $text) ?: [];
+        $names = [];
+        $seen = [];
 
-        if ($name === '') {
-            throw new \InvalidArgumentException('Grund / Ziel darf nicht leer sein.');
+        foreach ($lines as $line) {
+            $name = trim((string) $line);
+
+            if ($name === '') {
+                continue;
+            }
+
+            $key = strtolower($name);
+
+            if (isset($seen[$key])) {
+                continue;
+            }
+
+            $seen[$key] = true;
+            $names[] = $name;
         }
 
-        $stmt = $this->db->prepare('SELECT id, deleted FROM reasons WHERE lower(name) = lower(:name)');
-        $stmt->execute(['name' => $name]);
-        $existing = $stmt->fetch();
+        $this->db->beginTransaction();
 
-        if ($existing && (int) $existing['deleted'] === 0) {
-            throw new \RuntimeException('Dieser Eintrag ist bereits vorhanden.');
+        try {
+            $this->db->exec('DELETE FROM reasons');
+            $stmt = $this->db->prepare('INSERT INTO reasons (name, sort_order) VALUES (:name, :sort_order)');
+
+            foreach ($names as $index => $name) {
+                $stmt->execute([
+                    'name' => $name,
+                    'sort_order' => $index + 1,
+                ]);
+            }
+
+            $this->db->commit();
+        } catch (\Throwable $exception) {
+            $this->db->rollBack();
+            throw $exception;
         }
-
-        if ($existing && (int) $existing['deleted'] === 1) {
-            $restore = $this->db->prepare('UPDATE reasons SET deleted = 0 WHERE id = :id');
-            $restore->execute(['id' => (int) $existing['id']]);
-            return;
-        }
-
-        $stmt = $this->db->prepare('INSERT INTO reasons (name, deleted) VALUES (:name, 0)');
-        $stmt->execute(['name' => $name]);
-    }
-
-    /**
-     * Soft-deletes one reason. Existing absences keep showing the old name.
-     */
-    public function delete(int $id): void
-    {
-        if ($id < 1) {
-            throw new \InvalidArgumentException('Kein Eintrag ausgewählt.');
-        }
-
-        $stmt = $this->db->prepare('UPDATE reasons SET deleted = 1 WHERE id = :id');
-        $stmt->execute(['id' => $id]);
-
-        if ($stmt->rowCount() < 1) {
-            throw new \RuntimeException('Eintrag wurde nicht gefunden.');
-        }
-
-        $this->garbageCollectDeleted();
-    }
-
-    /**
-     * Permanently removes deleted reasons that are no longer referenced.
-     */
-    public function garbageCollectDeleted(): int
-    {
-        $stmt = $this->db->prepare(
-            'DELETE FROM reasons
-             WHERE deleted = 1
-               AND id NOT IN (SELECT DISTINCT reason_id FROM absences)'
-        );
-        $stmt->execute();
-
-        return $stmt->rowCount();
     }
 }

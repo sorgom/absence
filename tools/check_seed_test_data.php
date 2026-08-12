@@ -27,8 +27,6 @@ foreach ([
     'Aufbruch',
     'Rückkehr',
     'INSERT INTO absences',
-    'Alter Testgrund',
-    'deleted = 1',
     'Run first: php tools/init_database.php',
 ] as $marker) {
     if (!str_contains($content, $marker)) {

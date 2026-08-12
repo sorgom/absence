@@ -7,8 +7,9 @@ $created = file_get_contents($site . '/person_created.php') ?: '';
 $errors = [];
 
 foreach ([
-    '$password = $this->generatePin();',
-    'str_pad((string) random_int(0, 9999), 4',
+    '$password = $this->generatePin($isStaff);',
+    '$alphabet =',
+    'PasswordService::minLengthForRole',
 ] as $marker) {
     if (!str_contains($repository, $marker)) {
         $errors[] = "Missing password marker: {$marker}";

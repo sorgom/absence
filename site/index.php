@@ -83,7 +83,7 @@ if ($auth->isLoggedIn() && $_SERVER['REQUEST_METHOD'] === 'POST') {
         $action = (string) ($_POST['action'] ?? '');
 
         if ($action === 'start') {
-            $absences->start($personId, (int) ($_POST['reason_id'] ?? 0));
+            $absences->start($personId, (string) ($_POST['reason'] ?? ''));
         } elseif ($action === 'end') {
             $absences->endOrDeleteShort(
                 $personId,
@@ -132,16 +132,24 @@ if ($auth->isLoggedIn()):
                     <?= Csrf::field() ?>
                     <input type="hidden" name="action" value="start">
 
-                    <label for="reason_id">Grund / Ziel auswählen:</label>
-                    <select id="reason_id" name="reason_id" required>
-                        <?php foreach ($reasons as $reason): ?>
-                            <option value="<?= (int) $reason['id'] ?>">
-                                <?= Utils::h((string) $reason['name']) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                    <fieldset class="reason-entry-group">
+                        <legend>Grund / Ziel</legend>
 
-                    <button type="submit">Ausgang starten</button>
+                        <label for="reason_select">Auswählen</label>
+                        <select id="reason_select" name="reason_select" data-copy-to="#reason" autocomplete="off">
+                            <option value=""></option>
+                            <?php foreach ($reasons as $reason): ?>
+                                <option value="<?= Utils::h((string) $reason['name']) ?>">
+                                    <?= Utils::h((string) $reason['name']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+
+                        <label for="reason">oder Eingeben</label>
+                        <input id="reason" name="reason" type="text" autocomplete="off" required data-required-text="#start-outing-button">
+                    </fieldset>
+
+                    <button id="start-outing-button" type="submit" disabled>Ausgang starten</button>
                 </form>
             <?php endif; ?>
         <?php endif; ?>

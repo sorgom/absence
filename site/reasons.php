@@ -3,9 +3,6 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/bootstrap.php';
 
-
-
-
 use AbsenceApp\Auth;
 use AbsenceApp\Csrf;
 use AbsenceApp\Database;
@@ -29,26 +26,16 @@ $error = null;
 $success = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $action = (string) ($_POST['action'] ?? '');
-
     try {
         Csrf::requireValid($_POST['csrf_token'] ?? null);
-
-        if ($action === 'add') {
-            $repository->add((string) ($_POST['name'] ?? ''));
-            $success = 'Grund / Ziel wurde hinzugefügt.';
-        }
-
-        if ($action === 'delete') {
-            $repository->delete((int) ($_POST['reason_id'] ?? 0));
-            $success = 'Grund / Ziel wurde gelöscht.';
-        }
+        $repository->replaceFromText((string) ($_POST['reasons_text'] ?? ''));
+        $success = 'Gründe und Ziele wurden gespeichert.';
     } catch (Throwable $exception) {
         $error = Utils::safeMessage($exception);
     }
 }
 
-$reasons = $repository->listAll();
+$reasonsText = $repository->asText();
 
 $title = 'Gründe und Ziele';
 require __DIR__ . '/header.php';

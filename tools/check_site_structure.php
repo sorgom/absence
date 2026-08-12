@@ -55,9 +55,9 @@ $requiredRootTools = [
     'check_qr_code_handout.php',
     'check_qr_code_size.php',
     'check_qr_code_less_padding.php',
-    'check_reasons_soft_delete.php',
-    'check_reasons_hint_removed.php',
-    'check_reasons_no_autofocus.php',
+    'check_start_reason_text.php',
+    'check_reasons_text_editor.php',
+    'check_absence_reason_denormalized.php',
     'check_absence_manual_delete.php',
     'check_staff_overview_mobile.php',
     'check_staff_overview_simplified.php',
@@ -77,7 +77,6 @@ $requiredRootTools = [
     'check_confirm_modal.php',
     'check_js_syntax.php',
     'check_password_toggle.php',
-    'check_reasons_confirm.php',
     'check_login_start_flow.php',
     'check_short_absence_delete.php',
     'check_outing_labels.php',
@@ -113,7 +112,7 @@ foreach (new DirectoryIterator($site) as $file) {
     }
 
     if ($file->isDir()) {
-        if ($file->getFilename() === 'php-qrcode') {
+        if (in_array($file->getFilename(), ['php-qrcode', 'data'], true)) {
             continue;
         }
 

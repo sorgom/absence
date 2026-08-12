@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.22
+
+### Changed
+- Ausgang uses a free text reason field. Selecting a list item copies its text into the field.
+- Reasons are edited as one ordered multiline text area.
+- Absences store copied reason text instead of a reason reference.
+- Reason soft-delete and reason garbage collection were removed.
+
+### Added
+- Dirty-change warning for leaving the reasons editor.
+- Checks for denormalized absence reasons and the multiline reasons editor.
+
 ## v1.0.0-beta.10.5.21
 
 ### Changed

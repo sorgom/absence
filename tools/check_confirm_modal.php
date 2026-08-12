@@ -39,12 +39,10 @@ if (!str_contains($overview, 'Möchten Sie die Abwesenheit von {value} wirklich 
     $errors[] = 'Missing dynamic absence delete message.';
 }
 
-if (!str_contains($reasons, 'Möchten Sie „{value}“ wirklich löschen?')) {
-    $errors[] = 'Missing dynamic reason delete message.';
-}
-
-if (!str_contains($reasons, 'data-confirm-message="Möchten Sie diesen Grund / dieses Ziel wirklich löschen?"')) {
-    $errors[] = 'Missing reason confirm message.';
+foreach (['data-dirty-message="Änderungen verwerfen?"', 'data-dirty-leave>Abbruch</a>'] as $marker) {
+    if (!str_contains($reasons, $marker)) {
+        $errors[] = "Missing reasons discard marker: {$marker}";
+    }
 }
 
 if ($errors !== []) {

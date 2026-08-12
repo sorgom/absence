@@ -4,7 +4,7 @@ declare(strict_types=1);
 use AbsenceApp\Csrf;
 use AbsenceApp\Utils;
 
-/** @var array<int,array{id:int,name:string}> $reasons */
+/** @var string $reasonsText */
 /** @var string|null $error */
 /** @var string|null $success */
 ?>
@@ -19,33 +19,16 @@ use AbsenceApp\Utils;
         <p class="alert success"><?= Utils::h($success) ?></p>
     <?php endif; ?>
 
-    <form method="post" action="/reasons.php" class="stack-form">
+    <form method="post" action="/reasons.php" class="stack-form reasons-editor-form" data-dirty-form data-dirty-message="Änderungen verwerfen?">
         <?= Csrf::field() ?>
-        <input type="hidden" name="action" value="add">
 
-        <label for="name">Neuer Grund / neues Ziel</label>
-        <input id="name" name="name" type="text" autocomplete="off" required>
+        <label for="reasons_text">Gründe und Ziele</label>
+        <textarea id="reasons_text" name="reasons_text" rows="14" autocomplete="off" data-dirty-watch><?= Utils::h($reasonsText) ?></textarea>
+        <p class="form-hint">Jede Zeile ist ein Eintrag. Leerzeilen werden ignoriert. Die Reihenfolge bestimmt die Auswahlliste.</p>
 
-        <button type="submit">Hinzufügen</button>
+        <div class="form-actions two-actions">
+            <button type="submit" data-dirty-save>Speichern</button>
+            <a class="button-secondary" href="/personal.php" data-dirty-leave>Abbruch</a>
+        </div>
     </form>
-
-    <hr class="section-divider">
-
-    <?php if ($reasons === []): ?>
-        <p class="alert notice">Es sind keine Gründe / Ziele vorhanden.</p>
-    <?php else: ?>
-        <form data-confirm-message="Möchten Sie diesen Grund / dieses Ziel wirklich löschen?" data-confirm-template="Möchten Sie „{value}“ wirklich löschen?" data-confirm-value-source="#reason_id" method="post" action="/reasons.php" class="stack-form">
-            <?= Csrf::field() ?>
-            <input type="hidden" name="action" value="delete">
-
-            <label for="reason_id">Vorhandene Einträge</label>
-            <select id="reason_id" name="reason_id" required>
-                <?php foreach ($reasons as $reason): ?>
-                    <option value="<?= (int) $reason['id'] ?>"><?= Utils::h((string) $reason['name']) ?></option>
-                <?php endforeach; ?>
-            </select>
-
-            <button type="submit" class="danger-button">Löschen</button>
-        </form>
-    <?php endif; ?>
 </section>

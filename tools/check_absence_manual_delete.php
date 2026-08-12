@@ -9,7 +9,7 @@ $personal = file_get_contents($site . '/personal.php') ?: '';
 $template = file_get_contents($site . '/staff_overview.php') ?: '';
 $style = file_get_contents($site . '/style.css') ?: '';
 
-foreach (['deleteById', 'DELETE FROM absences', 'garbageCollectDeleted'] as $marker) {
+foreach (['deleteById', 'DELETE FROM absences'] as $marker) {
     if (!str_contains($repository, $marker)) {
         $errors[] = "Missing repository marker: {$marker}";
     }
