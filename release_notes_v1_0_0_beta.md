@@ -436,3 +436,13 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Added
 - `tools/check_outing_reason_textarea.php`.
+
+
+## Update v1.0.0-beta.10.5.25
+
+### Changed
+- Initial passwords now use lowercase letters except `l` and digits `2` through `9`.
+- Digits `0` and `1` are no longer used for generated initial passwords.
+
+### Added
+- `tools/check_initial_password_alphabet.php`.

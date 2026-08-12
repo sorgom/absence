@@ -7,6 +7,8 @@ $created = file_get_contents($site . '/person_created.php') ?: '';
 $errors = [];
 
 foreach ([
+    'abcdefghijkmnopqrstuvwxyz23456789',
+    'PasswordService::minLengthForRole',
     '$password = $this->generatePin($isStaff);',
     'PasswordService::minLengthForRole',
     '$alphabet =',

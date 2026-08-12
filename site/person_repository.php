@@ -142,13 +142,13 @@ final class PersonRepository
      * Generates a random initial password for a new or reset account.
      *
      * Uses lowercase letters (excluding 'l', which is easily confused with
-     * '1' or 'I' in some fonts/handwriting) plus digits 0-9, at the same
+     * '1' or 'I' in some fonts/handwriting) plus digits 2-9, at the same
      * length as the role's minimum password length - so the generated
      * password already satisfies PasswordService's own policy.
      */
     private function generatePin(bool $isStaff): string
     {
-        $alphabet = 'abcdefghijkmnopqrstuvwxyz0123456789';
+        $alphabet = 'abcdefghijkmnopqrstuvwxyz23456789';
         $length = PasswordService::minLengthForRole($isStaff ? Auth::ROLE_STAFF : Auth::ROLE_PATIENT);
         $password = '';
 
