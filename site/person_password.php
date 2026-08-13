@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/bootstrap.php';
 
+use AbsenceApp\AuditLogRepository;
 use AbsenceApp\Auth;
 use AbsenceApp\Csrf;
 use AbsenceApp\Database;
@@ -35,6 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'reset
 
         $selectedId = trim((string) ($_POST['id'] ?? ''));
         $initialPassword = $repository->resetPassword($selectedId);
+
+        (new AuditLogRepository($db))->record(
+            (string) $auth->currentUserId(),
+            AuditLogRepository::ACTION_PASSWORD_RESET,
+            $selectedId
+        );
 
         Session::set('created_person', [
             'id' => $selectedId,

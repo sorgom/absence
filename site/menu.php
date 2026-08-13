@@ -19,6 +19,7 @@ $userId = (string) Session::get('user_id', '');
         <a href="/person_create.php">Person anlegen</a>
         <a href="/person_password.php">Person Passwort</a>
         <a href="/person_delete.php">Person löschen</a>
+        <a href="/protokoll.php">Protokoll</a>
         <a href="/index.php">Ausgang</a>
         <a href="/change_password.php">Passwort ändern</a>
         <a href="/logout.php">Logout</a>

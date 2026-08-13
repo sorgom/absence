@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/bootstrap.php';
 
+use AbsenceApp\AuditLogRepository;
 use AbsenceApp\Auth;
 use AbsenceApp\Csrf;
 use AbsenceApp\Database;
@@ -29,6 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         Csrf::requireValid($_POST['csrf_token'] ?? null);
         $repository->replaceFromText((string) ($_POST['reasons_text'] ?? ''));
+        (new AuditLogRepository($db))->record(
+            (string) $auth->currentUserId(),
+            AuditLogRepository::ACTION_REASONS_SAVED,
+            'Gründe und Ziele'
+        );
         $success = 'Gründe und Ziele wurden gespeichert.';
     } catch (Throwable $exception) {
         $error = Utils::safeMessage($exception);

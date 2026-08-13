@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.26.1
+
+### Fixed
+- Added missing bootstrap include for `audit_log_repository.php`.
+- Protocol check now verifies bootstrap loading.
+
+## v1.0.0-beta.10.5.26
+
+### Added
+- Staff protocol table and repository.
+- Staff-only protocol page.
+- Hamburger menu entry `Protokoll` below `Person löschen`.
+- Automatic cleanup for protocol entries through `protocol_retention_hours`.
+- Protocol check `tools/check_protocol.php`.
+
+### Changed
+- Person creation, person deletion, password reset and reasons/destinations changes are now logged.
+
 ## v1.0.0-beta.10.5.25
 
 ### Changed

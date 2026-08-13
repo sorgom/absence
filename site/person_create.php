@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/bootstrap.php';
 
+use AbsenceApp\AuditLogRepository;
 use AbsenceApp\Auth;
 use AbsenceApp\Csrf;
 use AbsenceApp\Database;
@@ -36,6 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $repository = new PersonRepository($db);
         $createdId = trim((string) ($_POST['id'] ?? ''));
         $generatedPassword = $repository->create($createdId, $isStaff);
+
+        (new AuditLogRepository($db))->record(
+            (string) $auth->currentUserId(),
+            AuditLogRepository::ACTION_PERSON_CREATED,
+            $createdId
+        );
 
         Session::set('created_person', [
             'id' => $createdId,

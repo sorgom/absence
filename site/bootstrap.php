@@ -13,5 +13,6 @@ require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/app_info.php';
 require_once __DIR__ . '/person_repository.php';
 require_once __DIR__ . '/reason_repository.php';
+require_once __DIR__ . '/audit_log_repository.php';
 require_once __DIR__ . '/absence_repository.php';
 require_once __DIR__ . '/absence_cleanup.php';

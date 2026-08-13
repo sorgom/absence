@@ -1166,3 +1166,8 @@ button:disabled {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+
+.protocol-table {
+  width: 100%;
+}

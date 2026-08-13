@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/bootstrap.php';
 
+use AbsenceApp\AuditLogRepository;
 use AbsenceApp\Auth;
 use AbsenceApp\Csrf;
 use AbsenceApp\Database;
@@ -34,9 +35,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delet
     try {
         Csrf::requireValid($_POST['csrf_token'] ?? null);
 
+        $deletedId = trim((string) ($_POST['id'] ?? ''));
         $repository->delete(
-            (string) ($_POST['id'] ?? ''),
+            $deletedId,
             (string) $auth->currentUserId()
+        );
+
+        (new AuditLogRepository($db))->record(
+            (string) $auth->currentUserId(),
+            AuditLogRepository::ACTION_PERSON_DELETED,
+            $deletedId
         );
 
         $success = 'Person wurde gelöscht.';

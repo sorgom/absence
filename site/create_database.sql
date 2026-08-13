@@ -25,6 +25,16 @@ CREATE TABLE IF NOT EXISTS absences (
     FOREIGN KEY (person_id) REFERENCES persons(id) ON DELETE CASCADE
 );
 
+
+CREATE TABLE IF NOT EXISTS audit_logs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    staff_user_id TEXT NOT NULL,
+    action TEXT NOT NULL,
+    affected_element TEXT,
+    FOREIGN KEY (staff_user_id) REFERENCES persons(id) ON DELETE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS settings (
     name TEXT PRIMARY KEY,
     value TEXT NOT NULL
@@ -35,3 +45,5 @@ CREATE INDEX IF NOT EXISTS idx_reasons_sort_order ON reasons(sort_order);
 CREATE INDEX IF NOT EXISTS idx_absences_person_id ON absences(person_id);
 CREATE INDEX IF NOT EXISTS idx_absences_departure_time ON absences(departure_time);
 CREATE INDEX IF NOT EXISTS idx_absences_return_time ON absences(return_time);
+CREATE INDEX IF NOT EXISTS idx_audit_logs_created_at ON audit_logs(created_at);
+CREATE INDEX IF NOT EXISTS idx_audit_logs_staff_user_id ON audit_logs(staff_user_id);

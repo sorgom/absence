@@ -446,3 +446,22 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Added
 - `tools/check_initial_password_alphabet.php`.
+
+
+## Update v1.0.0-beta.10.5.26
+
+### Added
+- Staff protocol for relevant staff actions.
+- Protocol page `protokoll.php`, available for staff only.
+- Configurable protocol retention via `protocol_retention_hours`.
+- Automatic cleanup of old protocol entries.
+
+### Changed
+- Staff actions now record protocol entries for person creation, person deletion, password reset and reasons/destinations changes.
+
+
+## Update v1.0.0-beta.10.5.26.1
+
+### Fixed
+- Loaded `audit_log_repository.php` in bootstrap so protocol cleanup can use `AuditLogRepository`.
+- Extended protocol check to verify bootstrap loading.

@@ -246,6 +246,8 @@ $pdo->exec('CREATE INDEX IF NOT EXISTS idx_reasons_sort_order ON reasons(sort_or
 $pdo->exec('CREATE INDEX IF NOT EXISTS idx_absences_person_id ON absences(person_id)');
 $pdo->exec('CREATE INDEX IF NOT EXISTS idx_absences_departure_time ON absences(departure_time)');
 $pdo->exec('CREATE INDEX IF NOT EXISTS idx_absences_return_time ON absences(return_time)');
+$pdo->exec('CREATE INDEX IF NOT EXISTS idx_audit_logs_created_at ON audit_logs(created_at)');
+$pdo->exec('CREATE INDEX IF NOT EXISTS idx_audit_logs_staff_user_id ON audit_logs(staff_user_id)');
 
 echo "Database initialized: {$databasePath}\n";
 echo "Initial staff member ensured: anfang / anfang\n";

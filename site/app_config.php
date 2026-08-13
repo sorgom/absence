@@ -13,6 +13,7 @@ return [
     'database_path' => __DIR__ . '/data/database.sqlite',
     'session_name' => 'absence_app_session',
     'default_absence_retention_hours' => 48,
+    'protocol_retention_hours' => 48,
     'short_absence_delete_minutes' => 10,
     'datetime_display_format' => 'd.m.Y H:i',
     'login_max_attempts' => 5,
