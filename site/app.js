@@ -11,6 +11,7 @@
  * - #show_passwords
  * - name="show_passwords"
  */
+"use strict";
 (() => {
   const toggle = document.querySelector(
     '[data-show-passwords], [data-password-toggle], #show_passwords, input[name="show_passwords"]'
