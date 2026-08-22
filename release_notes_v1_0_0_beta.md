@@ -465,3 +465,13 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 ### Fixed
 - Loaded `audit_log_repository.php` in bootstrap so protocol cleanup can use `AuditLogRepository`.
 - Extended protocol check to verify bootstrap loading.
+
+
+## Update v1.0.0-beta.10.5.27
+
+### Fixed
+- Removed invalid `aria-label` usage from generic `div` elements.
+- Added a valid role to status-dot `span` elements that carry `aria-label`.
+
+### Added
+- `tools/check_html_aria_validity.php`.

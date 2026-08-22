@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.27
+
+### Fixed
+- Fixed HTML validator errors for `aria-label` on generic `div` and `span` elements.
+- Status dots now use `role="img"` when labelled.
+
+### Added
+- `tools/check_html_aria_validity.php`.
+
 ## v1.0.0-beta.10.5.26.1
 
 ### Fixed

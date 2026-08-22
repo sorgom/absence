@@ -70,7 +70,7 @@ function staffOverviewEmptyLabel(string $view): string
             </div>
         </form>
 
-        <div class="overview-sort-buttons" aria-label="Sortierung">
+        <div class="overview-sort-buttons" role="group" aria-label="Sortierung">
             <form method="post" action="/personal.php">
                 <?= Csrf::field() ?>
                 <input type="hidden" name="action" value="overview_sort">
@@ -113,6 +113,7 @@ function staffOverviewEmptyLabel(string $view): string
                             <td class="status-cell" data-label="">
                                 <span
                                     class="overview-status-dot <?= $isActive ? 'is-active' : 'is-inactive' ?>"
+                                    role="img"
                                     aria-label="<?= $isActive ? 'Aktiv' : 'Beendet' ?>"
                                     title="<?= $isActive ? 'Aktiv' : 'Beendet' ?>"
                                 ></span>

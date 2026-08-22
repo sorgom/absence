@@ -43,7 +43,7 @@ if ($userId !== '') {
     </div>
 
     <?php if (Session::has('user_id')): ?>
-        <div class="header-right" aria-label="Aktueller Login">
+        <div class="header-right">
             <span class="login-id"><?= Utils::h($userId) ?></span>
             <a
                 class="status-indicator <?= $hasActiveAbsence ? 'is-active' : 'is-inactive' ?>"
