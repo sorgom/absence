@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.28
+
+### Changed
+- Redesigned header with icon on the left, smaller centered status LED and hamburger menu on the right.
+- Added `Login: UID` row to the hamburger menu.
+- Added a subtle staff-menu separator between `Protokoll` and `Login: UID`.
+
+### Added
+- `tools/check_header_menu_redesign.php`.
+
 ## v1.0.0-beta.10.5.27
 
 ### Fixed

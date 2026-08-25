@@ -10,6 +10,7 @@ $userId = (string) Session::get('user_id', '');
 ?>
 <nav class="drawer-menu" id="drawer-menu" aria-label="Menü">
 <?php if ($role === Auth::ROLE_PATIENT): ?>
+        <p class="menu-login">Login: <?= Utils::h($userId) ?></p>
         <a href="/index.php">Ausgang</a>
         <a href="/change_password.php">Passwort ändern</a>
         <a href="/logout.php">Logout</a>
@@ -20,6 +21,8 @@ $userId = (string) Session::get('user_id', '');
         <a href="/person_password.php">Person Passwort</a>
         <a href="/person_delete.php">Person löschen</a>
         <a href="/protokoll.php">Protokoll</a>
+        <hr class="menu-separator">
+        <p class="menu-login">Login: <?= Utils::h($userId) ?></p>
         <a href="/index.php">Ausgang</a>
         <a href="/change_password.php">Passwort ändern</a>
         <a href="/logout.php">Logout</a>

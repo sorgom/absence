@@ -475,3 +475,14 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Added
 - `tools/check_html_aria_validity.php`.
+
+
+## Update v1.0.0-beta.10.5.28
+
+### Changed
+- Header layout now shows `icon.svg` on the left, a smaller centered status LED and the hamburger menu on the right.
+- Hamburger menu now shows `Login: UID` above `Ausgang`.
+- Staff menu includes a subtle separator between `Protokoll` and `Login: UID`.
+
+### Added
+- `tools/check_header_menu_redesign.php`.

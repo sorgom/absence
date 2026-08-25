@@ -1171,3 +1171,61 @@ button:disabled {
 .protocol-table {
   width: 100%;
 }
+
+
+/* v1.0.0-beta.10.5.28: header icon, centered LED, right menu ----------- */
+.app-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.header-left {
+  justify-content: flex-start;
+}
+
+.header-center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.header-right {
+  justify-content: flex-end;
+  margin-left: 0;
+}
+
+.app-icon-link {
+  align-items: center;
+  display: inline-flex;
+  height: 3rem;
+  justify-content: center;
+  width: 3rem;
+}
+
+.app-icon {
+  display: block;
+  height: 2.75rem;
+  width: 2.75rem;
+}
+
+.header-center .status-indicator {
+  height: 1.55rem;
+  width: 1.55rem;
+}
+
+.header-right .drawer-menu {
+  left: auto;
+  right: 0;
+}
+
+.menu-separator {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 0.25rem 0;
+}
+
+.drawer-menu .menu-login {
+  color: var(--muted);
+  font-weight: 600;
+}

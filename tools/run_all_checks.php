@@ -61,6 +61,7 @@ $checks = [
     'check_cleanup_seed_runtime.php',
     'check_forms.php',
     'check_header_layout.php',
+    'check_header_menu_redesign.php',
     'check_html_aria_validity.php',
     'check_status_led_link.php',
     'check_app_name_title_footer.php',

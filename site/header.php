@@ -36,22 +36,27 @@ if ($userId !== '') {
 <body>
 <header class="app-header">
     <div class="header-left">
-        <div class="menu-dropdown-anchor">
-            <button class="menu-toggle" type="button" data-menu-toggle aria-controls="drawer-menu" aria-expanded="false" aria-label="Menü öffnen">☰</button>
-            <?php require __DIR__ . '/menu.php'; ?>
-        </div>
+        <a class="app-icon-link" href="/index.php" aria-label="<?= Utils::h($appName) ?> öffnen">
+            <img class="app-icon" src="/icon.svg" alt="">
+        </a>
     </div>
 
-    <?php if (Session::has('user_id')): ?>
-        <div class="header-right">
-            <span class="login-id"><?= Utils::h($userId) ?></span>
+    <div class="header-center">
+        <?php if (Session::has('user_id')): ?>
             <a
                 class="status-indicator <?= $hasActiveAbsence ? 'is-active' : 'is-inactive' ?>"
                 href="/index.php"
                 aria-label="<?= $hasActiveAbsence ? 'Ausgang öffnen: Abwesenheit aktiv' : 'Ausgang öffnen: keine aktive Abwesenheit' ?>"
                 title="<?= $hasActiveAbsence ? 'Ausgang öffnen: Abwesenheit aktiv' : 'Ausgang öffnen: keine aktive Abwesenheit' ?>"
             ></a>
+        <?php endif; ?>
+    </div>
+
+    <div class="header-right">
+        <div class="menu-dropdown-anchor">
+            <button class="menu-toggle" type="button" data-menu-toggle aria-controls="drawer-menu" aria-expanded="false" aria-label="Menü öffnen">☰</button>
+            <?php require __DIR__ . '/menu.php'; ?>
         </div>
-    <?php endif; ?>
+    </div>
 </header>
 <main class="container">
