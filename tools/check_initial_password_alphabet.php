@@ -6,9 +6,13 @@ $errors = [];
 
 foreach ([
     "private function generatePin(bool \$isStaff): string",
-    "\$alphabet = 'abcdefghijkmnopqrstuvwxyz23456789';",
+    "\$letters = 'abcdefghijkmnopqrstuvwxyz';",
+    "\$digits = '23456789';",
+    "\$digitCount = intdiv(\$length, 2);",
+    "\$letterCount = \$length - \$digitCount;",
+    "shuffle(\$characters);",
+    "return implode('', \$characters);",
     "PasswordService::minLengthForRole",
-    "random_int(0, strlen(\$alphabet) - 1)",
 ] as $marker) {
     if (!str_contains($repository, $marker)) {
         $errors[] = "Missing initial password alphabet marker: {$marker}";
@@ -17,6 +21,7 @@ foreach ([
 
 foreach ([
     "abcdefghijkmnopqrstuvwxyz0123456789",
+    "abcdefghijkmnopqrstuvwxyz23456789",
     "0123456789",
     "generatePassword",
     "str_pad((string) random_int(0, 9999), 4",

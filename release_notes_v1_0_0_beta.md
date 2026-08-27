@@ -486,3 +486,23 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Added
 - `tools/check_header_menu_redesign.php`.
+
+
+## Update v1.0.0-beta.10.5.29
+
+### Changed
+- Duplicate-ID error on person creation now includes the concrete UID.
+- Generated initial passwords now contain as many digits as letters as possible.
+- Printed credential handouts now include the configured app title and visible signet.
+
+### Added
+- `tools/check_person_create_duplicate_id.php`.
+
+
+## Update v1.0.0-beta.10.5.29.1
+
+### Fixed
+- Credential handout signet and configured title are now visible only in print output.
+
+### Added
+- `tools/check_credential_print_brand.php`.

@@ -722,6 +722,24 @@ body.confirm-modal-open {
   margin-top: 0;
 }
 
+
+.print-brand {
+  display: none;
+}
+
+.print-brand-icon {
+  display: block;
+  height: 4.5rem;
+  width: 4.5rem;
+}
+
+.print-app-name {
+  color: var(--muted);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 0.15rem;
+}
+
 .print-title {
   display: none;
   margin-top: 0;
@@ -817,11 +835,30 @@ body.confirm-modal-open {
     width: 100%;
   }
 
+  .print-brand {
+    align-items: center;
+    display: flex;
+    gap: 8mm;
+    margin-bottom: 10mm;
+  }
+
+  .print-brand-icon {
+    height: 22mm;
+    width: 22mm;
+  }
+
+  .print-app-name {
+    color: #000;
+    font-size: 16pt;
+    margin: 0 0 2mm;
+  }
+
   .print-title {
     display: block;
     font-size: 22pt;
-    margin: 0 0 10mm;
+    margin: 0;
   }
+
 
   .credential-list {
     gap: 1.2rem;

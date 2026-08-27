@@ -4,6 +4,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/bootstrap.php';
 
 use AbsenceApp\Auth;
+use AbsenceApp\Config;
 use AbsenceApp\Database;
 use AbsenceApp\Session;
 use AbsenceApp\Utils;
@@ -38,6 +39,7 @@ $scheme = $forwardedProto !== ''
 $appUrl = $scheme . '://' . $host;
 $createdId = (string) $createdPerson['id'];
 $initialPassword = (string) $createdPerson['initial_password'];
+$appName = (string) Config::get('app_name');
 
 $title = 'Zugangsdaten';
 require __DIR__ . '/header.php';
@@ -48,7 +50,13 @@ require __DIR__ . '/header.php';
     </div>
 
     <div class="print-card" aria-label="Zugangsdaten für neue Person">
-        <h1 class="print-title">Zugangsdaten</h1>
+        <div class="print-brand">
+            <img class="print-brand-icon" src="/icon.svg" alt="">
+            <div>
+                <p class="print-app-name"><?= Utils::h($appName) ?></p>
+                <h1 class="print-title">Zugangsdaten</h1>
+            </div>
+        </div>
 
         <dl class="credential-list">
             <div>

@@ -63,7 +63,7 @@ final class PersonRepository
         }
 
         if ($this->exists($id)) {
-            throw new \RuntimeException('Diese ID ist bereits vorhanden.');
+            throw new \RuntimeException('Die ID „' . $id . '“ existiert bereits.');
         }
 
         $password = $this->generatePin($isStaff);
@@ -142,21 +142,30 @@ final class PersonRepository
      * Generates a random initial password for a new or reset account.
      *
      * Uses lowercase letters (excluding 'l', which is easily confused with
-     * '1' or 'I' in some fonts/handwriting) plus digits 2-9, at the same
-     * length as the role's minimum password length - so the generated
-     * password already satisfies PasswordService's own policy.
+     * '1' or 'I' in some fonts/handwriting) and digits 2-9.
+     * The generated password contains as many digits as letters as possible
+     * for the configured length.
      */
     private function generatePin(bool $isStaff): string
     {
-        $alphabet = 'abcdefghijkmnopqrstuvwxyz23456789';
+        $letters = 'abcdefghijkmnopqrstuvwxyz';
+        $digits = '23456789';
         $length = PasswordService::minLengthForRole($isStaff ? Auth::ROLE_STAFF : Auth::ROLE_PATIENT);
-        $password = '';
+        $digitCount = intdiv($length, 2);
+        $letterCount = $length - $digitCount;
+        $characters = [];
 
-        for ($i = 0; $i < $length; $i++) {
-            $password .= $alphabet[random_int(0, strlen($alphabet) - 1)];
+        for ($i = 0; $i < $letterCount; $i++) {
+            $characters[] = $letters[random_int(0, strlen($letters) - 1)];
         }
 
-        return $password;
+        for ($i = 0; $i < $digitCount; $i++) {
+            $characters[] = $digits[random_int(0, strlen($digits) - 1)];
+        }
+
+        shuffle($characters);
+
+        return implode('', $characters);
     }
 
 }

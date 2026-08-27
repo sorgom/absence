@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.29.1
+
+### Fixed
+- Signet and configured title on credential handouts are hidden on screen and shown only in print output.
+
+### Added
+- `tools/check_credential_print_brand.php`.
+
+## v1.0.0-beta.10.5.29
+
+### Changed
+- Duplicate-ID error on person creation now contains the concrete UID.
+- Generated initial passwords now contain as many digits as letters as possible.
+- Credential handout print output now includes the configured app title and visible signet.
+
+### Added
+- `tools/check_person_create_duplicate_id.php`.
+
 ## v1.0.0-beta.10.5.28
 
 ### Changed
