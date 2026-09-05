@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'reset
 
         Session::set('created_person', [
             'id' => $selectedId,
-            'type' => $isStaffSelection ? 'Personal' : 'Patient',
+            'type' => $isStaffSelection ? 'Team' : 'Patient/-in',
             'initial_password' => $initialPassword,
         ]);
 

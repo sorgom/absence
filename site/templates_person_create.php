@@ -13,12 +13,12 @@
 
             <label>
                 <input type="radio" name="person_type" value="patient" checked>
-                Patient
+                Patient/-in
             </label>
 
             <label>
                 <input type="radio" name="person_type" value="staff">
-                Personal
+                Team
             </label>
         </fieldset>
 

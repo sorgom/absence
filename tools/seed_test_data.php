@@ -169,7 +169,7 @@ try {
             '  %s / %s%s%s',
             $id,
             $password,
-            $isStaff === 1 ? ' [Personal]' : ' [Patient]',
+            $isStaff === 1 ? ' [Team]' : ' [Patient/-in]',
             $firstLogin === 1 ? ' [PW ändern]' : ''
         );
     }

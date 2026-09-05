@@ -506,3 +506,13 @@ Adds the missing `person_created.php` page and `check_person_created_print.php` 
 
 ### Added
 - `tools/check_credential_print_brand.php`.
+
+
+## Update v1.0.0-beta.10.5.30
+
+### Changed
+- User-visible wording changed from `Personal` to `Team`.
+- User-visible wording changed from `Patient` to `Patient/-in`.
+
+### Added
+- `tools/check_wording_team_patient.php`.

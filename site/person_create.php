@@ -24,7 +24,7 @@ if (!$auth->isLoggedIn()) {
 $auth->requireRole(Auth::ROLE_STAFF);
 
 $error = null;
-$createdType = 'Patient';
+$createdType = 'Patient/-in';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $personType = (string) ($_POST['person_type'] ?? 'patient');
         $isStaff = $personType === 'staff';
-        $createdType = $isStaff ? 'Personal' : 'Patient';
+        $createdType = $isStaff ? 'Team' : 'Patient/-in';
 
         $repository = new PersonRepository($db);
         $createdId = trim((string) ($_POST['id'] ?? ''));

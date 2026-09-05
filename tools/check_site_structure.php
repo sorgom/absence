@@ -54,6 +54,7 @@ $requiredRootTools = [
     'check_no_favicon_test.php',
     'check_person_delete_role_ui.php',
     'check_person_create_role_ui.php',
+    'check_wording_team_patient.php',
     'check_person_password_handout.php',
     'check_initial_password_alphabet.php',
     'check_person_password_reset.php',

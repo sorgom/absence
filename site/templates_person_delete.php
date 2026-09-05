@@ -15,12 +15,12 @@
 
             <label>
                 <input type="radio" name="person_type" value="patient" <?= $selectedType === 'patient' ? 'checked' : '' ?> onchange="this.form.submit()">
-                Patient
+                Patient/-in
             </label>
 
             <label>
                 <input type="radio" name="person_type" value="staff" <?= $selectedType === 'staff' ? 'checked' : '' ?> onchange="this.form.submit()">
-                Personal
+                Team
             </label>
         </fieldset>
     </form>

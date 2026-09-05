@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$title = 'Personalbereich';
+$title = 'Teambereich';
 require __DIR__ . '/header.php';
 
 $view = (string) Session::get('staff_overview_view', 'active');

@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v1.0.0-beta.10.5.30
+
+### Changed
+- User-visible wording changed from `Personal` to `Team`.
+- User-visible wording changed from `Patient` to `Patient/-in`.
+
+### Added
+- `tools/check_wording_team_patient.php`.
+
 ## v1.0.0-beta.10.5.29.1
 
 ### Fixed
